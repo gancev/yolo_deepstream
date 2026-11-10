@@ -1,0 +1,628 @@
+{
+  "ok": true,
+  "data": {
+    "id": "m-4edfcff35288",
+    "manifest": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/0435bcaa3cf8e8e9/manifests/m-4edfcff35288.json",
+    "state": "measured",
+    "contract": "project",
+    "gates": {
+      "Performance": "pass"
+    },
+    "verdict": "pass",
+    "rows": [
+      {
+        "fn": "NvDsInferParseCustomYoloV7",
+        "gate": "Performance",
+        "status": "✅",
+        "verdict": "pass",
+        "before": null,
+        "after": "139 ns",
+        "note": "139 ns (bound ≤ 250 ns, 56% of budget); callee-excluded",
+        "entries": [
+          "b5dc6b70cbd1"
+        ]
+      },
+      {
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Performance",
+        "status": "✅",
+        "verdict": "pass",
+        "before": null,
+        "after": "174 ns",
+        "note": "174 ns (bound ≤ 320 ns, 54% of budget); callee-excluded",
+        "entries": [
+          "23a9ff62cd1f"
+        ]
+      }
+    ],
+    "judgements": [
+      {
+        "text": "NvDsInferParseCustomYoloV7 worst-path time must not exceed 250 ns",
+        "kind": "budget",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "entry_key": "b5dc6b70cbd1",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "scope": "NvDsInferParseCustomYoloV7",
+        "verdict": "pass",
+        "lower_bound": true,
+        "bound": "≤ 250 ns",
+        "observed": "139 ns",
+        "note": "139 ns (bound ≤ 250 ns, 56% of budget); callee-excluded",
+        "before": null,
+        "after": "139 ns",
+        "before_value": null,
+        "after_value": 139.4103749258693
+      },
+      {
+        "text": "NvDsInferParseCustomYoloV4 worst-path time must not exceed 320 ns",
+        "kind": "budget",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "entry_key": "23a9ff62cd1f",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "scope": "NvDsInferParseCustomYoloV4",
+        "verdict": "pass",
+        "lower_bound": true,
+        "bound": "≤ 320 ns",
+        "observed": "174 ns",
+        "note": "174 ns (bound ≤ 320 ns, 54% of budget); callee-excluded",
+        "before": null,
+        "after": "174 ns",
+        "before_value": null,
+        "after_value": 173.7699252790479
+      }
+    ],
+    "unjudged": [
+      {
+        "text": "NvDsInferParseCustomYoloV7 hot-path time must not regress more than 10 %",
+        "kind": "regression",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "entry_key": "2067dcd71ce0",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "scope": "NvDsInferParseCustomYoloV7",
+        "verdict": "unjudged",
+        "reason": "not judged: no pre-edit object for this translation unit, so there is nothing to compare against",
+        "reason_code": "no_before_artifact",
+        "note": "callee-excluded"
+      },
+      {
+        "signal": "hot_path_time",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 65.99718477433065,
+        "after": "66.0 ns",
+        "before": "78.7 ns",
+        "prior": {
+          "value": 78.70817713357467,
+          "measured_at": "2026-11-10T12:12:36.452934+00:00",
+          "run": "m-8c7132f4b3fd",
+          "artifact": "object"
+        },
+        "delta_pct": -16.15,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "-16.1% vs last run (2026-11-10T12:12:36.452934+00:00); last run measured an object, this one the linked ELF; callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `NvDsInferParseCustomYoloV4`, so this movement is measured and not judged"
+      }
+    ],
+    "agent_judged": [
+      {
+        "entry_key": "46688bd714db",
+        "text": "NvDsInferParseCustomYoloV7 must not run a loop over the candidate rows inside another loop over the candidate rows; the only nested loop allowed is the 80-class argmax inside the row loop",
+        "signal": null,
+        "gate": "Safety",
+        "gate_fallback": true,
+        "severity": "caution",
+        "prose": true,
+        "function": "NvDsInferParseCustomYoloV7"
+      },
+      {
+        "entry_key": "2067dcd71ce0",
+        "text": "NvDsInferParseCustomYoloV7 hot-path time must not regress more than 10 %",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "unjudged_reason": "no_before_artifact",
+        "unjudged_note": "not judged: no pre-edit object for this translation unit, so there is nothing to compare against"
+      },
+      {
+        "entry_key": "hot_path_time:NvDsInferParseCustomYoloV4",
+        "text": "`hot_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      }
+    ],
+    "escalations": [],
+    "linked_before": {
+      "before_saved": false,
+      "before_reason": "no_edit_this_turn",
+      "relink": "cmake --build build"
+    },
+    "notes": [],
+    "selection": [
+      "p7",
+      "p14"
+    ],
+    "path_moved": {
+      "NvDsInferParseCustomYoloV7": false,
+      "NvDsInferParseCustomYoloV4": false
+    },
+    "paths": {
+      "NvDsInferParseCustomYoloV4": {
+        "hot_path": {
+          "candidate": "p14",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "none",
+          "blocks": [
+            "bb_0x40234c",
+            "bb_0x40237c",
+            "bb_0x402390",
+            "bb_0x40239c",
+            "bb_0x4023b0",
+            "bb_0x4023b8",
+            "bb_0x4023ec",
+            "bb_0x4023f0",
+            "bb_0x402400",
+            "bb_0x4024cc",
+            "bb_0x402410",
+            "bb_0x40241c",
+            "bb_0x402420",
+            "bb_0x402430",
+            "bb_0x402440",
+            "bb_0x4026c8",
+            "bb_0x4026d8",
+            "bb_0x4026dc",
+            "bb_0x4026e4",
+            "bb_0x40249c"
+          ],
+          "ns": 65.99718477433065,
+          "ns_worst": 71.86491567365252,
+          "lower_bound": true,
+          "energy_nws": 92.39605868406288,
+          "reasons": [
+            "≥ — cycles: 2 backward edge(s) that are not natural loops — bb_0x4027f0 -> bb_0x402808, bb_0x4027f0 -> bb_0x402800. Multi-entry/irreducible: no trip count is derivable, and blocks on them can run more often than iters says. in NvDsInferParseCustomYoloV4",
+            "≥ — loop L1 trip count unknown (limit register w19 is written inside the loop (add w19, w19, #1 @bb_0x402430) — the bound varies per lap)",
+            "≥ — loop L2 trip count unknown (limit register w2 is computed, not constant (ldr w2, [x20] @bb_0x4026b4))",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0 body not counted",
+            "callee-excluded — _ZdlPv body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0",
+              "site": "0x4026c8"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x4026dc"
+            }
+          ],
+          "baseline_reason": "no_before_artifact"
+        },
+        "worst_path": {
+          "baseline": "none",
+          "blocks": [
+            "bb_0x40234c",
+            "bb_0x4025dc",
+            "bb_0x4025f4",
+            "bb_0x402604",
+            "bb_0x402618",
+            "bb_0x402624",
+            "bb_0x40263c",
+            "bb_0x402658",
+            "bb_0x402660",
+            "bb_0x40267c",
+            "bb_0x402684",
+            "bb_0x402648",
+            "bb_0x402650",
+            "bb_0x402654",
+            "bb_0x40237c",
+            "bb_0x402390",
+            "bb_0x40239c",
+            "bb_0x4023b0",
+            "bb_0x4023b8",
+            "bb_0x4023ec",
+            "bb_0x4023f0",
+            "bb_0x402400",
+            "bb_0x4024cc",
+            "bb_0x402410",
+            "bb_0x40241c",
+            "bb_0x402420",
+            "bb_0x4024d8",
+            "bb_0x40251c",
+            "bb_0x402534",
+            "bb_0x40254c",
+            "bb_0x402564",
+            "bb_0x40257c",
+            "bb_0x402594",
+            "bb_0x40259c",
+            "bb_0x4025a4",
+            "bb_0x40268c",
+            "bb_0x4026b4",
+            "bb_0x402430",
+            "bb_0x402440",
+            "bb_0x402448",
+            "bb_0x402844",
+            "bb_0x402850",
+            "bb_0x40286c",
+            "bb_0x402834",
+            "bb_0x402840",
+            "bb_0x402808",
+            "bb_0x40280c",
+            "bb_0x402814",
+            "bb_0x4027e8",
+            "bb_0x4027f0"
+          ],
+          "ns": 156.24058050236883,
+          "ns_worst": 173.7699252790479,
+          "lower_bound": true,
+          "energy_nws": 218.73681270331647,
+          "reasons": [
+            "≥ — cycles: 2 backward edge(s) that are not natural loops — bb_0x4027f0 -> bb_0x402808, bb_0x4027f0 -> bb_0x402800. Multi-entry/irreducible: no trip count is derivable, and blocks on them can run more often than iters says. in NvDsInferParseCustomYoloV4",
+            "callee-excluded — _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l body not counted",
+            "callee-excluded — _ZNSo9_M_insertImEERSoT_ body not counted",
+            "callee-excluded — _ZNSolsEi body not counted",
+            "callee-excluded — _ZNKSt5ctypeIcE13_M_widen_initEv body not counted",
+            "callee-excluded — _ZNSo3putEc body not counted",
+            "callee-excluded — _ZNSo5flushEv body not counted",
+            "≥ — loop L1 trip count unknown (limit register w19 is written inside the loop (add w19, w19, #1 @bb_0x402430) — the bound varies per lap)",
+            "≥ — loop L2 trip count unknown (limit register w2 is computed, not constant (ldr w2, [x20] @bb_0x4026b4))",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_ body not counted",
+            "callee-excluded — _ZSt20__throw_length_errorPKc body not counted",
+            "callee-excluded — _ZSt16__throw_bad_castv body not counted",
+            "callee-excluded — _ZdlPv body not counted",
+            "callee-excluded — _Unwind_Resume body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x4025dc"
+            },
+            {
+              "name": "_ZNSo9_M_insertImEERSoT_",
+              "site": "0x4025f4"
+            },
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x402604"
+            },
+            {
+              "name": "_ZNSolsEi",
+              "site": "0x402618"
+            },
+            {
+              "name": "_ZNKSt5ctypeIcE13_M_widen_initEv",
+              "site": "0x402658"
+            },
+            {
+              "name": "_ZNSo3putEc",
+              "site": "0x402648"
+            },
+            {
+              "name": "_ZNSo5flushEv",
+              "site": "0x402650"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x4024d8"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x40251c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402534"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x40254c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402564"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x40257c"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0x40268c"
+            },
+            {
+              "name": "_ZSt20__throw_length_errorPKc",
+              "site": "0x402844"
+            },
+            {
+              "name": "_ZSt16__throw_bad_castv",
+              "site": "0x402850"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x40280c"
+            },
+            {
+              "name": "_Unwind_Resume",
+              "site": "0x4027e8"
+            }
+          ],
+          "paths_searched": 512,
+          "ties": 0,
+          "baseline_reason": "no_before_artifact"
+        }
+      },
+      "NvDsInferParseCustomYoloV7": {
+        "hot_path": {
+          "candidate": "p7",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "none",
+          "blocks": [
+            "bb_0x401f70",
+            "bb_0x401f88",
+            "bb_0x401fac",
+            "bb_0x401fb0",
+            "bb_0x401fc4",
+            "bb_0x402000",
+            "bb_0x402020",
+            "bb_0x40202c",
+            "bb_0x402038",
+            "bb_0x402058",
+            "bb_0x402070",
+            "bb_0x402088",
+            "bb_0x4020a0",
+            "bb_0x4020b8",
+            "bb_0x4020d0",
+            "bb_0x4020d8",
+            "bb_0x4020e0",
+            "bb_0x4020e8",
+            "bb_0x4020fc",
+            "bb_0x40210c",
+            "bb_0x402120",
+            "bb_0x402124",
+            "bb_0x40212c",
+            "bb_0x40213c",
+            "bb_0x402150"
+          ],
+          "ns": 79.12590429703444,
+          "ns_worst": 87.23938255595259,
+          "lower_bound": true,
+          "energy_nws": 110.77626601584821,
+          "reasons": [
+            "≥ — cycles: 1 backward edge(s) that are not natural loops — bb_0x402318 -> bb_0x402324. Multi-entry/irreducible: no trip count is derivable, and blocks on them can run more often than iters says. in NvDsInferParseCustomYoloV7",
+            "≥ — loop L1 trip count unknown (limit register w21 is written inside the loop (add w21, w21, #1 @bb_0x4020fc) — the bound varies per lap)",
+            "≥ — trip count unknown on NvDsInferParseCustomYoloV7_0x40202c",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0 body not counted",
+            "callee-excluded — _ZdlPv body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402038"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402058"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402070"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402088"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x4020a0"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x4020b8"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0",
+              "site": "0x40210c"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x402124"
+            }
+          ],
+          "baseline_reason": "no_before_artifact"
+        },
+        "worst_path": {
+          "baseline": "none",
+          "blocks": [
+            "bb_0x401f70",
+            "bb_0x401f88",
+            "bb_0x40215c",
+            "bb_0x402174",
+            "bb_0x402184",
+            "bb_0x402198",
+            "bb_0x4021a4",
+            "bb_0x4021bc",
+            "bb_0x40222c",
+            "bb_0x402234",
+            "bb_0x402250",
+            "bb_0x402258",
+            "bb_0x4021cc",
+            "bb_0x4021d4",
+            "bb_0x4021d8",
+            "bb_0x401fb0",
+            "bb_0x401fc4",
+            "bb_0x402000",
+            "bb_0x402020",
+            "bb_0x4021dc",
+            "bb_0x40202c",
+            "bb_0x402038",
+            "bb_0x402058",
+            "bb_0x402070",
+            "bb_0x402088",
+            "bb_0x4020a0",
+            "bb_0x4020b8",
+            "bb_0x4020d0",
+            "bb_0x4020d8",
+            "bb_0x4020e0",
+            "bb_0x4021e8",
+            "bb_0x40220c",
+            "bb_0x4020fc",
+            "bb_0x40210c",
+            "bb_0x402120",
+            "bb_0x402124",
+            "bb_0x40212c",
+            "bb_0x40213c",
+            "bb_0x402150"
+          ],
+          "ns": 126.01278599915689,
+          "ns_worst": 139.4103749258693,
+          "lower_bound": true,
+          "energy_nws": 176.41790039881968,
+          "reasons": [
+            "≥ — cycles: 1 backward edge(s) that are not natural loops — bb_0x402318 -> bb_0x402324. Multi-entry/irreducible: no trip count is derivable, and blocks on them can run more often than iters says. in NvDsInferParseCustomYoloV7",
+            "callee-excluded — _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l body not counted",
+            "callee-excluded — _ZNSo9_M_insertImEERSoT_ body not counted",
+            "callee-excluded — _ZNSolsEi body not counted",
+            "callee-excluded — _ZNKSt5ctypeIcE13_M_widen_initEv body not counted",
+            "callee-excluded — _ZNSo3putEc body not counted",
+            "callee-excluded — _ZNSo5flushEv body not counted",
+            "≥ — loop L1 trip count unknown (limit register w21 is written inside the loop (add w21, w21, #1 @bb_0x4020fc) — the bound varies per lap)",
+            "≥ — trip count unknown on NvDsInferParseCustomYoloV7_0x4021dc",
+            "≥ — trip count unknown on NvDsInferParseCustomYoloV7_0x40202c",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_ body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0 body not counted",
+            "callee-excluded — _ZdlPv body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x40215c"
+            },
+            {
+              "name": "_ZNSo9_M_insertImEERSoT_",
+              "site": "0x402174"
+            },
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x402184"
+            },
+            {
+              "name": "_ZNSolsEi",
+              "site": "0x402198"
+            },
+            {
+              "name": "_ZNKSt5ctypeIcE13_M_widen_initEv",
+              "site": "0x40222c"
+            },
+            {
+              "name": "_ZNSo3putEc",
+              "site": "0x4021cc"
+            },
+            {
+              "name": "_ZNSo5flushEv",
+              "site": "0x4021d4"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402038"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402058"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402070"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x402088"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x4020a0"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x4020b8"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0x4021e8"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0",
+              "site": "0x40210c"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x402124"
+            }
+          ],
+          "paths_searched": 74,
+          "ties": 0,
+          "baseline_reason": "no_before_artifact"
+        }
+      }
+    },
+    "frequency": {
+      "source": "repository",
+      "scaled": true,
+      "clock_hz": 2601000000,
+      "trained_hz": 2800000000
+    },
+    "measured": {
+      "r2": {
+        "value": 79.12590429703444,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "no_before_artifact",
+        "lower_bound": true
+      },
+      "r4": {
+        "value": 65.99718477433065,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "no_before_artifact",
+        "lower_bound": true
+      },
+      "r1": {
+        "value": 139.4103749258693,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "no_before_artifact",
+        "lower_bound": true
+      },
+      "r3": {
+        "value": 173.7699252790479,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "no_before_artifact",
+        "lower_bound": true
+      }
+    }
+  }
+}

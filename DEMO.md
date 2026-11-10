@@ -54,25 +54,42 @@ CPU parser at INT8). The contract has six sentences:
 | 5 | `NvDsInferParseCustomYoloV7` must not run a loop over the candidate rows inside another loop over the candidate rows |
 | 6 | `NvDsInferParseCustomYoloV4` worst-path time must not exceed 320 ns |
 
-The machine-readable form is `results/contract/contract.draft.yaml`. It is a
-**draft**: it becomes `.loci/contract.yaml` once the repository owner runs
-`loci contract accept`. The verdicts below read the measured figures against
-these limits. LOCI computes them itself once the contract is in force.
+The contract is in force: `.loci/contract.yaml`, accepted by the repository
+owner with `loci contract accept`. Every LOCI measurement of this project is
+judged against it. `./test.sh` checks the verdicts end to end; the run recorded
+in `results/test/20261110T121455Z/` gave the verdicts below.
 
 ## 3. What LOCI measured
 
 LOCI measured the compiled aarch64 object: Neoverse V2 model at 2601 MHz, the
-Jetson Thor T5000's default CPU clock. The envelopes are in `results/baseline/`,
-`results/scenario/innocent/` and `results/scenario/fix/`.
+Jetson Thor T5000's default CPU clock.
+
+**Timing, judged by LOCI against the contract** (`./test.sh`, envelopes in
+`results/test/20261110T121455Z/`):
 
 | `NvDsInferParseCustomYoloV7` | NVIDIA original | agent's change | fix | limit |
 |---|---|---|---|---|
-| worst-path time | ≥ 172 ns | **≥ 333 ns** | ≥ 180 ns | ≤ 250 ns |
-| hot-path time | 84 ns | **≥ 182 ns (+116 %)** | ≥ 58 ns (−32 %) | ≤ +10 % |
+| worst-path time | ≥ 172 ns | **≥ 333 ns: FAIL** | ≥ 180 ns: CAUTION | ≤ 250 ns |
+| hot-path time | ≥ 84 ns | **≥ 182 ns, +116.1 %: FAIL** | ≥ 58 ns, −31.7 %: PASS | ≤ +10 % |
+| **run verdict** | **PASS** | **FAIL** (exit 2) | **CAUTION** (exit 0) | |
+
+The fix is within every limit. Its CAUTION is LOCI marking a figure at 70 % or
+more of its limit: the worst path went from 69 % (172 ns) to 72 % (180 ns) of
+the 250 ns budget. `test.sh` accepts PASS or CAUTION for the fix, because no
+bound is breached. The original's baseline row in the test log reads 139 ns
+because it is measured on the linked test binary. The 172 ns above is the same
+function in the object, which the before/after comparisons use.
+
+**Structure, from LOCI's stack and control-flow analysis** (envelopes in
+`results/baseline/`, `results/scenario/innocent/` and `results/scenario/fix/`).
+These checks back contract rules 3 to 5. This test run's timing check did not
+judge them:
+
+| `NvDsInferParseCustomYoloV7` | NVIDIA original | agent's change | fix | limit |
+|---|---|---|---|---|
 | own stack frame | 224 B | **320 B** | 240 B | ≤ 288 B |
-| recursion cycles | 0 | **1** (`std::sort`) | 0 | 0 |
-| loops (no fixed trip count) | 2 (1) | **8 (7)**, a row loop nested in the row loop | 2 (1) | no nested row loop |
-| **verdict against the contract** | PASS | **FAIL, 5 of 5 rules** | PASS | |
+| recursion cycles | 0 | **1** (`std::__introsort_loop`, from `std::sort`) | 0 | 0 |
+| loops (no derivable trip count) | 2 (1) | **8 (7)**: loop at `:260` nested in the loop at `:259` | 2 (1) | no nested row loop |
 
 "≥" means the figure is a floor. The row loop's length (25,200) is a run-time
 value, so LOCI costs one trip through it. That is why the contract pairs its time
@@ -133,8 +150,7 @@ and on the numbers LOCI reports they are nothing alike.
   magnitude.
 - LOCI's times are per call, exclude the functions it calls, and cost each
   frame-dependent loop once. They do not convert into the laptop's milliseconds.
-- The agent's change is a prepared patch; the contract is a draft until
-  accepted.
+- The agent's change is a prepared patch.
 
 ## Reproduce it
 

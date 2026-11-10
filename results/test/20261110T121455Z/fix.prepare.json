@@ -1,0 +1,2950 @@
+{
+  "ok": true,
+  "data": {
+    "id": "m-f5b608d21797",
+    "manifest": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/06c2710edf4dac7b/manifests/m-f5b608d21797.json",
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "state": "prepared",
+    "turn": "test-20261110T121455Z-fix",
+    "contract": "project",
+    "functions": [
+      "NvDsInferParseCustomYoloV4",
+      "NvDsInferParseCustomYoloV7"
+    ],
+    "requests": [
+      {
+        "id": "r1",
+        "signal": "worst_path_time",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": "b5dc6b70cbd1",
+        "text": "NvDsInferParseCustomYoloV7 worst-path time must not exceed 250 ns",
+        "gate": "Performance",
+        "unit": "ns",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable"
+      },
+      {
+        "id": "r2",
+        "signal": "hot_path_time",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": "2067dcd71ce0",
+        "text": "NvDsInferParseCustomYoloV7 hot-path time must not regress more than 10 %",
+        "gate": "Performance",
+        "unit": "ns",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable"
+      },
+      {
+        "id": "r3",
+        "skill": "stack-depth",
+        "signal": "stack_frame_size",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": "22fe536f002c",
+        "text": "NvDsInferParseCustomYoloV7 must use no more than 288 bytes of stack for its own frame",
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable"
+      },
+      {
+        "id": "r4",
+        "skill": "stack-depth",
+        "signal": "recursion_cycles",
+        "entry_key": "e263fdc5e221",
+        "text": "The parser library must not contain recursion: recursion cycles must stay at 0",
+        "gate": "Safety",
+        "measure": "count",
+        "artifact": "object",
+        "granularity": "whole",
+        "measurability": "breach_only"
+      },
+      {
+        "id": "r5",
+        "signal": "worst_path_time",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": "23a9ff62cd1f",
+        "text": "NvDsInferParseCustomYoloV4 worst-path time must not exceed 320 ns",
+        "gate": "Performance",
+        "unit": "ns",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable"
+      },
+      {
+        "id": "r6",
+        "signal": "hot_path_time",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": null,
+        "text": null,
+        "gate": "Performance",
+        "unit": "ns",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      },
+      {
+        "id": "r7",
+        "signal": "energy",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": null,
+        "text": null,
+        "gate": "Energy",
+        "unit": "nWs",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      },
+      {
+        "id": "r8",
+        "signal": "energy",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": null,
+        "text": null,
+        "gate": "Energy",
+        "unit": "nWs",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      }
+    ],
+    "escalations": [
+      {
+        "skill": "stack-depth",
+        "requests": [
+          "r3",
+          "r4"
+        ],
+        "triggers": [
+          {
+            "kind": "stack_grew",
+            "fn": "NvDsInferParseCustomYoloV7",
+            "before_b": 288,
+            "after_b": 304,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          }
+        ]
+      }
+    ],
+    "linked_before": {
+      "before_saved": false,
+      "before_reason": "before_elf_stale"
+    },
+    "unjudged": [],
+    "candidates": [
+      {
+        "id": "p1",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 1,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x280",
+          "bb_0x2c0",
+          "bb_0x2d0",
+          "bb_0x2dc",
+          "bb_0x2e8",
+          "bb_0x3c8",
+          "bb_0x3d8",
+          "bb_0x3ec",
+          "bb_0x3f0",
+          "bb_0x3f4",
+          "bb_0x3f8",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x280": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189-254,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x2c0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:248-258",
+          "bb_0x2d0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:259-259",
+          "bb_0x2dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:258-263",
+          "bb_0x2e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:268-275,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x3c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246-246",
+          "bb_0x3d8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x3ec": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-282,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x3f0": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x3f4": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x3f8": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; guard falls through; guard taken; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p2",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 2,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x514",
+          "bb_0x528",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x514": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x528": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; out-of-line; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p3",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 3,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x280",
+          "bb_0x2c0",
+          "bb_0x2d0",
+          "bb_0x2dc",
+          "bb_0x2e8",
+          "bb_0x2fc",
+          "bb_0x320",
+          "bb_0x324",
+          "bb_0x338",
+          "bb_0x33c",
+          "bb_0x350",
+          "bb_0x354",
+          "bb_0x368",
+          "bb_0x36c",
+          "bb_0x380",
+          "bb_0x384",
+          "bb_0x398",
+          "bb_0x39c",
+          "bb_0x3c8",
+          "bb_0x3d8",
+          "bb_0x3ec",
+          "bb_0x3f0",
+          "bb_0x3f4",
+          "bb_0x3f8",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x280": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189-254,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x2c0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:248-258",
+          "bb_0x2d0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:259-259",
+          "bb_0x2dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:258-263",
+          "bb_0x2e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:268-275,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x2fc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:181-279",
+          "bb_0x320": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194-194",
+          "bb_0x324": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194-195",
+          "bb_0x338": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195-195",
+          "bb_0x33c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195-196",
+          "bb_0x350": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196-196",
+          "bb_0x354": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196-197",
+          "bb_0x368": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197-197",
+          "bb_0x36c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197-200",
+          "bb_0x380": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200-200",
+          "bb_0x384": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200-202",
+          "bb_0x398": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:202-202",
+          "bb_0x39c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:204-212",
+          "bb_0x3c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246-246",
+          "bb_0x3d8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x3ec": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-282,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x3f0": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x3f4": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x3f8": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": "_Z5clampfff",
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; guard falls through; guard taken; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p4",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 4,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x280",
+          "bb_0x2c0",
+          "bb_0x2d0",
+          "bb_0x428",
+          "bb_0x2dc",
+          "bb_0x2e8",
+          "bb_0x3c8",
+          "bb_0x3d8",
+          "bb_0x3ec",
+          "bb_0x3f0",
+          "bb_0x3f4",
+          "bb_0x3f8",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x280": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189-254,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x2c0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:248-258",
+          "bb_0x2d0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:259-259",
+          "bb_0x428": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:261-261",
+          "bb_0x2dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:258-263",
+          "bb_0x2e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:268-275,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x3c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246-246",
+          "bb_0x3d8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x3ec": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-282,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x3f0": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x3f4": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x3f8": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; guard taken; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p5",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 5,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x280",
+          "bb_0x2c0",
+          "bb_0x2d0",
+          "bb_0x2dc",
+          "bb_0x2e8",
+          "bb_0x3c8",
+          "bb_0x3d8",
+          "bb_0x3ec",
+          "bb_0x3f8",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x280": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189-254,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x2c0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:248-258",
+          "bb_0x2d0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:259-259",
+          "bb_0x2dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:258-263",
+          "bb_0x2e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:268-275,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x3c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246-246",
+          "bb_0x3d8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x3ec": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-282,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x3f8": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "taken",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; guard falls through; guard taken; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p6",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 6,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x280",
+          "bb_0x2c0",
+          "bb_0x2d0",
+          "bb_0x2dc",
+          "bb_0x2e8",
+          "bb_0x2fc",
+          "bb_0x320",
+          "bb_0x324",
+          "bb_0x338",
+          "bb_0x33c",
+          "bb_0x350",
+          "bb_0x354",
+          "bb_0x368",
+          "bb_0x36c",
+          "bb_0x380",
+          "bb_0x384",
+          "bb_0x398",
+          "bb_0x39c",
+          "bb_0x3a4",
+          "bb_0x3ac",
+          "bb_0x3b4",
+          "bb_0x3c8",
+          "bb_0x3d8",
+          "bb_0x3ec",
+          "bb_0x3f0",
+          "bb_0x3f4",
+          "bb_0x3f8",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x280": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189-254,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x2c0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:248-258",
+          "bb_0x2d0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:259-259",
+          "bb_0x2dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:258-263",
+          "bb_0x2e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:268-275,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x2fc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:181-279",
+          "bb_0x320": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194-194",
+          "bb_0x324": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194-195",
+          "bb_0x338": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195-195",
+          "bb_0x33c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195-196",
+          "bb_0x350": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196-196",
+          "bb_0x354": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196-197",
+          "bb_0x368": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197-197",
+          "bb_0x36c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197-200",
+          "bb_0x380": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200-200",
+          "bb_0x384": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200-202",
+          "bb_0x398": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:202-202",
+          "bb_0x39c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:204-212",
+          "bb_0x3a4": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:212-212",
+          "bb_0x3ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:214-216,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1416-1418",
+          "bb_0x3b4": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:665-665,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:189-191,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1423-1423",
+          "bb_0x3c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246-246",
+          "bb_0x3d8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x3ec": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-282,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x3f0": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x3f4": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x3f8": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": "_Z5clampfff",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p7",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 7,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x24c",
+          "bb_0x26c",
+          "bb_0x280",
+          "bb_0x2c0",
+          "bb_0x2d0",
+          "bb_0x2dc",
+          "bb_0x2e8",
+          "bb_0x2fc",
+          "bb_0x320",
+          "bb_0x324",
+          "bb_0x338",
+          "bb_0x33c",
+          "bb_0x350",
+          "bb_0x354",
+          "bb_0x368",
+          "bb_0x36c",
+          "bb_0x380",
+          "bb_0x384",
+          "bb_0x398",
+          "bb_0x39c",
+          "bb_0x3a4",
+          "bb_0x3c8",
+          "bb_0x3d8",
+          "bb_0x3ec",
+          "bb_0x3f0",
+          "bb_0x3f4",
+          "bb_0x3f8",
+          "bb_0x40c",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x24c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:227-233",
+          "bb_0x26c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:240-246,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x280": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189-254,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x2c0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:248-258",
+          "bb_0x2d0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:259-259",
+          "bb_0x2dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:258-263",
+          "bb_0x2e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:268-275,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x2fc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:181-279",
+          "bb_0x320": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194-194",
+          "bb_0x324": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194-195",
+          "bb_0x338": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195-195",
+          "bb_0x33c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195-196",
+          "bb_0x350": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196-196",
+          "bb_0x354": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196-197",
+          "bb_0x368": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197-197",
+          "bb_0x36c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197-200",
+          "bb_0x380": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200-200",
+          "bb_0x384": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200-202",
+          "bb_0x398": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:202-202",
+          "bb_0x39c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:204-212",
+          "bb_0x3a4": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:212-212",
+          "bb_0x3c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246-246",
+          "bb_0x3d8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281-281",
+          "bb_0x3ec": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-282,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x3f0": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x3f4": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x3f8": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x40c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282-292,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": "_Z5clampfff",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; guard falls through; guard taken; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p8",
+        "request": "r2",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "rank": 8,
+        "scope": "call",
+        "blocks": [
+          "bb_0x230",
+          "bb_0x52c",
+          "bb_0x544",
+          "bb_0x548",
+          "bb_0x55c",
+          "bb_0x564",
+          "bb_0x568",
+          "bb_0x570",
+          "bb_0x574",
+          "bb_0x578",
+          "bb_0x41c"
+        ],
+        "lines": {
+          "bb_0x230": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:219-291,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "bb_0x52c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:228-228,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:734-739",
+          "bb_0x544": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:739-739",
+          "bb_0x548": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:116-116,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:66-67,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/basic_ios.h:49-464",
+          "bb_0x55c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882-884",
+          "bb_0x564": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:885-885",
+          "bb_0x568": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67-67",
+          "bb_0x570": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67-67",
+          "bb_0x574": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:88-89",
+          "bb_0x578": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:228-229,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67-67",
+          "bb_0x41c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:293-293"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "cbz",
+            "cond": "z",
+            "call": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "out-of-line; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p9",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 1,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6cc",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x708",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6cc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-125,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x708": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 13,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); fall-through layout; cycle exited; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p10",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 2,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6cc",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x888",
+          "bb_0x89c",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6cc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-125,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x888": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x89c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 19,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": true
+          },
+          {
+            "branch": 20,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); fall-through layout; cycle exited; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p11",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 3,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x9ac",
+          "bb_0x9bc"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x9ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-885",
+          "bb_0x9bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; out-of-line; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p12",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 4,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6cc",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x6f0",
+          "bb_0x6fc",
+          "bb_0x708",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6cc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-125,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x6f0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6fc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x708": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 11,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 12,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 13,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); fall-through layout; cycle exited; back-edge taken (L4); guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p13",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 5,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x708",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x708": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 13,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); fall-through layout; branch taken; cycle exited; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p14",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 6,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x888",
+          "bb_0x89c",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x888": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x89c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 19,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": true
+          },
+          {
+            "branch": 20,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); fall-through layout; branch taken; cycle exited; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p15",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 7,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x6f0",
+          "bb_0x6fc",
+          "bb_0x708",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x6f0": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6fc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x708": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 11,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 12,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 13,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); fall-through layout; branch taken; cycle exited; back-edge taken (L4); guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      },
+      {
+        "id": "p16",
+        "request": "r6",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "rank": 8,
+        "scope": "call",
+        "blocks": [
+          "bb_0x600",
+          "bb_0x630",
+          "bb_0x644",
+          "bb_0x650",
+          "bb_0x660",
+          "bb_0x668",
+          "bb_0x698",
+          "bb_0x69c",
+          "bb_0x6ac",
+          "bb_0x790",
+          "bb_0x6bc",
+          "bb_0x6c8",
+          "bb_0x6cc",
+          "bb_0x6dc",
+          "bb_0x6e8",
+          "bb_0x708",
+          "bb_0x710",
+          "bb_0x720",
+          "bb_0x724",
+          "bb_0x728",
+          "bb_0x738",
+          "bb_0x73c",
+          "bb_0x750",
+          "bb_0x754",
+          "bb_0x758",
+          "bb_0x75c",
+          "bb_0x760",
+          "bb_0x764"
+        ],
+        "lines": {
+          "bb_0x600": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142-143",
+          "bb_0x630": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:150-156,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "bb_0x644": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158-158",
+          "bb_0x650": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161-161",
+          "bb_0x660": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:92-167,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "bb_0x668": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100-169,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "bb_0x698": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x69c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103-111",
+          "bb_0x6ac": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:113-114",
+          "bb_0x790": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:116-117",
+          "bb_0x6bc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111-111",
+          "bb_0x6c8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-124",
+          "bb_0x6cc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:124-125,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "bb_0x6dc": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101-131",
+          "bb_0x6e8": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:131-131",
+          "bb_0x708": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "bb_0x710": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "bb_0x720": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "bb_0x724": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "bb_0x728": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "bb_0x738": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "bb_0x73c": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "bb_0x750": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176-176,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "bb_0x754": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "bb_0x758": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x75c": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "bb_0x760": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "bb_0x764": "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177-177"
+        },
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 13,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ],
+        "why": "avoids out-of-line; back-edge taken (L2); branch taken; fall-through layout; cycle exited; guard falls through; signal family: structure+layout; producer: GNU C++11 15.2.0 -mcpu=neoverse-v2 -mlittle-endian -mabi=lp64 -g -O2 -std=c++11 -fPIC -mno-fix-cortex-a53-835769 -mno-fix-cortex-a53-843419"
+      }
+    ],
+    "proposed": [
+      "p1",
+      "p9"
+    ],
+    "standing": [
+      {
+        "fn": "NvDsInferParseCustomYoloV7",
+        "signal": "worst_path_time",
+        "verdict": "fail",
+        "observed": "333 ns",
+        "bound": "≤ 250 ns",
+        "note": "333 ns (bound ≤ 250 ns, 133% of budget)"
+      },
+      {
+        "fn": "NvDsInferParseCustomYoloV4",
+        "signal": "worst_path_time",
+        "verdict": "pass",
+        "observed": "216 ns",
+        "bound": "≤ 320 ns",
+        "note": "216 ns (bound ≤ 320 ns, 67% of budget)"
+      },
+      {
+        "fn": "NvDsInferParseCustomYoloV7",
+        "signal": "hot_path_time",
+        "verdict": "unjudged",
+        "note": "no baseline value (`prev`) for a regression bound"
+      },
+      {
+        "signal": "stack_frame_size",
+        "verdict": "unjudged",
+        "note": "not measured this run: `stack_frame_size` on `NvDsInferParseCustomYoloV7`"
+      },
+      {
+        "signal": "hot_path_time",
+        "verdict": "agent_judged"
+      }
+    ],
+    "baseline_selection": [
+      {
+        "fn": "NvDsInferParseCustomYoloV4",
+        "scope": "call",
+        "lines": [
+          "src/nvdsparsebbox_Yolo.cpp:147-148",
+          "src/nvdsparsebbox_Yolo.cpp:155-161,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1283",
+          "src/nvdsparsebbox_Yolo.cpp:163-163",
+          "src/nvdsparsebbox_Yolo.cpp:166-166",
+          "src/nvdsparsebbox_Yolo.cpp:97-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "src/nvdsparsebbox_Yolo.cpp:105-174,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "src/nvdsparsebbox_Yolo.cpp:108-116",
+          "src/nvdsparsebbox_Yolo.cpp:108-116",
+          "src/nvdsparsebbox_Yolo.cpp:118-119",
+          "src/nvdsparsebbox_Yolo.cpp:116-116",
+          "src/nvdsparsebbox_Yolo.cpp:129-129",
+          "src/nvdsparsebbox_Yolo.cpp:129-130,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280-1282",
+          "src/nvdsparsebbox_Yolo.cpp:106-136",
+          "src/nvdsparsebbox_Yolo.cpp:136-136",
+          "src/nvdsparsebbox_Yolo.cpp:139-177,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1165,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1617,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:885-889",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1337-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:102-150,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197-2199",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384-384",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-276",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273",
+          "src/nvdsparsebbox_Yolo.cpp:179-179,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:118-144,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975-975,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-998",
+          "src/nvdsparsebbox_Yolo.cpp:181-181,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139,src/nvdsparsebbox_Yolo.cpp:182-182"
+        ],
+        "measured_at": "2026-11-10T12:15:21.248846+00:00",
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "cbz",
+            "cond": "z",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.gt",
+            "cond": "gt",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "tbnz",
+            "cond": "nz-bit",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 13,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "b.hi",
+            "cond": "hi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ]
+      },
+      {
+        "fn": "NvDsInferParseCustomYoloV7",
+        "scope": "call",
+        "lines": [
+          "src/nvdsparsebbox_Yolo.cpp:268-346,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1008-1223",
+          "src/nvdsparsebbox_Yolo.cpp:276-282",
+          "src/nvdsparsebbox_Yolo.cpp:282-282",
+          "src/nvdsparsebbox_Yolo.cpp:289-295,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-168,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-88,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "src/nvdsparsebbox_Yolo.cpp:194-318,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-106",
+          "src/nvdsparsebbox_Yolo.cpp:297-305",
+          "src/nvdsparsebbox_Yolo.cpp:301-307",
+          "src/nvdsparsebbox_Yolo.cpp:306-311",
+          "src/nvdsparsebbox_Yolo.cpp:186-320",
+          "src/nvdsparsebbox_Yolo.cpp:199-199",
+          "src/nvdsparsebbox_Yolo.cpp:199-200",
+          "src/nvdsparsebbox_Yolo.cpp:200-200",
+          "src/nvdsparsebbox_Yolo.cpp:200-201",
+          "src/nvdsparsebbox_Yolo.cpp:201-201",
+          "src/nvdsparsebbox_Yolo.cpp:201-202",
+          "src/nvdsparsebbox_Yolo.cpp:202-202",
+          "src/nvdsparsebbox_Yolo.cpp:202-205",
+          "src/nvdsparsebbox_Yolo.cpp:205-205",
+          "src/nvdsparsebbox_Yolo.cpp:205-207",
+          "src/nvdsparsebbox_Yolo.cpp:207-207",
+          "src/nvdsparsebbox_Yolo.cpp:209-217",
+          "src/nvdsparsebbox_Yolo.cpp:217-217",
+          "src/nvdsparsebbox_Yolo.cpp:219-317,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1416-1418",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:665-665,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:189-191,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1423-1423",
+          "src/nvdsparsebbox_Yolo.cpp:295-295",
+          "src/nvdsparsebbox_Yolo.cpp:326-326,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:725-725,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:172-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:92-92,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1117,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ext/alloc_traits.h:99-99",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273-273,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:407-407",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1058,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:231-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-1028",
+          "src/nvdsparsebbox_Yolo.cpp:245-247,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/predefined_ops.h:150-164,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_algo.h:1901-4862,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_algobase.h:1552-1562,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1340,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998-1018",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_algo.h:1813-1816",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1148,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_algo.h:1818-1818",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/predefined_ops.h:231-252,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_algo.h:1795-1799,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator.h:1058-1147",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_algo.h:1798-1798",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:613-613,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:126-151",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:526-720,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151-151,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1997-1997",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:553-553",
+          "src/nvdsparsebbox_Yolo.cpp:253-261,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-561",
+          "src/nvdsparsebbox_Yolo.cpp:256-256",
+          "src/nvdsparsebbox_Yolo.cpp:255-255",
+          "src/nvdsparsebbox_Yolo.cpp:255-256",
+          "src/nvdsparsebbox_Yolo.cpp:257-257,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1261-1418",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:665-665,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:189-191,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1423-1423",
+          "src/nvdsparsebbox_Yolo.cpp:258-258",
+          "src/nvdsparsebbox_Yolo.cpp:258-258",
+          "src/nvdsparsebbox_Yolo.cpp:259-259",
+          "src/nvdsparsebbox_Yolo.cpp:258-258",
+          "src/nvdsparsebbox_Yolo.cpp:255-255",
+          "src/nvdsparsebbox_Yolo.cpp:265-265,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-1119",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-172,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-1119",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:105-1119,src/nvdsparsebbox_Yolo.cpp:328-329,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:168-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:88-104",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106-1117,src/nvdsparsebbox_Yolo.cpp:329-329",
+          "src/nvdsparsebbox_Yolo.cpp:329-329",
+          "src/nvdsparsebbox_Yolo.cpp:330-331,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1261-1283",
+          "src/nvdsparsebbox_Yolo.cpp:329-329,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1117-1117",
+          "src/nvdsparsebbox_Yolo.cpp:336-336",
+          "src/nvdsparsebbox_Yolo.cpp:337-337,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:307-800",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:1042-1042,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-800",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648-648,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:156-172",
+          "/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172-172",
+          "src/nvdsparsebbox_Yolo.cpp:337-347,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/allocator.h:189-189,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104-104,/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139-139",
+          "src/nvdsparsebbox_Yolo.cpp:348-348"
+        ],
+        "measured_at": "2026-11-10T12:15:21.248846+00:00",
+        "decisions": [
+          {
+            "branch": 0,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 1,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 2,
+            "op": "b.le",
+            "cond": "le",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 3,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 4,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 5,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": "_Z5clampfff",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 6,
+            "op": "b.mi",
+            "cond": "mi",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 7,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 8,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 9,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 10,
+            "op": "b.le",
+            "cond": "le",
+            "call": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 11,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 12,
+            "op": "cbz",
+            "cond": "z",
+            "call": "memset",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 13,
+            "op": "b.ls",
+            "cond": "ls",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 14,
+            "op": "cbnz",
+            "cond": "nz",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 15,
+            "op": "b.eq",
+            "cond": "eq",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 16,
+            "op": "b.ls",
+            "cond": "ls",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 17,
+            "op": "cbnz",
+            "cond": "nz",
+            "call": null,
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 22,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 13,
+            "op": "b.ls",
+            "cond": "ls",
+            "call": null,
+            "taken": "taken",
+            "back_edge": true
+          },
+          {
+            "branch": 27,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": "_ZdlPv",
+            "taken": "taken",
+            "back_edge": false
+          },
+          {
+            "branch": 26,
+            "op": "b.ge",
+            "cond": "ge",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 27,
+            "op": "b.ne",
+            "cond": "ne",
+            "call": null,
+            "taken": "fallthrough",
+            "back_edge": true
+          },
+          {
+            "branch": 28,
+            "op": "cbz",
+            "cond": "z",
+            "call": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 29,
+            "op": "cbz",
+            "cond": "z",
+            "call": "_ZdlPv",
+            "taken": "fallthrough",
+            "back_edge": false
+          },
+          {
+            "branch": 30,
+            "op": "cbz",
+            "cond": "z",
+            "call": "_ZdlPv",
+            "taken": "fallthrough",
+            "back_edge": false
+          }
+        ]
+      }
+    ],
+    "provenance": [
+      {
+        "artifact": ".loci/build/objects/neoverse-v2/src/nvdsparsebbox_Yolo.o",
+        "kind": "object",
+        "built": "2026-11-10T12:15:28.978174+00:00",
+        "freshness": "current",
+        "source": "src/nvdsparsebbox_Yolo.cpp",
+        "before": ".loci/build/turns/06c2710edf4dac7b/obj/93509-acba864e/neoverse-v2/src/nvdsparsebbox_Yolo.o",
+        "before_kind": "reconstructed",
+        "verified": true
+      }
+    ],
+    "units": {
+      "NvDsInferParseCustomYoloV7": "src/nvdsparsebbox_Yolo.cpp",
+      "NvDsInferParseCustomYoloV4": "src/nvdsparsebbox_Yolo.cpp"
+    },
+    "headers": [],
+    "duplicates": [],
+    "not_found": [],
+    "resolved": {}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "data": {
+    "snapshotted": false,
+    "object": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/objects/neoverse-v2/src/nvdsparsebbox_Yolo.o",
+    "reason": "object was built from a different revision of this source (recorded sha256:47d59ffafdc5aae7, source sha256:82e8d9f30734072d) — rebuild it before editing, or the baseline would be the edit itself",
+    "source_captured": true,
+    "source_capture_state": "captured",
+    "baseline_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/06c2710edf4dac7b",
+    "source_prev": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/06c2710edf4dac7b/orig/src/nvdsparsebbox_Yolo.cpp.locisrc",
+    "linked": {
+      "state": "refused",
+      "artifact": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64",
+      "code": "before_elf_stale",
+      "reason": "stale artifact: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 predates its sources — /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp is 9s newer. Rebuild before trusting these numbers."
+    }
+  }
+}

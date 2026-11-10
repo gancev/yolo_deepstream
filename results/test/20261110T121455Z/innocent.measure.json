@@ -1,0 +1,2010 @@
+{
+  "ok": true,
+  "data": {
+    "id": "m-476d9f414e7f",
+    "manifest": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/2d9e2c9f36247585/manifests/m-476d9f414e7f.json",
+    "state": "measured",
+    "contract": "project",
+    "gates": {
+      "Performance": "fail"
+    },
+    "verdict": "fail",
+    "rows": [
+      {
+        "fn": "NvDsInferParseCustomYoloV7",
+        "gate": "Performance",
+        "status": "❌",
+        "verdict": "fail",
+        "before": "172 ns",
+        "after": "333 ns",
+        "note": "333 ns (bound ≤ 250 ns, 133% of budget); callee-excluded, 84.2 ns → 182 ns (+116%) — on the ranked hot path (≥ lower bound); hot path moved — absolutes only; callee-excluded",
+        "entries": [
+          "b5dc6b70cbd1",
+          "2067dcd71ce0"
+        ]
+      },
+      {
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Performance",
+        "status": "✅",
+        "verdict": "pass",
+        "before": "215 ns",
+        "after": "216 ns",
+        "note": "216 ns (bound ≤ 320 ns, 67% of budget); callee-excluded",
+        "entries": [
+          "23a9ff62cd1f"
+        ]
+      }
+    ],
+    "judgements": [
+      {
+        "text": "NvDsInferParseCustomYoloV7 worst-path time must not exceed 250 ns",
+        "kind": "budget",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "entry_key": "b5dc6b70cbd1",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "scope": "NvDsInferParseCustomYoloV7",
+        "verdict": "fail",
+        "lower_bound": true,
+        "prev_lower_bound": true,
+        "bound": "≤ 250 ns",
+        "observed": "333 ns",
+        "note": "333 ns (bound ≤ 250 ns, 133% of budget); callee-excluded",
+        "before": "172 ns",
+        "after": "333 ns",
+        "before_value": 171.61437770547172,
+        "after_value": 332.8967837025339
+      },
+      {
+        "text": "NvDsInferParseCustomYoloV7 hot-path time must not regress more than 10 %",
+        "kind": "regression",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "entry_key": "2067dcd71ce0",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "scope": "NvDsInferParseCustomYoloV7",
+        "verdict": "fail",
+        "lower_bound": true,
+        "prev_lower_bound": true,
+        "bound": "+10%",
+        "observed": "+116.1%",
+        "note": "84.2 ns → 182 ns (+116%) — on the ranked hot path (≥ lower bound); hot path moved — absolutes only; callee-excluded",
+        "before": "84.2 ns",
+        "after": "182 ns",
+        "before_value": 84.23732654123695,
+        "after_value": 182.04984729348635
+      },
+      {
+        "text": "NvDsInferParseCustomYoloV4 worst-path time must not exceed 320 ns",
+        "kind": "budget",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "fail",
+        "entry_key": "23a9ff62cd1f",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "scope": "NvDsInferParseCustomYoloV4",
+        "verdict": "pass",
+        "lower_bound": true,
+        "prev_lower_bound": true,
+        "bound": "≤ 320 ns",
+        "observed": "216 ns",
+        "note": "216 ns (bound ≤ 320 ns, 67% of budget); callee-excluded",
+        "before": "215 ns",
+        "after": "216 ns",
+        "before_value": 215.03667888058214,
+        "after_value": 215.79719837781428
+      }
+    ],
+    "unjudged": [
+      {
+        "entry_key": "22fe536f002c",
+        "text": "NvDsInferParseCustomYoloV7 must use no more than 288 bytes of stack for its own frame",
+        "signal": "stack_frame_size",
+        "gate": "Stack",
+        "reason_code": "no_measurement",
+        "reason": "not measured this run: `stack_frame_size` on `NvDsInferParseCustomYoloV7`"
+      },
+      {
+        "entry_key": "e263fdc5e221",
+        "text": "The parser library must not contain recursion: recursion cycles must stay at 0",
+        "signal": "recursion_cycles",
+        "gate": "Safety",
+        "reason_code": "no_measurement",
+        "reason": "not measured this run: `recursion_cycles`"
+      },
+      {
+        "signal": "hot_path_time",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 78.70019203761903,
+        "after": "78.7 ns",
+        "before": "66.0 ns",
+        "prior": {
+          "value": 65.99718477433065,
+          "measured_at": "2026-11-10T12:15:07.585084+00:00",
+          "run": "m-4edfcff35288",
+          "artifact": "elf"
+        },
+        "delta_pct": 19.25,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+19.2% vs last run (2026-11-10T12:15:07.585084+00:00); last run measured the linked ELF, this one an object; callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `NvDsInferParseCustomYoloV4`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `NvDsInferParseCustomYoloV4` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 110.18026885266663,
+        "after": "110 nWs",
+        "before": "110 nWs",
+        "prior": {
+          "value": 110.19144798700452,
+          "measured_at": "2026-11-10T12:12:36.452934+00:00",
+          "run": "m-8c7132f4b3fd",
+          "artifact": "object"
+        },
+        "delta_pct": -0.01,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "-0.0% vs last run (2026-11-10T12:12:36.452934+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `NvDsInferParseCustomYoloV4`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `NvDsInferParseCustomYoloV7` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 254.869786210881,
+        "after": "255 nWs",
+        "before": "80.5 nWs",
+        "prior": {
+          "value": 80.53021304764837,
+          "measured_at": "2026-11-10T12:12:36.452934+00:00",
+          "run": "m-8c7132f4b3fd",
+          "artifact": "object"
+        },
+        "delta_pct": 216.49,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+216.5% vs last run (2026-11-10T12:12:36.452934+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `NvDsInferParseCustomYoloV7`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "hot_path_time",
+        "fn": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 43.61916175882031,
+        "after": "43.6 ns",
+        "before": "43.6 ns",
+        "prior": {
+          "value": 43.61916175882031,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "worst_path_time",
+        "fn": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`worst_path_time` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 52.098199864123,
+        "after": "52.1 ns",
+        "before": "52.1 ns",
+        "prior": {
+          "value": 52.098199864123,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `worst_path_time` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 61.06682646234843,
+        "after": "61.1 nWs",
+        "before": "61.1 nWs",
+        "prior": {
+          "value": 61.06682646234843,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "hot_path_time",
+        "fn": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 25.08795228458676,
+        "after": "25.1 ns",
+        "before": "25.1 ns",
+        "prior": {
+          "value": 25.08795228458676,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "worst_path_time",
+        "fn": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`worst_path_time` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 40.45095890955716,
+        "after": "40.5 ns",
+        "before": "40.5 ns",
+        "prior": {
+          "value": 40.45095890955716,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `worst_path_time` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 35.123133198421456,
+        "after": "35.1 nWs",
+        "before": "35.1 nWs",
+        "prior": {
+          "value": 35.123133198421456,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "hot_path_time",
+        "fn": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 7.831686578469849,
+        "after": "7.83 ns",
+        "before": "7.83 ns",
+        "prior": {
+          "value": 7.831686578469849,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "worst_path_time",
+        "fn": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`worst_path_time` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 89.20623745774806,
+        "after": "89.2 ns",
+        "before": "89.2 ns",
+        "prior": {
+          "value": 89.20623745774806,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `worst_path_time` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 10.964361209857788,
+        "after": "11.0 nWs",
+        "before": "11.0 nWs",
+        "prior": {
+          "value": 10.964361209857788,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "hot_path_time",
+        "fn": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 9.742396550048975,
+        "after": "9.74 ns",
+        "before": "9.74 ns",
+        "prior": {
+          "value": 9.742396550048975,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "worst_path_time",
+        "fn": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`worst_path_time` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 17.454765386936593,
+        "after": "17.5 ns",
+        "before": "17.5 ns",
+        "prior": {
+          "value": 17.454765386936593,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `worst_path_time` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 13.639355170068566,
+        "after": "13.6 nWs",
+        "before": "13.6 nWs",
+        "prior": {
+          "value": 13.639355170068566,
+          "measured_at": "2026-11-10T12:12:25.484905+00:00",
+          "run": "m-eef16e74f836",
+          "artifact": "object"
+        },
+        "delta_pct": 0.0,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-10T12:12:25.484905+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]`, so this movement is measured and not judged"
+      }
+    ],
+    "agent_judged": [
+      {
+        "entry_key": "46688bd714db",
+        "text": "NvDsInferParseCustomYoloV7 must not run a loop over the candidate rows inside another loop over the candidate rows; the only nested loop allowed is the 80-class argmax inside the row loop",
+        "signal": null,
+        "gate": "Safety",
+        "gate_fallback": true,
+        "severity": "caution",
+        "prose": true,
+        "function": "NvDsInferParseCustomYoloV7"
+      },
+      {
+        "entry_key": "hot_path_time:NvDsInferParseCustomYoloV4",
+        "text": "`hot_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      },
+      {
+        "entry_key": "energy:NvDsInferParseCustomYoloV4",
+        "text": "`energy` of `NvDsInferParseCustomYoloV4` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      },
+      {
+        "entry_key": "energy:NvDsInferParseCustomYoloV7",
+        "text": "`energy` of `NvDsInferParseCustomYoloV7` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV7"
+      },
+      {
+        "entry_key": "hot_path_time:std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`hot_path_time` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "worst_path_time:std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`worst_path_time` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "energy:std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`energy` of `std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "hot_path_time:std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`hot_path_time` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "worst_path_time:std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`worst_path_time` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "energy:std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`energy` of `std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "hot_path_time:std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`hot_path_time` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "worst_path_time:std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`worst_path_time` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "energy:std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`energy` of `std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "hot_path_time:std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`hot_path_time` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "worst_path_time:std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`worst_path_time` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      },
+      {
+        "entry_key": "energy:std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+        "text": "`energy` of `std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      }
+    ],
+    "escalations": [
+      {
+        "skill": "stack-depth",
+        "requests": [
+          "r3",
+          "r4"
+        ],
+        "triggers": [
+          {
+            "kind": "stack_grew",
+            "fn": "NvDsInferParseCustomYoloV4",
+            "before_b": 336,
+            "after_b": 704,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "recursion",
+            "fn": "NvDsInferParseCustomYoloV4",
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "stack_grew",
+            "fn": "NvDsInferParseCustomYoloV7",
+            "before_b": 288,
+            "after_b": 768,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "recursion",
+            "fn": "NvDsInferParseCustomYoloV7",
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "stack_grew",
+            "fn": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "before_b": null,
+            "after_b": 32,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "stack_grew",
+            "fn": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "before_b": null,
+            "after_b": 128,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "stack_grew",
+            "fn": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "before_b": null,
+            "after_b": 256,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "recursion",
+            "fn": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          },
+          {
+            "kind": "stack_grew",
+            "fn": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "before_b": null,
+            "after_b": 32,
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          }
+        ]
+      },
+      {
+        "skill": "memory-report",
+        "requests": [],
+        "triggers": [
+          {
+            "kind": "static_data",
+            "ram_b": 0,
+            "rom_b": 271,
+            "objects": [],
+            "unit": "src/nvdsparsebbox_Yolo.cpp"
+          }
+        ]
+      }
+    ],
+    "linked_before": {
+      "before_saved": true,
+      "relink": "cmake --build build"
+    },
+    "notes": [],
+    "selection": [
+      "p1",
+      "p9",
+      "p17",
+      "p25",
+      "p31",
+      "p39"
+    ],
+    "path_moved": {
+      "NvDsInferParseCustomYoloV7": true,
+      "NvDsInferParseCustomYoloV4": false,
+      "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": false,
+      "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": false,
+      "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": false,
+      "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": false
+    },
+    "paths": {
+      "NvDsInferParseCustomYoloV4": {
+        "hot_path": {
+          "candidate": "p9",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "reselected",
+          "blocks": [
+            "bb_0x7f0",
+            "bb_0x820",
+            "bb_0x834",
+            "bb_0x840",
+            "bb_0x850",
+            "bb_0x858",
+            "bb_0x888",
+            "bb_0x88c",
+            "bb_0x8a0",
+            "bb_0x8b0",
+            "bb_0x8bc",
+            "bb_0x8c0",
+            "bb_0x8d0",
+            "bb_0x8dc",
+            "bb_0x8fc",
+            "bb_0x904",
+            "bb_0x914",
+            "bb_0x918",
+            "bb_0x91c",
+            "bb_0x92c",
+            "bb_0x930",
+            "bb_0x944",
+            "bb_0x948",
+            "bb_0x94c",
+            "bb_0x950",
+            "bb_0x954",
+            "bb_0x958"
+          ],
+          "ns": 78.70019203761903,
+          "ns_worst": 87.4748302866623,
+          "lower_bound": true,
+          "energy_nws": 110.18026885266663,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (no register add/sub of w2 in the loop body — the counter is not in a register, or the loop is not counted)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)",
+            "≥ — loop L3 trip count unknown (limit register w0 is written inside the loop (add w0, w0, #1 @bb_0x8b0) — the bound varies per lap)",
+            "callee-excluded — _Znwm body not counted",
+            "callee-excluded — memcpy body not counted",
+            "callee-excluded — std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0] body not counted",
+            "callee-excluded — _ZdlPv body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_Znwm",
+              "site": "0x918"
+            },
+            {
+              "name": "memcpy",
+              "site": "0x92c"
+            },
+            {
+              "name": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+              "site": "0x930"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x94c"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x954"
+            }
+          ],
+          "before_ns": 77.65148940764334
+        },
+        "worst_path": {
+          "baseline": "recomputed",
+          "blocks": [
+            "bb_0x7f0",
+            "bb_0xab8",
+            "bb_0xacc",
+            "bb_0xad0",
+            "bb_0xadc",
+            "bb_0xae0",
+            "bb_0xaf0",
+            "bb_0xaf4",
+            "bb_0xafc",
+            "bb_0xb00",
+            "bb_0xb18",
+            "bb_0xb34",
+            "bb_0xb38",
+            "bb_0xb3c",
+            "bb_0xb58",
+            "bb_0xb60",
+            "bb_0xb24",
+            "bb_0xb28",
+            "bb_0xb2c",
+            "bb_0xb30",
+            "bb_0x820",
+            "bb_0x834",
+            "bb_0x840",
+            "bb_0x850",
+            "bb_0x858",
+            "bb_0x888",
+            "bb_0x88c",
+            "bb_0x8a0",
+            "bb_0x984",
+            "bb_0x8b0",
+            "bb_0x8bc",
+            "bb_0x8c0",
+            "bb_0x8d0",
+            "bb_0x8dc",
+            "bb_0x990",
+            "bb_0x9cc",
+            "bb_0x9d0",
+            "bb_0x9e4",
+            "bb_0x9e8",
+            "bb_0x9fc",
+            "bb_0xa00",
+            "bb_0xa14",
+            "bb_0xa18",
+            "bb_0xa2c",
+            "bb_0xa30",
+            "bb_0xa44",
+            "bb_0xa48",
+            "bb_0xa54",
+            "bb_0xa5c",
+            "bb_0xb68",
+            "bb_0xb8c",
+            "bb_0xb90",
+            "bb_0xa7c",
+            "bb_0xa90",
+            "bb_0x904",
+            "bb_0xc64",
+            "bb_0xc6c",
+            "bb_0xc70",
+            "bb_0xc84",
+            "bb_0xc88",
+            "bb_0xc94",
+            "bb_0xc98",
+            "bb_0xc9c",
+            "bb_0xca0",
+            "bb_0xca4",
+            "bb_0xca8",
+            "bb_0xcac",
+            "bb_0xcb0"
+          ],
+          "ns": 190.80637886124197,
+          "ns_worst": 215.79719837781428,
+          "lower_bound": true,
+          "energy_nws": 267.1289304057387,
+          "reasons": [
+            "callee-excluded — _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l body not counted",
+            "callee-excluded — _ZNSo9_M_insertImEERSoT_ body not counted",
+            "callee-excluded — _ZNSolsEi body not counted",
+            "callee-excluded — _ZNKSt5ctypeIcE13_M_widen_initEv body not counted",
+            "callee-excluded — _ZNSo3putEc body not counted",
+            "callee-excluded — _ZNSo5flushEv body not counted",
+            "≥ — loop L1 trip count unknown (no register add/sub of w2 in the loop body — the counter is not in a register, or the loop is not counted)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)",
+            "≥ — loop L3 trip count unknown (limit register w0 is written inside the loop (add w0, w0, #1 @bb_0x8b0) — the bound varies per lap)",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_ body not counted",
+            "callee-excluded — _ZSt20__throw_length_errorPKc body not counted",
+            "callee-excluded — _ZSt16__throw_bad_castv body not counted",
+            "callee-excluded — _ZdlPv body not counted",
+            "≥ — loop L5 trip count unknown (no exit test inside the loop — exit is unconditional or indirect)",
+            "callee-excluded — _Unwind_Resume body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0xacc"
+            },
+            {
+              "name": "_ZNSo9_M_insertImEERSoT_",
+              "site": "0xadc"
+            },
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0xaf0"
+            },
+            {
+              "name": "_ZNSolsEi",
+              "site": "0xafc"
+            },
+            {
+              "name": "_ZNKSt5ctypeIcE13_M_widen_initEv",
+              "site": "0xb38"
+            },
+            {
+              "name": "_ZNSo3putEc",
+              "site": "0xb28"
+            },
+            {
+              "name": "_ZNSo5flushEv",
+              "site": "0xb2c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x9cc"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x9e4"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x9fc"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xa14"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xa2c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xa44"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0xb8c"
+            },
+            {
+              "name": "_ZSt20__throw_length_errorPKc",
+              "site": "0xc6c"
+            },
+            {
+              "name": "_ZSt16__throw_bad_castv",
+              "site": "0xc84"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0xc98"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0xca4"
+            },
+            {
+              "name": "_Unwind_Resume",
+              "site": "0xcac"
+            }
+          ],
+          "paths_searched": 1144,
+          "ties": 0,
+          "before_ns_worst": 215.03667888058214
+        }
+      },
+      "NvDsInferParseCustomYoloV7": {
+        "hot_path": {
+          "candidate": "p1",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": true,
+          "moved_at": [
+            {
+              "kind": "flipped",
+              "branch": 6,
+              "op": "b.mi",
+              "cond": "mi",
+              "call": null,
+              "was": "taken",
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 5,
+              "op": "b.mi",
+              "cond": "mi",
+              "call": "_Z5clampfff",
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 7,
+              "op": "b.eq",
+              "cond": "eq",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 9,
+              "op": "b.eq",
+              "cond": "eq",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 10,
+              "op": "b.le",
+              "cond": "le",
+              "call": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 11,
+              "op": "b.ne",
+              "cond": "ne",
+              "call": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 12,
+              "op": "cbz",
+              "cond": "z",
+              "call": "memset",
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 13,
+              "op": "b.ls",
+              "cond": "ls",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 14,
+              "op": "cbnz",
+              "cond": "nz",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 15,
+              "op": "b.eq",
+              "cond": "eq",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 16,
+              "op": "b.ls",
+              "cond": "ls",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 17,
+              "op": "cbnz",
+              "cond": "nz",
+              "call": null,
+              "now": "taken"
+            },
+            {
+              "kind": "new branch",
+              "branch": 22,
+              "op": "b.ne",
+              "cond": "ne",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 13,
+              "op": "b.ls",
+              "cond": "ls",
+              "call": null,
+              "now": "taken"
+            },
+            {
+              "kind": "new branch",
+              "branch": 27,
+              "op": "b.ne",
+              "cond": "ne",
+              "call": "_ZdlPv",
+              "now": "taken"
+            },
+            {
+              "kind": "new branch",
+              "branch": 26,
+              "op": "b.ge",
+              "cond": "ge",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 27,
+              "op": "b.ne",
+              "cond": "ne",
+              "call": null,
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 29,
+              "op": "cbz",
+              "cond": "z",
+              "call": "_ZdlPv",
+              "now": "fallthrough"
+            },
+            {
+              "kind": "new branch",
+              "branch": 30,
+              "op": "cbz",
+              "cond": "z",
+              "call": "_ZdlPv",
+              "now": "fallthrough"
+            }
+          ],
+          "baseline": "reselected",
+          "blocks": [
+            "bb_0xd08",
+            "bb_0xd24",
+            "bb_0xd44",
+            "bb_0xd48",
+            "bb_0xd5c",
+            "bb_0xd90",
+            "bb_0xda8",
+            "bb_0xdb4",
+            "bb_0xdc0",
+            "bb_0xddc",
+            "bb_0xde0",
+            "bb_0xdf4",
+            "bb_0xdf8",
+            "bb_0xe0c",
+            "bb_0xe10",
+            "bb_0xe24",
+            "bb_0xe28",
+            "bb_0xe3c",
+            "bb_0xe40",
+            "bb_0xe54",
+            "bb_0xe58",
+            "bb_0xe60",
+            "bb_0xe68",
+            "bb_0xe74",
+            "bb_0xe88",
+            "bb_0xe98",
+            "bb_0xea0",
+            "bb_0xea4",
+            "bb_0xea8",
+            "bb_0xeb8",
+            "bb_0xebc",
+            "bb_0xee8",
+            "bb_0xef0",
+            "bb_0xf00",
+            "bb_0xf0c",
+            "bb_0xf14",
+            "bb_0xf18",
+            "bb_0xf1c",
+            "bb_0xf2c",
+            "bb_0xf30",
+            "bb_0xf58",
+            "bb_0xf60",
+            "bb_0xf68",
+            "bb_0xf78",
+            "bb_0xf80",
+            "bb_0xf94",
+            "bb_0xf9c",
+            "bb_0xfa8",
+            "bb_0x1040",
+            "bb_0x1050",
+            "bb_0x1100",
+            "bb_0x1108",
+            "bb_0x110c",
+            "bb_0x1114",
+            "bb_0x1118",
+            "bb_0x1134",
+            "bb_0x1170",
+            "bb_0x1150",
+            "bb_0x1168",
+            "bb_0x1178",
+            "bb_0x118c",
+            "bb_0x1190",
+            "bb_0x1194",
+            "bb_0x1198",
+            "bb_0x119c",
+            "bb_0x11a0",
+            "bb_0x11a4",
+            "bb_0x11a8",
+            "bb_0x11ac",
+            "bb_0x11b0",
+            "bb_0x11c4"
+          ],
+          "ns": 182.04984729348635,
+          "ns_worst": 206.2202175996157,
+          "lower_bound": true,
+          "energy_nws": 254.869786210881,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (limit register w21 is written inside the loop (add w21, w21, #1 @bb_0xe88) — the bound varies per lap)",
+            "≥ — trip count unknown on NvDsInferParseCustomYoloV7_0xdb4",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _Znwm body not counted",
+            "callee-excluded — memcpy body not counted",
+            "callee-excluded — std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "callee-excluded — std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "callee-excluded — std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "≥ — loop L3 trip count unknown (limit register x19 is written inside the loop (add x19, x19, #0x18 @bb_0xf00) — the bound varies per lap)",
+            "callee-excluded — memset body not counted",
+            "≥ — loop L4 trip count unknown (limit register x23 is written inside the loop (add x23, x23, #1 @bb_0xf68) — the bound varies per lap)",
+            "≥ — loop L5 trip count unknown (no register add/sub of w0 in the loop body — the counter is not in a register, or the loop is not counted)",
+            "≥ — loop L6 trip count unknown (limit register x27 is computed, not constant (add x27, x20, x28 @bb_0xf30))",
+            "callee-excluded — _ZdlPv body not counted",
+            "≥ — loop L7 trip count unknown (limit register x20 is computed, not constant (subs x20, x20, x25 @bb_0xe98))",
+            "callee-excluded — std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0] body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_Z5clampfff",
+              "site": "0xddc"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xdf4"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe0c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe24"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe3c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe54"
+            },
+            {
+              "name": "_Znwm",
+              "site": "0xea4"
+            },
+            {
+              "name": "memcpy",
+              "site": "0xeb8"
+            },
+            {
+              "name": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0xebc"
+            },
+            {
+              "name": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0xef0"
+            },
+            {
+              "name": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0xf00"
+            },
+            {
+              "name": "_Znwm",
+              "site": "0xf18"
+            },
+            {
+              "name": "memset",
+              "site": "0xf2c"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x1108"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x1114"
+            },
+            {
+              "name": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+              "site": "0x1178"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x1194"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x11a0"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x11ac"
+            }
+          ],
+          "before_ns": 84.23732654123695
+        },
+        "worst_path": {
+          "baseline": "recomputed",
+          "blocks": [
+            "bb_0xd08",
+            "bb_0xd24",
+            "bb_0x105c",
+            "bb_0x1070",
+            "bb_0x1074",
+            "bb_0x1080",
+            "bb_0x1084",
+            "bb_0x1094",
+            "bb_0x1098",
+            "bb_0x10a0",
+            "bb_0x10a4",
+            "bb_0x10bc",
+            "bb_0x12c0",
+            "bb_0x12c4",
+            "bb_0x12c8",
+            "bb_0x12e4",
+            "bb_0x12ec",
+            "bb_0x10cc",
+            "bb_0x10d0",
+            "bb_0x10d4",
+            "bb_0x10d8",
+            "bb_0xd48",
+            "bb_0xd5c",
+            "bb_0xd90",
+            "bb_0xda8",
+            "bb_0x10dc",
+            "bb_0xdb4",
+            "bb_0xdc0",
+            "bb_0xddc",
+            "bb_0xde0",
+            "bb_0xdf4",
+            "bb_0xdf8",
+            "bb_0xe0c",
+            "bb_0xe10",
+            "bb_0xe24",
+            "bb_0xe28",
+            "bb_0xe3c",
+            "bb_0xe40",
+            "bb_0xe54",
+            "bb_0xe58",
+            "bb_0xe60",
+            "bb_0xe68",
+            "bb_0x11f0",
+            "bb_0x1214",
+            "bb_0x1218",
+            "bb_0xe88",
+            "bb_0xe98",
+            "bb_0xea0",
+            "bb_0xea4",
+            "bb_0xea8",
+            "bb_0xeb8",
+            "bb_0xebc",
+            "bb_0xee8",
+            "bb_0xef0",
+            "bb_0xf00",
+            "bb_0xf0c",
+            "bb_0xf14",
+            "bb_0xf18",
+            "bb_0xf1c",
+            "bb_0xf2c",
+            "bb_0xf30",
+            "bb_0xf58",
+            "bb_0xf60",
+            "bb_0xf68",
+            "bb_0xf78",
+            "bb_0x1244",
+            "bb_0x125c",
+            "bb_0x1260",
+            "bb_0xf94",
+            "bb_0xf9c",
+            "bb_0xfa8",
+            "bb_0xfb0",
+            "bb_0xfc0",
+            "bb_0xff4",
+            "bb_0x1028",
+            "bb_0x10e8",
+            "bb_0x10f4",
+            "bb_0x1040",
+            "bb_0x1050",
+            "bb_0x1100",
+            "bb_0x1108",
+            "bb_0x110c",
+            "bb_0x1114",
+            "bb_0x1118",
+            "bb_0x1134",
+            "bb_0x1170",
+            "bb_0x1150",
+            "bb_0x11d0",
+            "bb_0x1224",
+            "bb_0x1234",
+            "bb_0x1238",
+            "bb_0x1168",
+            "bb_0x1178",
+            "bb_0x118c",
+            "bb_0x1190",
+            "bb_0x1194",
+            "bb_0x1198",
+            "bb_0x119c",
+            "bb_0x11a0",
+            "bb_0x11a4",
+            "bb_0x11a8",
+            "bb_0x11ac",
+            "bb_0x11b0",
+            "bb_0x11c4"
+          ],
+          "ns": 296.6178881239142,
+          "ns_worst": 332.8967837025339,
+          "lower_bound": true,
+          "energy_nws": 415.26504337348,
+          "reasons": [
+            "callee-excluded — _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l body not counted",
+            "callee-excluded — _ZNSo9_M_insertImEERSoT_ body not counted",
+            "callee-excluded — _ZNSolsEi body not counted",
+            "callee-excluded — _ZNKSt5ctypeIcE13_M_widen_initEv body not counted",
+            "callee-excluded — _ZNSo3putEc body not counted",
+            "callee-excluded — _ZNSo5flushEv body not counted",
+            "≥ — loop L1 trip count unknown (limit register w21 is written inside the loop (add w21, w21, #1 @bb_0xe88) — the bound varies per lap)",
+            "≥ — trip count unknown on NvDsInferParseCustomYoloV7_0x10dc",
+            "≥ — trip count unknown on NvDsInferParseCustomYoloV7_0xdb4",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_ body not counted",
+            "callee-excluded — _Znwm body not counted",
+            "callee-excluded — memcpy body not counted",
+            "callee-excluded — std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "callee-excluded — std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "callee-excluded — std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "≥ — loop L3 trip count unknown (limit register x19 is written inside the loop (add x19, x19, #0x18 @bb_0xf00) — the bound varies per lap)",
+            "callee-excluded — memset body not counted",
+            "≥ — loop L4 trip count unknown (limit register x23 is written inside the loop (add x23, x23, #1 @bb_0xf68) — the bound varies per lap)",
+            "≥ — loop L5 trip count unknown (no register add/sub of w0 in the loop body — the counter is not in a register, or the loop is not counted)",
+            "≥ — loop L6 trip count unknown (limit register x27 is computed, not constant (add x27, x20, x28 @bb_0xf30))",
+            "callee-excluded — _ZdlPv body not counted",
+            "≥ — loop L7 trip count unknown (limit register x20 is computed, not constant (subs x20, x20, x25 @bb_0xe98))",
+            "callee-excluded — std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0] body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x1070"
+            },
+            {
+              "name": "_ZNSo9_M_insertImEERSoT_",
+              "site": "0x1080"
+            },
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x1094"
+            },
+            {
+              "name": "_ZNSolsEi",
+              "site": "0x10a0"
+            },
+            {
+              "name": "_ZNKSt5ctypeIcE13_M_widen_initEv",
+              "site": "0x12c4"
+            },
+            {
+              "name": "_ZNSo3putEc",
+              "site": "0x10d0"
+            },
+            {
+              "name": "_ZNSo5flushEv",
+              "site": "0x10d4"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xddc"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xdf4"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe0c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe24"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe3c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0xe54"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0x1214"
+            },
+            {
+              "name": "_Znwm",
+              "site": "0xea4"
+            },
+            {
+              "name": "memcpy",
+              "site": "0xeb8"
+            },
+            {
+              "name": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0xebc"
+            },
+            {
+              "name": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0xef0"
+            },
+            {
+              "name": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0xf00"
+            },
+            {
+              "name": "_Znwm",
+              "site": "0xf18"
+            },
+            {
+              "name": "memset",
+              "site": "0xf2c"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0x125c"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x1108"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x1114"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0x1234"
+            },
+            {
+              "name": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+              "site": "0x1178"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x1194"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x11a0"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x11ac"
+            }
+          ],
+          "paths_searched": 69771,
+          "ties": 0,
+          "before_ns_worst": 171.61437770547172
+        }
+      },
+      "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": {
+        "hot_path": {
+          "candidate": "p17",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "none",
+          "blocks": [
+            "bb_0x60",
+            "bb_0x80",
+            "bb_0x8c",
+            "bb_0x88",
+            "bb_0xe0",
+            "bb_0xe4",
+            "bb_0xf0",
+            "bb_0x10c",
+            "bb_0x144",
+            "bb_0x168",
+            "bb_0x128"
+          ],
+          "ns": 43.61916175882031,
+          "ns_worst": 46.62337100177819,
+          "lower_bound": true,
+          "energy_nws": 61.06682646234843,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (limit register x5 is written inside the loop (csel x5, x8, x5, mi @bb_0x8c) — the bound varies per lap)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)"
+          ],
+          "baseline_reason": "fn_absent_from_before"
+        },
+        "worst_path": {
+          "baseline": "none",
+          "blocks": [
+            "bb_0x60",
+            "bb_0x80",
+            "bb_0x8c",
+            "bb_0x88",
+            "bb_0xe0",
+            "bb_0x180",
+            "bb_0x18c",
+            "bb_0xf0",
+            "bb_0x10c",
+            "bb_0x144",
+            "bb_0x168",
+            "bb_0x128"
+          ],
+          "ns": 48.76526931796461,
+          "ns_worst": 52.098199864123,
+          "lower_bound": true,
+          "energy_nws": 68.27137704515046,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (limit register x5 is written inside the loop (csel x5, x8, x5, mi @bb_0x8c) — the bound varies per lap)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)"
+          ],
+          "paths_searched": 41,
+          "ties": 0,
+          "baseline_reason": "fn_absent_from_before"
+        }
+      },
+      "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": {
+        "hot_path": {
+          "candidate": "p25",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "none",
+          "blocks": [
+            "bb_0x288",
+            "bb_0x290",
+            "bb_0x2ac",
+            "bb_0x2c0",
+            "bb_0x2d0",
+            "bb_0x2d8",
+            "bb_0x2e4",
+            "bb_0x2ec"
+          ],
+          "ns": 25.08795228458676,
+          "ns_worst": 28.24896807203781,
+          "lower_bound": true,
+          "energy_nws": 35.123133198421456,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (limit register x19 is written inside the loop (add x19, x19, #0x18 @bb_0x2d8) — the bound varies per lap)",
+            "callee-excluded — std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted"
+          ],
+          "callees": [
+            {
+              "name": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0x2d0"
+            }
+          ],
+          "baseline_reason": "fn_absent_from_before"
+        },
+        "worst_path": {
+          "baseline": "none",
+          "blocks": [
+            "bb_0x288",
+            "bb_0x290",
+            "bb_0x2ac",
+            "bb_0x2c0",
+            "bb_0x2f8",
+            "bb_0x348",
+            "bb_0x34c",
+            "bb_0x334",
+            "bb_0x2d8",
+            "bb_0x2e4",
+            "bb_0x2ec"
+          ],
+          "ns": 36.7699286131085,
+          "ns_worst": 40.45095890955716,
+          "lower_bound": true,
+          "energy_nws": 51.4779000583519,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (limit register x19 is written inside the loop (add x19, x19, #0x18 @bb_0x2d8) — the bound varies per lap)"
+          ],
+          "paths_searched": 6,
+          "ties": 0,
+          "baseline_reason": "fn_absent_from_before"
+        }
+      },
+      "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": {
+        "hot_path": {
+          "candidate": "p31",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "none",
+          "blocks": [
+            "bb_0x4c0",
+            "bb_0x700"
+          ],
+          "ns": 7.831686578469849,
+          "ns_worst": 8.564832361593908,
+          "lower_bound": true,
+          "energy_nws": 10.964361209857788,
+          "reasons": [
+            "≥ — loop R1 is recursion, depth unknown (recursive call, not an iteration — depth is not statically bounded here)"
+          ],
+          "baseline_reason": "fn_absent_from_before"
+        },
+        "worst_path": {
+          "baseline": "none",
+          "blocks": [
+            "bb_0x4c0",
+            "bb_0x4dc",
+            "bb_0x508",
+            "bb_0x530",
+            "bb_0x538",
+            "bb_0x748",
+            "bb_0x568",
+            "bb_0x56c",
+            "bb_0x5d0",
+            "bb_0x5e4",
+            "bb_0x5f4",
+            "bb_0x590",
+            "bb_0x59c",
+            "bb_0x5a0",
+            "bb_0x614",
+            "bb_0x644",
+            "bb_0x664",
+            "bb_0x68c",
+            "bb_0x65c",
+            "bb_0x690",
+            "bb_0x6a8",
+            "bb_0x6f0",
+            "bb_0x6f8",
+            "bb_0x700"
+          ],
+          "ns": 82.27270126486084,
+          "ns_worst": 89.20623745774806,
+          "lower_bound": true,
+          "energy_nws": 115.18178177080515,
+          "reasons": [
+            "≥ — loop R1 is recursion, depth unknown (recursive call, not an iteration — depth is not statically bounded here)",
+            "≥ — loop L1 trip count unknown (limit register x0 is written inside the loop (sub x0, x0, #0x18 @bb_0x590) — the bound varies per lap)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)",
+            "callee-excluded — recursive call to std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0], body not counted",
+            "callee-excluded — std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] body not counted",
+            "≥ — loop L4 trip count unknown (x14 is not constant on entry (mul x14, x0, x20 @bb_0x630))",
+            "≥ — loop L5 trip count unknown (no register add/sub of x13 in the loop body — the counter is not in a register, or the loop is not counted)"
+          ],
+          "callees": [
+            {
+              "name": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0x614"
+            },
+            {
+              "name": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0x664"
+            },
+            {
+              "name": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+              "site": "0x6a8"
+            }
+          ],
+          "paths_searched": 293,
+          "ties": 1,
+          "tied_paths": [
+            [
+              "bb_0x4c0",
+              "bb_0x4dc",
+              "bb_0x508",
+              "bb_0x70c",
+              "bb_0x714",
+              "bb_0x748",
+              "bb_0x568",
+              "bb_0x56c",
+              "bb_0x5d0",
+              "bb_0x5e4",
+              "bb_0x5f4",
+              "bb_0x590",
+              "bb_0x59c",
+              "bb_0x5a0",
+              "bb_0x614",
+              "bb_0x644",
+              "bb_0x664",
+              "bb_0x68c",
+              "bb_0x65c",
+              "bb_0x690",
+              "bb_0x6a8",
+              "bb_0x6f0",
+              "bb_0x6f8",
+              "bb_0x700"
+            ]
+          ],
+          "baseline_reason": "fn_absent_from_before"
+        }
+      },
+      "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": {
+        "hot_path": {
+          "candidate": "p39",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "none",
+          "blocks": [
+            "bb_0x200",
+            "bb_0x228"
+          ],
+          "ns": 9.742396550048975,
+          "ns_worst": 10.187410872661081,
+          "lower_bound": false,
+          "energy_nws": 13.639355170068566,
+          "baseline_reason": "fn_absent_from_before"
+        },
+        "worst_path": {
+          "baseline": "none",
+          "blocks": [
+            "bb_0x200",
+            "bb_0x240",
+            "bb_0x248",
+            "bb_0x270"
+          ],
+          "ns": 16.47864654484959,
+          "ns_worst": 17.454765386936593,
+          "lower_bound": true,
+          "energy_nws": 23.070105162789424,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (limit is neither an immediate nor a register compare)"
+          ],
+          "paths_searched": 2,
+          "ties": 0,
+          "baseline_reason": "fn_absent_from_before"
+        }
+      }
+    },
+    "frequency": {
+      "source": "repository",
+      "scaled": true,
+      "clock_hz": 2601000000,
+      "trained_hz": 2800000000
+    },
+    "measured": {
+      "r2": {
+        "value": 182.04984729348635,
+        "unit": "ns",
+        "baseline": "reselected",
+        "prev": 84.23732654123695,
+        "lower_bound": true
+      },
+      "r6": {
+        "value": 78.70019203761903,
+        "unit": "ns",
+        "baseline": "reselected",
+        "prev": 77.65148940764334,
+        "lower_bound": true
+      },
+      "r9": {
+        "value": 43.61916175882031,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r12": {
+        "value": 25.08795228458676,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r15": {
+        "value": 7.831686578469849,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r18": {
+        "value": 9.742396550048975,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before"
+      },
+      "r1": {
+        "value": 332.8967837025339,
+        "unit": "ns",
+        "baseline": "recomputed",
+        "prev": 171.61437770547172,
+        "lower_bound": true
+      },
+      "r5": {
+        "value": 215.79719837781428,
+        "unit": "ns",
+        "baseline": "recomputed",
+        "prev": 215.03667888058214,
+        "lower_bound": true
+      },
+      "r10": {
+        "value": 52.098199864123,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r13": {
+        "value": 40.45095890955716,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r16": {
+        "value": 89.20623745774806,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r19": {
+        "value": 17.454765386936593,
+        "unit": "ns",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r7": {
+        "value": 110.18026885266663,
+        "unit": "nWs",
+        "baseline": "reselected",
+        "prev": 108.71208517070066,
+        "lower_bound": true
+      },
+      "r8": {
+        "value": 254.869786210881,
+        "unit": "nWs",
+        "baseline": "reselected",
+        "prev": 117.93225715773174,
+        "lower_bound": true
+      },
+      "r11": {
+        "value": 61.06682646234843,
+        "unit": "nWs",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r14": {
+        "value": 35.123133198421456,
+        "unit": "nWs",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r17": {
+        "value": 10.964361209857788,
+        "unit": "nWs",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before",
+        "lower_bound": true
+      },
+      "r20": {
+        "value": 13.639355170068566,
+        "unit": "nWs",
+        "baseline": "none",
+        "baseline_reason": "fn_absent_from_before"
+      }
+    }
+  }
+}

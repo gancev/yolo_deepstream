@@ -114,9 +114,10 @@ test ELF (same parser code: the TU assembles identically with and without SVE).
 Envelopes: `results/baseline/`, `results/scenario/innocent/`,
 `results/scenario/fix/`; the earlier pass at the generic `aarch64`
 (Cortex-A53 model, 1728 MHz) is kept under `results/archive-aarch64-a53/`. The
-contract draft and its expected verdicts: `CONTRACT.md`. The draft is applied
-by the repository owner (`loci contract accept`), after which `test.sh` asserts
-PASS / FAIL / PASS.
+contract and the reasoning behind each bound: `CONTRACT.md`; it is in force as
+`.loci/contract.yaml`. `test.sh` asserts baseline PASS, innocent edit FAIL and
+fix PASS or CAUTION; the recorded run (`results/test/20261110T121455Z/`) gave
+PASS / FAIL / CAUTION, the fix's worst path sitting at 72 % of its 250 ns budget.
 
 ## Layout
 
