@@ -139,13 +139,13 @@ pre.flow b { color: var(--accent); }
       </div>
       <div class="v">
         <span class="who">LOCI on the agent's change</span>
-        <span class="pill fail">FAIL · 5 of 5 rules</span>
-        <p>Timing, regression, stack, recursion and loop-structure rules all broken.</p>
+        <span class="pill fail">FAIL</span>
+        <p>Against the contract: worst path ≥ 333 ns vs 250 ns, typical path +116.1 % vs +10 %. Stack and control-flow analysis show why: 320 B frame (limit 288 B), recursion from <code>std::sort</code>, a row loop inside the row loop.</p>
       </div>
       <div class="v">
         <span class="who">LOCI on the fix</span>
-        <span class="pill pass">PASS · 5 of 5 rules</span>
-        <p>Worst path ≥ 180 ns against a 250 ns budget; typical path 32 % faster than before.</p>
+        <span class="pill pass">CAUTION · within every limit</span>
+        <p>Worst path ≥ 180 ns, 72 % of the 250 ns budget (LOCI marks 70 % and above CAUTION); typical path 31.7 % faster than before.</p>
       </div>
     </div>
   </section>
@@ -169,7 +169,7 @@ boxes drawn on screen / sent downstream</pre>
     <div class="facts">
       <div class="panel">
         <span class="eyebrow">Why 25,200 rows</span>
-        <p>For a 640×640 image YOLOv7 predicts on three grids (80×80, 40×40, 20×20 cells) with 3 candidate boxes per cell: 3 × (6,400 + 1,600 + 400) = 25,200 candidates per frame. Almost all are background; on the test clip about 160 pass the 0.25 threshold.</p>
+        <p>For a 640×640 image YOLOv7 predicts on three grids (80×80, 40×40, 20×20 cells) with 3 candidate boxes per cell: 3 × (6,400 + 1,600 + 400) = 25,200 candidates per frame. Almost all are background; on the sample image 56 pass the parser's threshold.</p>
       </div>
       <div class="panel">
         <span class="eyebrow">The 85 numbers per row</span>
@@ -254,9 +254,9 @@ static bool NvDsInferParseYoloV7(outputLayersInfo, networkInfo, detectionParams,
         <h3>Same bug fixes, threshold first</h3>
         <ul>
           <li>Keeps the index guard and the objectness × class-score confidence.</li>
-          <li>Applies the confidence threshold to each row as it is read, so only about 50 boxes survive instead of 25,200.</li>
+          <li>Applies the confidence threshold to each row as it is read, so 56 boxes survive on the sample image instead of 25,200.</li>
           <li>Leaves NMS to DeepStream's own cluster stage (<code>cluster-mode=2</code>, IoU 0.65), which the sample config already enables.</li>
-          <li>Same detections on screen; parser time 0.65 ms, about 21 % faster than NVIDIA's original because it hands on ~50 boxes instead of 25,200.</li>
+          <li>Same detections on screen; parser time 0.65 ms, about 21 % faster than NVIDIA's original because it hands on far fewer boxes (56 on the sample image) instead of 25,200.</li>
         </ul>
       </div>
     </div>
@@ -297,7 +297,7 @@ static std::vector&lt;NvDsInferParseObjectInfo&gt; nmsYoloV7(std::vector&lt;...&
     <span class="ok">if (maxProb &lt; detectionParams.perClassPreclusterThreshold[maxIndex]) {</span>
     <span class="ok">    continue;</span>
     <span class="ok">}</span>
-    addBBoxProposalYoloV7(..., maxIndex, maxProb, objects);  <span class="c">// ~50 boxes</span>
+    addBBoxProposalYoloV7(..., maxIndex, maxProb, objects);  <span class="c">// 56 boxes on the sample image</span>
 }
 objectList = objects;</pre>
     </div>
@@ -307,7 +307,7 @@ objectList = objects;</pre>
         <tbody>
           <tr><td>NVIDIA original</td><td>Decode everything, return everything (25,200 boxes); DeepStream filters and merges</td><td>Linear in rows</td></tr>
           <tr><td>Agent's change</td><td>Decode everything, sort everything, compare every box with every other box, then filter</td><td class="bad">Square of the rows</td></tr>
-          <tr><td>Fix</td><td>Decode, filter immediately (~50 left), return those; DeepStream merges</td><td class="good">Linear in rows, less output</td></tr>
+          <tr><td>Fix</td><td>Decode, filter immediately (56 left on the sample image), return those; DeepStream merges</td><td class="good">Linear in rows, less output</td></tr>
         </tbody>
       </table>
     </div>
@@ -358,15 +358,15 @@ objectList = objects;</pre>
     <ol class="steps">
       <li><p><strong>Matched the real build.</strong> LOCI recorded how the project compiles for the Jetson Thor target (aarch64, Neoverse V2 timing model at 2601 MHz). Its own compile came out byte-identical to the production object, so it measured the code that would actually ship.</p></li>
       <li><p><strong>Measured the compiled binary, not the source.</strong> From the aarch64 object it derived timing per execution path, stack frame size, loops and their trip counts, and recursion, without running anything on a device.</p></li>
-      <li><p><strong>Judged it against a written budget.</strong> Five rules, drafted from NVIDIA's published frame-rate numbers, turned those measurements into a pass or fail rather than a number to interpret.</p></li>
+      <li><p><strong>Judged it against a written budget.</strong> Six rules, derived from NVIDIA's published frame-rate numbers and accepted into <code>.loci/contract.yaml</code>, turned those measurements into a verdict rather than a number to interpret: original PASS, agent's change FAIL, fix CAUTION (<code>./test.sh</code>, run <code>20261110T121455Z</code>).</p></li>
       <li><p><strong>Pointed at the cause.</strong> It named a new loop over the candidate rows nested inside the existing row loop (loops at lines 255 and 258; the compiler's debug info places their blocks at 259–260) and recursion pulled in by <code>std::sort</code>, which is the design flaw rather than a tuning issue.</p></li>
     </ol>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Rule (from the drafted contract)</th><th>Budget</th><th>Upstream</th><th>Agent's change</th><th>Fix</th></tr></thead>
+        <thead><tr><th>Rule (from .loci/contract.yaml)</th><th>Budget</th><th>Upstream</th><th>Agent's change</th><th>Fix</th></tr></thead>
         <tbody>
-          <tr><td>Worst-path time</td><td class="num">≤ 250 ns</td><td class="num">≥ 172 ns</td><td class="num bad">≥ 333 ns</td><td class="num good">≥ 180 ns</td></tr>
-          <tr><td>Typical-path regression</td><td class="num">≤ +10 %</td><td class="num">84 ns</td><td class="num bad">+116 %</td><td class="num good">−32 %</td></tr>
+          <tr><td>Worst-path time</td><td class="num">≤ 250 ns</td><td class="num">≥ 172 ns</td><td class="num bad">≥ 333 ns · FAIL</td><td class="num good">≥ 180 ns · CAUTION (72 %)</td></tr>
+          <tr><td>Typical-path regression</td><td class="num">≤ +10 %</td><td class="num">84 ns</td><td class="num bad">+116.1 % · FAIL</td><td class="num good">−31.7 % · PASS</td></tr>
           <tr><td>Stack frame</td><td class="num">≤ 288 B</td><td class="num">224 B</td><td class="num bad">320 B</td><td class="num good">240 B</td></tr>
           <tr><td>Recursion cycles</td><td class="num">0</td><td class="num">0</td><td class="num bad">1 (std::sort)</td><td class="num good">0</td></tr>
           <tr><td>Row loop nested in row loop</td><td class="num">not allowed</td><td class="num">no</td><td class="num bad">yes</td><td class="num good">no</td></tr>
@@ -410,19 +410,15 @@ objectList = objects;</pre>
     </div>
     <div class="facts">
       <div class="panel">
-        <span class="eyebrow">Agent's NMS on one real frame</span>
-        <div class="count">182,081,978</div>
-        <p>inner-loop iterations (<code>j</code> over every candidate, for every kept box)</p>
-        <div class="count">43,929,249</div>
-        <p>IoU calculations, to keep the 160 boxes that pass the threshold anyway</p>
+        <span class="eyebrow">Why per pass and per frame differ</span>
+        <p>The agent's NMS compares each kept box with every later candidate: a loop over the rows inside a loop over the rows. Its work grows with the square of the row count, and a frame has 25,200 rows, where the unit test has 5.</p>
       </div>
       <div class="panel">
-        <span class="eyebrow">What that adds up to</span>
-        <p>402 ms ÷ 182 million iterations ≈ 2.2 ns per inner iteration on the laptop. That is the 487×: a cheap loop body run 182 million times per frame.</p>
-        <p>This is why the contract pairs its timing budgets with a structural rule, "no loop over the rows inside the loop over the rows". The ns figure is a floor; the nesting is what predicts the blow-up.</p>
+        <span class="eyebrow">What LOCI can and cannot say</span>
+        <p>The row count is a run-time value, so LOCI costs one pass and marks it ≥. It cannot turn +116 % per pass into ×487 per frame. It can name the nesting (loop at <code>:260</code> inside the loop at <code>:259</code>), which is what predicts the blow-up.</p>
+        <p>This is why the contract pairs its timing budgets with a structural rule, "no loop over the rows inside the loop over the rows".</p>
       </div>
     </div>
-    <p class="note">Counts from replaying the agent's NMS on frame 150 of the test clip (YOLOv5s output, 25,200 candidates).</p>
   </section>
 
   <section>
@@ -430,7 +426,7 @@ objectList = objects;</pre>
     <ul>
       <li>The slow change is a prepared, representative patch, not output captured from a specific agent run.</li>
       <li>Nothing here has run on a Jetson. The laptop timings show the direction and the order of magnitude; the Jetson-class figures are LOCI's estimates.</li>
-      <li>The five rules are a draft. The pass and fail verdicts above are read against them; they become enforced once the repository owner accepts the contract.</li>
+      <li>The contract is in force. LOCI computed the timing verdicts in <code>./test.sh</code>. The stack, recursion and nested-loop figures come from LOCI's stack-depth and control-flow runs in <code>results/</code>; that test run did not judge them against the contract.</li>
       <li>In the laptop demo, onnxruntime stands in for TensorRT and a Python NMS stands in for DeepStream's cluster stage. The parser in the middle is NVIDIA's C++ code, unchanged apart from the edits being compared.</li>
     </ul>
   </section>
@@ -438,12 +434,12 @@ objectList = objects;</pre>
   <section>
     <h2>Next steps</h2>
     <ul>
-      <li>Accept the drafted contract so every future change to the parser is checked against these budgets automatically.</li>
+      <li>Keep the contract in force (<code>.loci/contract.yaml</code>) so every future change to the parser is checked against these budgets automatically.</li>
       <li>Optionally confirm on a Jetson AGX Thor or Orin by comparing DeepStream frame rates for the three versions.</li>
     </ul>
   </section>
 
-  <footer>Sources: LOCI runs recorded in <code>results/</code>, contract draft in <code>CONTRACT.md</code>, laptop measurements from <code>demo/measure.py</code> (each version alone, 30 s of the OpenCV vtest clip, onnxruntime CPU) on 9 November 2026, raw numbers in <code>demo/out/measurements.json</code>.</footer>
+  <footer>Sources: LOCI runs recorded in <code>results/</code>, contract in <code>.loci/contract.yaml</code> (reasoning in <code>CONTRACT.md</code>), verdicts from <code>results/test/20261110T121455Z/</code>, laptop measurements from <code>demo/measure.py</code> (each version alone, 30 s of the OpenCV vtest clip, onnxruntime CPU) on 9 November 2026, raw numbers in <code>demo/out/measurements.json</code>.</footer>
 </main>
 
 </body></html>
