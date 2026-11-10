@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LOCI Stack Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a schematic sheet. The 8-layer stack as a fit matrix, then the pipeline with the LOCI gate, then the CPUs and demos. */
+:root {
+  --bg: #eef1f4;
+  --sheet: #f9fafb;
+  --ink: #15212c;
+  --ink-2: #4c5966;
+  --rule: #cfd6dd;
+  --accent: #b8560b;      /* LOCI marker: amber ink */
+  --accent-soft: #f6e3d2;
+  --off: #e3e8ec;
+  --off-ink: #7a8794;
+  --grid: rgba(21,33,44,.045);
+  --f-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151b; --sheet: #151d25; --ink: #e4e9ee; --ink-2: #9aa7b3; --rule: #2a3642;
+  --accent: #f0943f; --accent-soft: #3a2614; --off: #1d2731; --off-ink: #6f7d8a; --grid: rgba(228,233,238,.035);
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f151b; --sheet: #151d25; --ink: #e4e9ee; --ink-2: #9aa7b3; --rule: #2a3642;
+  --accent: #f0943f; --accent-soft: #3a2614; --off: #1d2731; --off-ink: #6f7d8a; --grid: rgba(228,233,238,.035);
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+body {
+  background: var(--bg);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 56px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
+h1, h2 { font-family: var(--f-display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0 }
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1 }
+h1 em { font-style: normal; color: var(--accent) }
+h2 { font-size: 1.6rem; line-height: 1.1 }
+.eyebrow { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2) }
+.lede { max-width: 68ch; color: var(--ink-2); margin: 12px 0 0; font-size: 1.02rem }
+header { display: flex; flex-direction: column; gap: 8px }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .82rem; color: var(--ink-2); align-items: center }
+.legend span { display: inline-flex; gap: 8px; align-items: center }
+
+section > .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 14px }
+section > .head p { margin: 4px 0 0; color: var(--ink-2); max-width: 70ch }
+
+/* fit meter */
+.meter { display: inline-flex; gap: 3px }
+.meter i { width: 14px; height: 8px; background: var(--off); border: 1px solid var(--rule) }
+.meter i.on { background: var(--accent); border-color: var(--accent) }
+
+/* stack matrix */
+.matrix { background: var(--sheet); border: 1px solid var(--rule) }
+.row {
+  display: grid; grid-template-columns: 54px minmax(170px, 1.05fr) 150px minmax(0, 2.2fr) minmax(0, 1.4fr);
+  border-top: 1px solid var(--rule); align-items: stretch;
+}
+.row.hdr { border-top: 0; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2) }
+.row > div { padding: 14px 14px; min-width: 0 }
+.row.hdr > div { padding-block: 10px }
+.num { font-family: var(--f-mono); font-size: .85rem; color: var(--ink-2); border-right: 1px solid var(--rule) }
+.layer b { display: block; font-family: var(--f-display); font-size: 1.15rem; font-weight: 600; line-height: 1.15 }
+.layer small { color: var(--ink-2); font-size: .8rem }
+.fit { display: flex; flex-direction: column; gap: 6px }
+.fit .lvl { font-family: var(--f-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em }
+.row.strong { background: linear-gradient(90deg, var(--accent-soft), transparent 70%) }
+.row.strong .num { color: var(--accent); font-weight: 500 }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start }
+.chip { font-size: .8rem; padding: 3px 8px; border: 1px solid var(--accent); color: var(--ink); background: var(--sheet); line-height: 1.35 }
+.chip.out { border: 1px dashed var(--rule); color: var(--off-ink); background: transparent }
+.chip.demo { background: var(--accent); color: var(--sheet); font-family: var(--f-mono); font-size: .72rem; letter-spacing: .04em; border-color: var(--accent) }
+.note { flex-basis: 100%; font-size: .8rem; color: var(--ink-2); margin-top: 2px }
+
+/* pipeline */
+.pipe { background: var(--sheet); border: 1px solid var(--rule); padding: 24px 20px 20px; overflow-x: auto }
+.flow { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); gap: 0; min-width: 820px; position: relative }
+.step { position: relative; padding: 0 6px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center }
+.step .box { width: 100%; min-height: 64px; display: flex; align-items: center; justify-content: center; padding: 8px; border: 1px solid var(--rule); font-size: .85rem; font-weight: 500; background: var(--bg) }
+.step.lit .box { border: 1.5px solid var(--accent); background: var(--accent-soft) }
+.step:not(:last-child)::after { content: ""; position: absolute; top: 32px; right: -6px; width: 12px; height: 1px; background: var(--ink-2) }
+.step .tag { font-family: var(--f-mono); font-size: .7rem; color: var(--ink-2); min-height: 2.6em; line-height: 1.3 }
+.step.lit .tag { color: var(--accent) }
+.gate { position: absolute; top: 18px; left: calc(100% / 7 * 4 - 14px); width: 28px; height: 28px; transform: rotate(45deg); background: var(--accent); border: 3px solid var(--sheet); z-index: 2 }
+.gate-lbl { position: absolute; top: -18px; left: calc(100% / 7 * 4); transform: translateX(-50%); font-family: var(--f-mono); font-size: .68rem; letter-spacing: .1em; color: var(--accent); white-space: nowrap }
+.bracket { margin-top: 14px; display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); min-width: 820px }
+.bracket div { grid-column: 4 / 7; border: 1.5px solid var(--accent); border-top: 0; height: 12px; margin: 0 10px }
+.bracket p { grid-column: 3 / 8; margin: 6px 0 0; text-align: center; font-size: .82rem; color: var(--ink-2) }
+.why { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px }
+.why div { border-left: 2px solid var(--accent); padding: 2px 0 2px 12px; font-size: .88rem; color: var(--ink-2); min-width: 0 }
+.why b { color: var(--ink); display: block; font-weight: 600 }
+
+/* silicon + demos */
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px }
+.panel { background: var(--sheet); border: 1px solid var(--rule); min-width: 0 }
+.panel h3 { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--rule); font-family: var(--f-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); font-weight: 500 }
+table { width: 100%; border-collapse: collapse; font-size: .86rem }
+td, th { padding: 10px 16px; text-align: left; border-top: 1px solid var(--rule); vertical-align: top }
+tr:first-child td, tr:first-child th { border-top: 0 }
+th { font-family: var(--f-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); font-weight: 500 }
+td.mono, .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: .8rem }
+.ok { color: var(--accent) }
+.pnote { margin: 0; padding: 10px 16px 14px; border-top: 1px solid var(--rule); font-size: .8rem; color: var(--ink-2) }
+.st { white-space: normal !important; display: inline-block; font-family: var(--f-mono); font-size: .68rem; padding: 2px 6px; border: 1px solid currentColor; white-space: nowrap }
+.st.yes { color: var(--accent) }
+.st.proxy { color: var(--ink-2) }
+.st.gap { color: var(--off-ink); border-style: dashed }
+.fail { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px }
+.tbl { overflow-x: auto }
+
+footer { font-size: .8rem; color: var(--ink-2); max-width: 80ch }
+
+@media (max-width: 820px) {
+  .row.hdr { display: none }
+  .row { grid-template-columns: 44px 1fr; }
+  .row > .num { grid-row: span 4 }
+  .row > div { padding: 10px 12px }
+  .fit { flex-direction: row; align-items: center; gap: 10px }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gate { animation: pulse 2.4s ease-in-out infinite }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 6px var(--accent-soft) } }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Physical AI · Industrial AI · Robotics — CPU-side view</div>
+    <h1>Where <em>LOCI</em> sits on the AI stack</h1>
+    <p class="lede">The usual stack chart shows GPUs, models and simulators. LOCI covers the compiled C, C++, Rust and Go code on the Arm CPU next to them: the control ticks, parsers and pre- and post-processing that decide whether a robot or camera meets its deadline.</p>
+  </header>
+
+  <section>
+    <div class="head">
+      <div>
+        <h2>The eight layers, by LOCI fit</h2>
+        <p>Rows follow the numbering of the original stack chart. Solid chips are what LOCI measures; dashed chips are out of its scope.</p>
+      </div>
+      <div class="legend">
+        <span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>Strong</span>
+        <span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>Medium–strong</span>
+        <span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span>Medium / indirect</span>
+        <span><span class="meter"><i class="on"></i><i></i><i></i><i></i></span>Weak</span>
+      </div>
+    </div>
+
+    <div class="matrix" role="table" aria-label="LOCI fit by stack layer">
+      <div class="row hdr" role="row"><div>#</div><div>Layer</div><div>LOCI fit</div><div>Where LOCI applies</div><div>Out of scope</div></div>
+
+      <div class="row strong" role="row">
+        <div class="num">04</div>
+        <div class="layer"><b>Robotics &amp; Physical AI</b><small>ROS 2 · Nav2 · MoveIt 2 · Isaac ROS · GR00T</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="lvl ok">Strong · main target</span></div>
+        <div class="chips"><span class="chip">ros2_control real-time tick</span><span class="chip">Safety controllers</span><span class="chip">Nav2 / MoveIt 2 C++ nodes</span><span class="chip">GR00T policy C++ wrapper</span><span class="chip demo">DEMO · G1 Isaac ROS</span></div>
+        <div class="chips"><span class="chip out">Isaac Lab training</span><span class="chip out">Cosmos</span><span class="chip out">URDF</span></div>
+      </div>
+
+      <div class="row strong" role="row">
+        <div class="num">03</div>
+        <div class="layer"><b>Digital Twins &amp; Simulation</b><small>Isaac Sim · PhysX · Omniverse</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="lvl ok">Strong · complement</span></div>
+        <div class="chips"><span class="chip">CPU timing the simulator can't see</span><span class="chip">Scenario validation</span><span class="chip">Sim-to-real validation</span><span class="note">On simulated time, ros2_control never reports a late tick.</span></div>
+        <div class="chips"><span class="chip out">The simulator itself</span><span class="chip out">OpenUSD</span><span class="chip out">Three.js</span></div>
+      </div>
+
+      <div class="row strong" role="row">
+        <div class="num">02</div>
+        <div class="layer"><b>Computer Vision &amp; Perception</b><small>DeepStream · Isaac ROS · OpenCV · CV-CUDA</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="lvl ok">Strong</span></div>
+        <div class="chips"><span class="chip">DeepStream custom parsers</span><span class="chip">NMS on the CPU</span><span class="chip">OpenCV CPU paths</span><span class="chip">CV-CUDA host code</span><span class="chip demo">DEMO · DeepStream YOLO</span></div>
+        <div class="chips"><span class="chip out">CUDA kernels</span><span class="chip out">YOLO training</span></div>
+      </div>
+
+      <div class="row strong" role="row">
+        <div class="num">07</div>
+        <div class="layer"><b>Inference &amp; Deployment</b><small>TensorRT · Triton · Jetson · CI/CD</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="lvl ok">Strong</span></div>
+        <div class="chips"><span class="chip">Pre- / post-processing around TensorRT</span><span class="chip">Triton C++ backends</span><span class="chip">Jetson Orin / Thor target</span><span class="chip">Contract gate in CI/CD</span></div>
+        <div class="chips"><span class="chip out">TensorRT engine on GPU</span><span class="chip out">Docker · Kubernetes</span><span class="chip out">MLflow</span></div>
+      </div>
+
+      <div class="row" role="row">
+        <div class="num">05</div>
+        <div class="layer"><b>Data Engineering &amp; Connectivity</b><small>Holoscan · MQTT · OPC UA</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="lvl">Medium–strong</span></div>
+        <div class="chips"><span class="chip">Holoscan C++ operators</span><span class="chip">MQTT / OPC UA C stacks on gateways</span><span class="chip">Sensor-reading firmware</span></div>
+        <div class="chips"><span class="chip out">Kafka</span><span class="chip out">PostgreSQL · InfluxDB</span><span class="chip out">Analytics</span></div>
+      </div>
+
+      <div class="row" role="row">
+        <div class="num">08</div>
+        <div class="layer"><b>Cloud &amp; Backend</b><small>NVIDIA GPU Cloud · Grace servers</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="lvl">Medium</span></div>
+        <div class="chips"><span class="chip">Hot C++ / Rust services on Grace (Neoverse V2)</span></div>
+        <div class="chips"><span class="chip out">AWS · Azure</span><span class="chip out">React · TypeScript</span><span class="chip out">WebRTC</span></div>
+      </div>
+
+      <div class="row" role="row">
+        <div class="num">06</div>
+        <div class="layer"><b>Generative AI &amp; Agents</b><small>NIM · NeMo · Nemotron · LLM agents</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="lvl">Indirect · enabler</span></div>
+        <div class="chips"><span class="chip">Guardrail for AI coding agents</span><span class="chip">Engineering Assistant use case</span><span class="note">LOCI runs inside Claude Code, so agents can edit rows 02, 04, 05 and 07 without breaking real-time bounds.</span></div>
+        <div class="chips"><span class="chip out">NIM · NeMo</span><span class="chip out">RAG · vector DBs</span></div>
+      </div>
+
+      <div class="row" role="row">
+        <div class="num">01</div>
+        <div class="layer"><b>AI &amp; Machine Learning</b><small>PyTorch · TensorFlow · TAO · CUDA</small></div>
+        <div class="fit"><span class="meter"><i class="on"></i><i></i><i></i><i></i></span><span class="lvl">Weak</span></div>
+        <div class="chips"><span class="chip">Cython-compiled Python only</span></div>
+        <div class="chips"><span class="chip out">Model training</span><span class="chip out">CUDA</span><span class="chip out">TAO Toolkit</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <div>
+        <h2>The end-to-end workflow, with the LOCI gate</h2>
+        <p>Code that passes in simulation is checked against its timing, stack and energy bounds for the target CPU before it ships.</p>
+      </div>
+    </div>
+    <div class="pipe">
+      <div class="flow">
+        <span class="gate-lbl">LOCI CONTRACT GATE</span>
+        <span class="gate" aria-hidden="true"></span>
+        <div class="step"><div class="box">Industrial sensors &amp; machines</div><div class="tag">&nbsp;</div></div>
+        <div class="step"><div class="box">Data collection &amp; processing</div><div class="tag">&nbsp;</div></div>
+        <div class="step"><div class="box">AI models &amp; analytics</div><div class="tag">&nbsp;</div></div>
+        <div class="step lit"><div class="box">Digital twin &amp; simulation</div><div class="tag">sim time hides late ticks</div></div>
+        <div class="step lit"><div class="box">Robot intelligence &amp; automation</div><div class="tag">control code measured</div></div>
+        <div class="step lit"><div class="box">Inference &amp; deployment</div><div class="tag">bounds enforced in CI</div></div>
+        <div class="step"><div class="box">Operational monitoring</div><div class="tag">runtime, not LOCI</div></div>
+      </div>
+      <div class="bracket"><div></div><p>LOCI's span: the CPU code between the simulator and the shipped device</p></div>
+      <div class="why">
+        <div><b>Before the gate</b>The simulator runs on simulated time, so a slow control tick still looks on time.</div>
+        <div><b>At the gate</b>LOCI times the compiled function on the target core model and judges it against the accepted contract.</div>
+        <div><b>After the gate</b>Only code that meets its worst-path, stack and energy bounds reaches Jetson.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="two">
+    <div class="panel">
+      <h3>NVIDIA CPUs LOCI targets</h3>
+      <div class="tbl"><table>
+        <tr><th>Platform</th><th>Core · ISA</th><th>Today</th><th>Roadmap</th></tr>
+        <tr><td>Grace (data center)</td><td class="mono">Neoverse V2 · Armv9.0</td><td><span class="st yes">native v9 model</span></td><td class="mono">—</td></tr>
+        <tr><td>Jetson Thor</td><td class="mono">Neoverse V3AE · Armv9.2</td><td><span class="st proxy">processed as v9 · V2 model, 2601 MHz</span></td><td><span class="st gap">native V3AE model</span></td></tr>
+        <tr><td>Jetson AGX Orin</td><td class="mono">Cortex-A78AE · Armv8.2</td><td><span class="st proxy">processed as v9 · V2 model, 1728 MHz</span></td><td><span class="st gap">native A78AE model</span></td></tr>
+      </table></div>
+      <p class="pnote">Armv9 contains every Armv8.x instruction these cores use, so their code runs through the V2 model unchanged. Build Orin code with <span class="mono">-mcpu=cortex-a78ae</span> so no SVE instructions are emitted.</p>
+    </div>
+    <div class="panel">
+      <h3>Demos built · worst path on Neoverse V2</h3>
+      <div class="tbl"><table>
+        <tr><th>Demo · row</th><th>Base</th><th>Innocent edit</th><th>Fix</th></tr>
+        <tr><td>G1 Isaac ROS · 04</td><td class="mono">510 ns</td><td class="mono"><span class="fail">934 ns</span> &gt; 900</td><td class="mono ok">734 ns</td></tr>
+        <tr><td>DeepStream YOLO · 02</td><td class="mono">172 ns</td><td class="mono"><span class="fail">333 ns</span> &gt; 250</td><td class="mono ok">180 ns</td></tr>
+        <tr><td>ArduCopter · 04/05</td><td class="mono">128 ns</td><td class="mono"><span class="fail">3108 ns</span> &gt; 160</td><td class="mono ok">141 ns</td></tr>
+      </table></div>
+    </div>
+  </section>
+
+  <footer>The fix column passes its bound and the innocent-edit column fails it. These verdicts are read from the measured numbers against the drafted contracts, which still await the owner's accept. Product names belong to their owners; this page is an independent map, not an NVIDIA publication.</footer>
+</div>
+</body>
+</html>

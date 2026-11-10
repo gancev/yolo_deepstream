@@ -1,0 +1,4 @@
+cuda-crt-13-0_13.0.88-1_arm64.deb
+cuda-cudart-dev-13-0_13.0.96-1_arm64.deb
+libnvinfer-headers-dev_10.13.2.6-1+cuda13.0_arm64.deb
+libnvonnxparsers-dev_10.13.2.6-1+cuda13.0_arm64.deb

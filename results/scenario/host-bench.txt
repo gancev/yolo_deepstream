@@ -1,0 +1,6 @@
+== baseline
+bench_parser: 25200 rows -> 25200 boxes, best of 3: 1.412 ms per call (host wall clock, not a Jetson or LOCI figure)
+== innocent
+bench_parser: 25200 rows -> 487 boxes, best of 3: 147.567 ms per call (host wall clock, not a Jetson or LOCI figure)
+== fix
+bench_parser: 25200 rows -> 487 boxes, best of 3: 1.242 ms per call (host wall clock, not a Jetson or LOCI figure)

@@ -1,0 +1,449 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>DeepStream Parser Regression</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: one reading column of an engineering review memo; verdict strip up top, then change / fix / LOCI, evidence tables, caveats. */
+:root {
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --fg: #1b211e;
+  --muted: #5b6660;
+  --rule: #d9ddd9;
+  --accent: #2f6b4f;
+  --fail: #b3261e;
+  --fail-soft: #fbe9e7;
+  --pass: #2f6b4f;
+  --pass-soft: #e5f1ea;
+  --warn: #8a5a00;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141816; --surface: #1c211e; --fg: #e6ebe7; --muted: #9aa69f; --rule: #2f3632;
+    --accent: #7cc49d; --fail: #ff8a80; --fail-soft: #3a1f1d; --pass: #7cc49d; --pass-soft: #1d3127; --warn: #e0b04a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141816; --surface: #1c211e; --fg: #e6ebe7; --muted: #9aa69f; --rule: #2f3632;
+  --accent: #7cc49d; --fail: #ff8a80; --fail-soft: #3a1f1d; --pass: #7cc49d; --pass-soft: #1d3127; --warn: #e0b04a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+}
+main { max-width: 860px; margin: 0 auto; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 4.5vw, 2.7rem); font-weight: 700; }
+h2 { font-size: 1.45rem; font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font: 600 0.74rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+code, .mono { font-family: var(--mono); font-size: 0.88em; }
+section { display: grid; gap: 16px; }
+header { display: grid; gap: 14px; }
+.lede { font-size: 1.12rem; color: var(--fg); }
+.meta { color: var(--muted); font-size: 0.9rem; }
+
+.verdicts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.v { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; display: grid; gap: 6px; min-width: 0; }
+.v .who { font-size: 0.86rem; color: var(--muted); }
+.pill { display: inline-block; font: 600 0.78rem/1 var(--mono); letter-spacing: 0.06em; padding: 5px 8px; border-radius: 3px; width: fit-content; }
+.pill.fail { background: var(--fail-soft); color: var(--fail); }
+.pill.pass { background: var(--pass-soft); color: var(--pass); }
+.v p { font-size: 0.92rem; }
+
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel.bad { border-top: 3px solid var(--fail); }
+.panel.good { border-top: 3px solid var(--pass); }
+ul { margin: 0; padding-left: 1.15em; display: grid; gap: 6px; }
+li { max-width: 66ch; }
+
+.bars { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; }
+.bar-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 84px; gap: 12px; align-items: center; }
+.bar-row .lab { font-size: 0.9rem; }
+.track { position: relative; height: 18px; background: color-mix(in srgb, var(--rule) 45%, transparent); border-radius: 2px; }
+.fill { position: absolute; inset: 0 auto 0 0; border-radius: 2px; }
+.fill.bad { background: var(--fail); }
+.fill.good { background: var(--pass); min-width: 3px; }
+.mark { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--warn); }
+.val { font: 600 0.92rem var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+.axis { display: grid; grid-template-columns: 150px minmax(0, 1fr) 84px; gap: 12px; font: 0.74rem var(--mono); color: var(--muted); }
+.axis .scale { display: flex; justify-content: space-between; }
+.legend { font-size: 0.84rem; color: var(--muted); }
+.legend .sw { display: inline-block; width: 10px; height: 10px; background: var(--warn); margin-right: 6px; vertical-align: -1px; }
+
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 0.9rem; }
+th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 600 0.72rem/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.bad { color: var(--fail); font-weight: 600; }
+td.good { color: var(--pass); }
+
+.steps { counter-reset: s; list-style: none; padding: 0; display: grid; gap: 10px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
+.steps li::before { content: counter(s); font: 600 0.85rem/1.7 var(--mono); color: var(--accent); }
+.note { font-size: 0.9rem; color: var(--muted); }
+footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--rule); padding-top: 16px; }
+
+.codewrap { display: grid; gap: 6px; min-width: 0; }
+.codewrap .cap { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; }
+.codewrap .cap span { font-size: 0.86rem; color: var(--muted); }
+pre.code {
+  margin: 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+  padding: 14px 16px; font: 0.8rem/1.55 var(--mono); color: var(--fg); tab-size: 4;
+}
+pre.code.bad { border-left: 3px solid var(--fail); }
+pre.code.good { border-left: 3px solid var(--pass); }
+pre.code .c { color: var(--muted); }
+pre.code .hot { background: var(--fail-soft); color: var(--fail); font-weight: 600; }
+pre.code .ok { background: var(--pass-soft); color: var(--pass); font-weight: 600; }
+pre.flow { margin: 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; font: 0.82rem/1.6 var(--mono); color: var(--fg); }
+pre.flow b { color: var(--accent); }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.count { font: 600 1.5rem/1.1 var(--display); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 680px) {
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .verdicts, .cols { grid-template-columns: minmax(0, 1fr); }
+  .bar-row, .axis { grid-template-columns: 96px minmax(0, 1fr) 70px; gap: 8px; }
+}
+</style>
+
+<main>
+  <header>
+    <span class="eyebrow">Engineering review · DeepStream YOLO parser · Jetson Thor class</span>
+    <h1>A plausible AI-style fix that passes its tests and would stall the video pipeline</h1>
+    <p class="lede">The scenario: an AI coding agent is asked to "fix the threshold handling and add the missing NMS" (non-maximum suppression, the step that removes duplicate boxes for the same object) in NVIDIA's DeepStream YOLO output parser. The change it typically produces fixes a real defect and passes the unit test, but makes the parser about 490 times slower than NVIDIA's original on a real frame. LOCI catches this from the compiled aarch64 binary, with no Jetson needed, and an acceptable fix takes its place.</p>
+    <p class="meta">How the pieces were made: the defects were found by code review of NVIDIA's published parser during this project; none is reported in the upstream issue tracker (61 issues checked). NVIDIA's original parser is fast. The slow change is a prepared scenario patch (<code>scenario/innocent_edit.patch</code>) that represents what an agent tends to write for this request, not a recording of one specific agent run. It can also be reproduced live with the prompt in <code>PROMPTS.md</code>.</p>
+    <p class="meta">Code: <code>NvDsInferParseCustomYoloV7</code> in <code>nvdsparsebbox_Yolo.cpp</code>, from NVIDIA-AI-IOT/yolo_deepstream (pinned commit <code>e9b75770</code>). It runs on the CPU after every TensorRT inference.</p>
+  </header>
+
+  <section aria-label="Verdicts">
+    <div class="verdicts">
+      <div class="v">
+        <span class="who">Unit test (5 boxes)</span>
+        <span class="pill pass">PASS</span>
+        <p>Passed for upstream, the agent's change and the fix alike, so it could not tell them apart.</p>
+      </div>
+      <div class="v">
+        <span class="who">LOCI on the agent's change</span>
+        <span class="pill fail">FAIL · 5 of 5 rules</span>
+        <p>Timing, regression, stack, recursion and loop-structure rules all broken.</p>
+      </div>
+      <div class="v">
+        <span class="who">LOCI on the fix</span>
+        <span class="pill pass">PASS · 5 of 5 rules</span>
+        <p>Worst path ≥ 180 ns against a 250 ns budget; typical path 32 % faster than before.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What the parser does</h2>
+    <p><code>NvDsInferParseCustomYoloV7</code> turns the YOLO network's raw output into a list of boxes. DeepStream calls it on the CPU once per video frame, straight after TensorRT has run the model on the GPU. DeepStream finds it through the config line <code>parse-bbox-func-name=NvDsInferParseCustomYoloV7</code>, which is why its name and signature are fixed.</p>
+<pre class="flow" aria-label="Pipeline">camera frame
+   │
+   ▼
+nvinfer: TensorRT runs YOLOv7 on the GPU
+   │    output: one tensor of 25,200 rows × 85 numbers
+   ▼
+<b>NvDsInferParseCustomYoloV7</b>   ← this function, on the CPU, every frame
+   │    output: boxes {left, top, width, height, class, confidence}
+   ▼
+nvinfer: drop low-confidence boxes (threshold 0.25),
+         merge overlapping boxes (NMS, cluster-mode=2), keep top 300
+   ▼
+boxes drawn on screen / sent downstream</pre>
+    <div class="facts">
+      <div class="panel">
+        <span class="eyebrow">Why 25,200 rows</span>
+        <p>For a 640×640 image YOLOv7 predicts on three grids (80×80, 40×40, 20×20 cells) with 3 candidate boxes per cell: 3 × (6,400 + 1,600 + 400) = 25,200 candidates per frame. Almost all are background; on the test clip about 160 pass the 0.25 threshold.</p>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">The 85 numbers per row</span>
+        <ul>
+          <li><code>cx, cy, w, h</code>: box centre and size, in pixels of the 640×640 input</li>
+          <li><code>objectness</code>: how likely the box contains any object</li>
+          <li>80 class scores, one per COCO class (person, car, bus, …)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NMS</strong></td><td><strong>Non-Maximum Suppression.</strong> A detector finds the same object many times with slightly shifted boxes. NMS keeps the highest-confidence box and removes ("suppresses") the other boxes of the same class that overlap it too much, so each object is reported once.</td></tr>
+          <tr><td>IoU</td><td>Intersection over Union: how much two boxes overlap, from 0 (no overlap) to 1 (identical). NMS removes a box when its IoU with a kept box is above a limit, here 0.65.</td></tr>
+          <tr><td>Objectness</td><td>The model's score for "there is some object in this box", before deciding which class it is.</td></tr>
+          <tr><td>Threshold</td><td>The minimum confidence (here 0.25) a box needs to be kept at all.</td></tr>
+          <tr><td>Cluster stage</td><td>DeepStream's own step after the parser that applies the threshold and runs NMS (<code>cluster-mode=2</code>).</td></tr>
+          <tr><td>TensorRT / nvinfer</td><td>NVIDIA's GPU inference engine, and the DeepStream element that runs it and calls this parser.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="codewrap">
+      <div class="cap"><h3>NVIDIA's original</h3><span>third_party/yolo_deepstream/…/nvdsparsebbox_Yolo.cpp, simplified</span></div>
+<pre class="code">extern "C" bool NvDsInferParseCustomYoloV7(...)       <span class="c">// entry point DeepStream calls</span>
+{   return NvDsInferParseYoloV7(...); }                <span class="c">// just forwards</span>
+
+static bool NvDsInferParseYoloV7(outputLayersInfo, networkInfo, detectionParams, objectList)
+{
+    if (outputLayersInfo.empty()) return false;        <span class="c">// no output tensor: error</span>
+    float* data    = (float*)layer.buffer;             <span class="c">// the 25,200 x 85 tensor</span>
+    int dimensions = layer.inferDims.d[1];             <span class="c">// 85</span>
+    int rows       = numElements / dimensions;         <span class="c">// 25,200</span>
+
+    for (int i = 0; i &lt; rows; ++i) {                   <span class="c">// every candidate box</span>
+        float bx = data[0], by = data[1], bw = data[2], bh = data[3];
+        float maxProb = data[4];                       <span class="c">// confidence = objectness only</span>
+        int  maxIndex = data[5];                       <span class="c">// a score cast to int; overwritten below</span>
+        for (int j = 0; j &lt; 80; j++)                   <span class="c">// best of the 80 classes</span>
+            if (score[j] &gt; maxScore) { index = j; maxScore = score[j]; }
+        maxIndex = index;
+        data += dimensions;                            <span class="c">// next row</span>
+        addBBoxProposalYoloV7(bx, by, bw, bh, 1, netW, netH,
+                              maxIndex, maxProb, objects); <span class="c">// centre to corners, clamp, keep if &gt;= 1 px</span>
+    }
+    objectList = objects;                              <span class="c">// every box goes back to DeepStream</span>
+    return true;
+}</pre>
+    </div>
+    <p>Per frame that is 25,200 rows × 80 class comparisons (about 2 million cheap comparisons) plus about 25,200 box conversions: 0.83 ms on the laptop, and linear, so twice the rows means twice the time.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>What is odd about the original</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td>No confidence threshold in the parser</td><td>All ~25,200 boxes are returned every frame and DeepStream filters them afterwards. Correct, but most of the work is spent on noise.</td></tr>
+          <tr><td>Confidence = objectness only</td><td>The class score is not multiplied in, so a box that is 90 % "something" and 30 % "person" is reported as person 0.90. The YOLOv7 reference uses objectness × class score.</td></tr>
+          <tr><td><code>int maxIndex = data[5];</code></td><td>Casts a score to an integer; meaningless, harmless only because it is overwritten later.</td></tr>
+          <tr><td>No NMS</td><td>By design. NVIDIA's README says the post-processor does "not include NMS"; DeepStream's cluster stage does it.</td></tr>
+          <tr><td>YOLOv4 path, same file</td><td>The real bug: <code>maxIndex</code> starts at <code>-1</code> and indexes the threshold table without a check.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">NVIDIA also ships a CUDA version of this parser (<code>nvdsparsebbox_Yolo_cuda.cu</code>), which is the sample's default. This CPU function is the alternative whose cost NVIDIA's own benchmark table shows at INT8.</p>
+  </section>
+
+  <section>
+    <h2>The change and the fix</h2>
+    <div class="cols">
+      <div class="panel bad">
+        <span class="eyebrow">The agent's change (staged scenario)</span>
+        <h3>Correct output, wrong place for the work</h3>
+        <ul>
+          <li>Fixes a real bug in NVIDIA's code: the YOLOv4 path can read the threshold table at index <code>-1</code> when every class score in a row is zero (rare, but an out-of-bounds read).</li>
+          <li>Tightens the YOLOv7 path: the original scores boxes by objectness alone and returns all 25,200 to DeepStream, which applies the threshold later. Not a wrong result, but wasteful and unlike the YOLOv7 reference scoring.</li>
+          <li>Adds non-maximum suppression (NMS) <em>inside</em> the parser, run on all 25,200 candidate boxes before thresholding: a full sort plus a box-against-every-box comparison. This is the slowdown; NVIDIA's original has no such loop and runs in under a millisecond.</li>
+          <li>The test feeds 5 boxes, where that costs nothing. A real 640×640 frame has 25,200.</li>
+        </ul>
+      </div>
+      <div class="panel good">
+        <span class="eyebrow">The fix that shipped</span>
+        <h3>Same bug fixes, threshold first</h3>
+        <ul>
+          <li>Keeps the index guard and the objectness × class-score confidence.</li>
+          <li>Applies the confidence threshold to each row as it is read, so only about 50 boxes survive instead of 25,200.</li>
+          <li>Leaves NMS to DeepStream's own cluster stage (<code>cluster-mode=2</code>, IoU 0.65), which the sample config already enables.</li>
+          <li>Same detections on screen; parser time 0.65 ms, about 21 % faster than NVIDIA's original because it hands on ~50 boxes instead of 25,200.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The code change</h2>
+    <p>Both edits change the same row loop. The difference is the order of the work: the agent's change runs the expensive step (sort and all-pairs comparison) before the cheap filter, and the fix runs the filter first. Both edits also add the YOLOv4 guard <code>if (maxIndex &gt;= 0 &amp;&amp; …)</code>.</p>
+    <div class="codewrap">
+      <div class="cap"><h3>Agent's change</h3><span>scenario/innocent_edit.patch: decode all, NMS over all, threshold last</span></div>
+<pre class="code bad">    const float maxProb = objectness * maxScore;          <span class="c">// correct scoring</span>
+    addBBoxProposalYoloV7(..., maxIndex, maxProb, objects); <span class="c">// still all 25,200</span>
+}
+<span class="hot">std::vector&lt;NvDsInferParseObjectInfo&gt; kept = nmsYoloV7(objects, 0.65f);</span>  <span class="c">// NMS first</span>
+for (...)                                                 <span class="c">// threshold last</span>
+    if (d.detectionConfidence &gt;= perClassPreclusterThreshold[d.classId]) detections.push_back(d);
+
+static std::vector&lt;NvDsInferParseObjectInfo&gt; nmsYoloV7(std::vector&lt;...&gt; candidates, float iou)
+{
+    <span class="hot">std::sort(candidates.begin(), candidates.end(), byConfidenceDesc);</span>  <span class="c">// pulls in recursive introsort</span>
+    <span class="hot">for (size_t i = 0; i &lt; candidates.size(); ++i) {</span>                     <span class="c">// line 255  rows</span>
+        if (suppressed[i]) continue;
+        kept.push_back(candidates[i]);
+        <span class="hot">for (size_t j = i + 1; j &lt; candidates.size(); ++j) {</span>             <span class="c">// line 258  × rows</span>
+            if (suppressed[j] || candidates[j].classId != candidates[i].classId) continue;
+            if (iouYoloV7(candidates[i], candidates[j]) &gt; iou) suppressed[j] = 1;
+        }
+    }
+    return kept;
+}</pre>
+    </div>
+    <div class="codewrap">
+      <div class="cap"><h3>Fix</h3><span>scenario/fix.patch: same scoring, threshold first, NMS left to DeepStream</span></div>
+<pre class="code good">    const int maxIndex = index;
+    const float maxProb = objectness * maxScore;
+    <span class="c">// Suppression of the survivors is nvinfer's cluster stage (cluster-mode=2),</span>
+    <span class="c">// which runs on the few hundred rows that pass, not on all 25,200.</span>
+    <span class="ok">if (maxProb &lt; detectionParams.perClassPreclusterThreshold[maxIndex]) {</span>
+    <span class="ok">    continue;</span>
+    <span class="ok">}</span>
+    addBBoxProposalYoloV7(..., maxIndex, maxProb, objects);  <span class="c">// ~50 boxes</span>
+}
+objectList = objects;</pre>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Version</th><th>What it does per frame</th><th>How it grows</th></tr></thead>
+        <tbody>
+          <tr><td>NVIDIA original</td><td>Decode everything, return everything (25,200 boxes); DeepStream filters and merges</td><td>Linear in rows</td></tr>
+          <tr><td>Agent's change</td><td>Decode everything, sort everything, compare every box with every other box, then filter</td><td class="bad">Square of the rows</td></tr>
+          <tr><td>Fix</td><td>Decode, filter immediately (~50 left), return those; DeepStream merges</td><td class="good">Linear in rows, less output</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">The 5-row unit test passes for all three: with 5 boxes there are only 10 pairs to compare.</p>
+  </section>
+
+  <section>
+    <h2>What it costs per frame</h2>
+    <p>Each version measured alone through the full live pipeline (YOLO inference, NVIDIA's parser, DeepStream-style clustering) on the same 30-second clip, one after another, so none shares the CPU with another. Only the parser differs. Timings are wall clock on an Apple M5 Pro laptop, not a Jetson.</p>
+    <div class="bars" role="img" aria-label="Parser time per frame: NVIDIA original 0.83 milliseconds, agent's change 402 milliseconds, fix 0.65 milliseconds, against a 100 millisecond frame interval">
+      <div class="bar-row">
+        <span class="lab">NVIDIA original</span>
+        <div class="track"><div class="fill good" style="width: 0.17%"></div><div class="mark" style="left: 20%"></div></div>
+        <span class="val">0.83 ms</span>
+      </div>
+      <div class="bar-row">
+        <span class="lab">Agent's change</span>
+        <div class="track"><div class="fill bad" style="width: 80.4%"></div><div class="mark" style="left: 20%"></div></div>
+        <span class="val">402 ms</span>
+      </div>
+      <div class="bar-row">
+        <span class="lab">Fix</span>
+        <div class="track"><div class="fill good" style="width: 0.13%"></div><div class="mark" style="left: 20%"></div></div>
+        <span class="val">0.65 ms</span>
+      </div>
+      <div class="axis"><span></span><span class="scale"><span>0</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500 ms</span></span><span></span></div>
+      <p class="legend"><span class="sw"></span>A new frame arrives every 100 ms (10 fps clip). Anything past this line means dropped frames.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Measured on the laptop, 30 s each</th><th>NVIDIA original (before)</th><th>Agent's change</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Parser time per frame, median</td><td class="num">0.83 ms</td><td class="num bad">402 ms</td><td class="num good">0.65 ms</td></tr>
+          <tr><td>Parser time per frame, 95th percentile</td><td class="num">0.85 ms</td><td class="num bad">418 ms</td><td class="num good">0.68 ms</td></tr>
+          <tr><td>Versus the original</td><td class="num">—</td><td class="num bad">× 487</td><td class="num good">−21 %</td></tr>
+          <tr><td>Parser share of each frame</td><td class="num">2.4 %</td><td class="num bad">93 %</td><td class="num good">2.0 %</td></tr>
+          <tr><td>Frames per second delivered</td><td class="num">10 (every frame)</td><td class="num bad">2.3</td><td class="num good">10 (every frame)</td></tr>
+          <tr><td>Latency, camera to result</td><td class="num">35 ms</td><td class="num bad">479 ms</td><td class="num good">34 ms</td></tr>
+          <tr><td>Frames processed out of 300</td><td class="num">300</td><td class="num bad">68</td><td class="num good">300</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">For scale: NVIDIA's published Jetson AGX Orin results show the CPU parser already limiting the pipeline at INT8 (128 FPS with the CPU parser against 175 FPS with the CUDA one), roughly 2.1 ms per frame. At 120 FPS a whole frame is 8.3 ms.</p>
+  </section>
+
+  <section>
+    <h2>What LOCI did</h2>
+    <ol class="steps">
+      <li><p><strong>Matched the real build.</strong> LOCI recorded how the project compiles for the Jetson Thor target (aarch64, Neoverse V2 timing model at 2601 MHz). Its own compile came out byte-identical to the production object, so it measured the code that would actually ship.</p></li>
+      <li><p><strong>Measured the compiled binary, not the source.</strong> From the aarch64 object it derived timing per execution path, stack frame size, loops and their trip counts, and recursion, without running anything on a device.</p></li>
+      <li><p><strong>Judged it against a written budget.</strong> Five rules, drafted from NVIDIA's published frame-rate numbers, turned those measurements into a pass or fail rather than a number to interpret.</p></li>
+      <li><p><strong>Pointed at the cause.</strong> It named a new loop over the candidate rows nested inside the existing row loop (loops at lines 255 and 258; the compiler's debug info places their blocks at 259–260) and recursion pulled in by <code>std::sort</code>, which is the design flaw rather than a tuning issue.</p></li>
+    </ol>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Rule (from the drafted contract)</th><th>Budget</th><th>Upstream</th><th>Agent's change</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Worst-path time</td><td class="num">≤ 250 ns</td><td class="num">≥ 172 ns</td><td class="num bad">≥ 333 ns</td><td class="num good">≥ 180 ns</td></tr>
+          <tr><td>Typical-path regression</td><td class="num">≤ +10 %</td><td class="num">84 ns</td><td class="num bad">+116 %</td><td class="num good">−32 %</td></tr>
+          <tr><td>Stack frame</td><td class="num">≤ 288 B</td><td class="num">224 B</td><td class="num bad">320 B</td><td class="num good">240 B</td></tr>
+          <tr><td>Recursion cycles</td><td class="num">0</td><td class="num">0</td><td class="num bad">1 (std::sort)</td><td class="num good">0</td></tr>
+          <tr><td>Row loop nested in row loop</td><td class="num">not allowed</td><td class="num">no</td><td class="num bad">yes</td><td class="num good">no</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Compiled aarch64 code, same function</th><th>Upstream</th><th>Agent's change</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Instructions</td><td class="num">247</td><td class="num bad">469</td><td class="num good">244</td></tr>
+          <tr><td>Loops (with no fixed trip count)</td><td class="num">2 (1)</td><td class="num bad">8 (7)</td><td class="num good">2 (1)</td></tr>
+          <tr><td>New functions in the binary</td><td class="num">—</td><td class="num bad">4 sort internals</td><td class="num good">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">LOCI's timings are per pass through each loop whose trip count depends on the frame (hence the ≥). They are path estimates on its Neoverse V2 model, the nearest it has to Thor's Neoverse V3AE cores.</p>
+  </section>
+
+  <section>
+    <h2>How LOCI's numbers relate to the laptop's</h2>
+    <p>They measure different things, so they do not convert one into the other. They point the same way, and the gap between them is the loop LOCI flagged.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>What it measures</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td>LOCI (ns)</td><td>One pass through the function's own instructions. Each loop whose length depends on the frame is counted once (hence ≥); functions it calls are left out.</td><td>Jetson Thor-class model (Neoverse V2, 2601 MHz), from the compiled aarch64 binary</td></tr>
+          <tr><td>Laptop (ms)</td><td>The whole call on a real frame: all 25,200 rows and every loop iteration</td><td>Apple M5 Pro, wall clock</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols">
+      <div class="panel good">
+        <span class="eyebrow">Original → fix: they agree</span>
+        <p>LOCI typical path 84 → 58 ns (−32 %): the typical row now leaves at the threshold check. Laptop 0.83 → 0.65 ms (−21 %). Same direction, similar size.</p>
+      </div>
+      <div class="panel bad">
+        <span class="eyebrow">Original → agent's change: the loop explains the gap</span>
+        <p>LOCI per pass: typical path +116 %, worst path +94 %, which on its own reads as "about 2× slower". Laptop: 487× slower. LOCI cannot read the nested loop's length from the binary because it depends on the frame, so it reports "trip count ?" and flags the nesting.</p>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="panel">
+        <span class="eyebrow">Agent's NMS on one real frame</span>
+        <div class="count">182,081,978</div>
+        <p>inner-loop iterations (<code>j</code> over every candidate, for every kept box)</p>
+        <div class="count">43,929,249</div>
+        <p>IoU calculations, to keep the 160 boxes that pass the threshold anyway</p>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">What that adds up to</span>
+        <p>402 ms ÷ 182 million iterations ≈ 2.2 ns per inner iteration on the laptop. That is the 487×: a cheap loop body run 182 million times per frame.</p>
+        <p>This is why the contract pairs its timing budgets with a structural rule, "no loop over the rows inside the loop over the rows". The ns figure is a floor; the nesting is what predicts the blow-up.</p>
+      </div>
+    </div>
+    <p class="note">Counts from replaying the agent's NMS on frame 150 of the test clip (YOLOv5s output, 25,200 candidates).</p>
+  </section>
+
+  <section>
+    <h2>Limits of this evidence</h2>
+    <ul>
+      <li>The slow change is a prepared, representative patch, not output captured from a specific agent run.</li>
+      <li>Nothing here has run on a Jetson. The laptop timings show the direction and the order of magnitude; the Jetson-class figures are LOCI's estimates.</li>
+      <li>The five rules are a draft. The pass and fail verdicts above are read against them; they become enforced once the repository owner accepts the contract.</li>
+      <li>In the laptop demo, onnxruntime stands in for TensorRT and a Python NMS stands in for DeepStream's cluster stage. The parser in the middle is NVIDIA's C++ code, unchanged apart from the edits being compared.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Next steps</h2>
+    <ul>
+      <li>Accept the drafted contract so every future change to the parser is checked against these budgets automatically.</li>
+      <li>Optionally confirm on a Jetson AGX Thor or Orin by comparing DeepStream frame rates for the three versions.</li>
+    </ul>
+  </section>
+
+  <footer>Sources: LOCI runs recorded in <code>results/</code>, contract draft in <code>CONTRACT.md</code>, laptop measurements from <code>demo/measure.py</code> (each version alone, 30 s of the OpenCV vtest clip, onnxruntime CPU) on 9 November 2026, raw numbers in <code>demo/out/measurements.json</code>.</footer>
+</main>
+
+</body></html>

@@ -1,0 +1,196 @@
+{
+  "ok": true,
+  "data": {
+    "run": "r-16ba1277297a",
+    "verb": "analyse stack",
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "turn": "demo-20261103T150116Z",
+    "caller": "stack-depth",
+    "contract": "none",
+    "artifact": {
+      "artifact": ".loci/build/turns/c3404019ebc85047/obj/42803-0bc04302/aarch64/src/nvdsparsebbox_Yolo.o",
+      "kind": "object",
+      "built": "2026-11-03T15:16:21.075393+00:00",
+      "freshness": "stale",
+      "via": "named",
+      "recipe": {
+        "path": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+        "root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+        "hash": "sha256:2db3950bd9ce8baf84d37b76afca09fad157c4d46d0519cbab42432ed9808fd3",
+        "target": "aarch64",
+        "escrow": "ok",
+        "validated": "replay-compare",
+        "confirmed_by_user": false,
+        "artifact_only": false,
+        "warnings": [
+          "recipe: this recipe has not been confirmed by the user yet; run `/loci:init` to review it."
+        ],
+        "compiler_triplet": "aarch64-unknown-linux-gnu",
+        "recorded_artifact": "build/tests/bench_parser_aarch64",
+        "recorded_artifact_on_disk": true
+      },
+      "scope": "single-function: callees are not resolved in a relocatable object"
+    },
+    "functions": [
+      "NvDsInferParseCustomYoloV7",
+      "NvDsInferParseCustomYoloV4"
+    ],
+    "requests": [
+      {
+        "id": "r1",
+        "signal": "stack_depth",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "unmeasurable",
+        "fabricated": true
+      },
+      {
+        "id": "r2",
+        "signal": "stack_frame_size",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      },
+      {
+        "id": "r3",
+        "signal": "stack_depth",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "unmeasurable",
+        "fabricated": true
+      },
+      {
+        "id": "r4",
+        "signal": "stack_frame_size",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      }
+    ],
+    "measured": {
+      "r2": {
+        "value": 224,
+        "unit": "B",
+        "baseline_reason": "no_before_artifact"
+      },
+      "r4": {
+        "value": 272,
+        "unit": "B",
+        "baseline_reason": "no_before_artifact"
+      }
+    },
+    "gates": {},
+    "verdict": null,
+    "rows": [],
+    "judgements": [],
+    "unjudged": [],
+    "agent_judged": [
+      {
+        "entry_key": "stack_frame_size:NvDsInferParseCustomYoloV7",
+        "text": "`stack_frame_size` of `NvDsInferParseCustomYoloV7`, no bound",
+        "signal": "stack_frame_size",
+        "gate": "Stack",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV7"
+      },
+      {
+        "entry_key": "stack_frame_size:NvDsInferParseCustomYoloV4",
+        "text": "`stack_frame_size` of `NvDsInferParseCustomYoloV4`, no bound",
+        "signal": "stack_frame_size",
+        "gate": "Stack",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      },
+      {
+        "entry_key": "indirect_calls:whole",
+        "text": "`indirect_calls`: 3 counted, no bound",
+        "signal": "indirect_calls",
+        "gate": "Safety",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true
+      }
+    ],
+    "notes": [],
+    "detail": {
+      "functions": [
+        "NvDsInferParseCustomYoloV4",
+        "NvDsInferParseCustomYoloV7"
+      ],
+      "cycles": [],
+      "unknown_callees": [],
+      "indirect_call_sites": [
+        "in NvDsInferParseCustomYoloV4: indirect call via x2 at instruction 205",
+        "in NvDsInferParseCustomYoloV7: indirect call via x2 at instruction 185",
+        "in NvDsInferParseCustomYoloV7: indirect call via x2 at instruction 225"
+      ],
+      "stack_analysis": {
+        "NvDsInferParseCustomYoloV7": {
+          "frame_size": 224,
+          "worst_case_depth": 288,
+          "average_depth": 288,
+          "worst_case_path": [
+            "NvDsInferParseCustomYoloV7",
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]"
+          ],
+          "per_function_frames": {
+            "NvDsInferParseCustomYoloV7": 224,
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]": 64
+          },
+          "warnings": [
+            "indirect call via x2 at instruction 185",
+            "indirect call via x2 at instruction 225"
+          ]
+        },
+        "NvDsInferParseCustomYoloV4": {
+          "frame_size": 272,
+          "worst_case_depth": 336,
+          "average_depth": 336,
+          "worst_case_path": [
+            "NvDsInferParseCustomYoloV4",
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]"
+          ],
+          "per_function_frames": {
+            "NvDsInferParseCustomYoloV4": 272,
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]": 64
+          },
+          "warnings": [
+            "indirect call via x2 at instruction 205"
+          ]
+        }
+      },
+      "summary": {
+        "total_functions_analyzed": 2,
+        "functions_with_warnings": 2
+      },
+      "roots": "named"
+    }
+  }
+}

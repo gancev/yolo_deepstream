@@ -1,0 +1,175 @@
+{
+  "ok": true,
+  "data": {
+    "run": "r-3390b31d4420",
+    "verb": "analyse cfg",
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "turn": "demo-v2-innocent-20261103T160131Z",
+    "caller": "control-flow",
+    "artifact": {
+      "artifact": ".loci/build/objects/neoverse-v2/src/nvdsparsebbox_Yolo.o",
+      "kind": "object",
+      "built": "2026-11-03T16:01:33.372819+00:00",
+      "freshness": "current",
+      "via": "ranked",
+      "recipe": {
+        "path": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+        "root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+        "hash": "sha256:68c2fc87d7ee6dd7ffdde7809200da4e0bd1c2d8e415fb5dfcae2f40a058401e",
+        "target": "neoverse-v2",
+        "escrow": "ok",
+        "validated": "replay-compare",
+        "confirmed_by_user": false,
+        "artifact_only": false,
+        "warnings": [
+          "recipe: this recipe has not been confirmed by the user yet; run `/loci:init` to review it."
+        ],
+        "compiler_triplet": "aarch64-unknown-linux-gnu",
+        "recorded_artifact": "build/tests/bench_parser_aarch64",
+        "recorded_artifact_on_disk": true
+      },
+      "scope": "translation unit: calls that leave this object are unresolved",
+      "refused": [
+        "build/tests/bench_parser_aarch64 - stale artifact: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 predates its sources — /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp is 392s newer. Rebuild before trusting these numbers."
+      ],
+      "before_saved": true,
+      "relink": "cmake --build build"
+    },
+    "compiled": [
+      {
+        "source": "src/nvdsparsebbox_Yolo.cpp",
+        "object": ".loci/build/objects/neoverse-v2/src/nvdsparsebbox_Yolo.o",
+        "compiled": false
+      }
+    ],
+    "requested": [
+      "NvDsInferParseCustomYoloV7"
+    ],
+    "functions": [
+      "NvDsInferParseCustomYoloV7"
+    ],
+    "files": {
+      "out_dir": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/401c4a9f0d9a6221/dumps/nvdsparsebbox_Yolo-e7f8cc1591",
+      "timing_csv": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/401c4a9f0d9a6221/dumps/nvdsparsebbox_Yolo-e7f8cc1591/timing.csv",
+      "assembly": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/401c4a9f0d9a6221/dumps/nvdsparsebbox_Yolo-e7f8cc1591/assembly.txt",
+      "control_flow": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/401c4a9f0d9a6221/dumps/nvdsparsebbox_Yolo-e7f8cc1591/control-flow.txt",
+      "arch": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/401c4a9f0d9a6221/dumps/nvdsparsebbox_Yolo-e7f8cc1591/arch.json",
+      "manifest": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/401c4a9f0d9a6221/dumps/nvdsparsebbox_Yolo-e7f8cc1591/manifest.json",
+      "architecture": "aarch64",
+      "timing_architecture": "neoverse-v2",
+      "function_count": 1,
+      "loops": {
+        "total": 8,
+        "with_trip_count": 1,
+        "unknown_trip_count": 7,
+        "recursion": 0,
+        "uncounted_cycles": 0
+      }
+    },
+    "loops": {
+      "NvDsInferParseCustomYoloV7": {
+        "total": 8,
+        "with_trip_count": 1,
+        "unknown_trip_count": 7,
+        "recursion": 0,
+        "uncounted_cycles": 0,
+        "entry": "0xd08",
+        "rows": [
+          {
+            "id": "L1",
+            "kind": "loop",
+            "header": "bb_0xd90",
+            "latch": "bb_0xe88",
+            "depth": 1,
+            "blocks": 24,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L2",
+            "kind": "loop",
+            "header": "bb_0xda8",
+            "latch": "bb_0xdb4",
+            "depth": 2,
+            "blocks": 3,
+            "trips": "80",
+            "trips_known": true,
+            "in": "L1"
+          },
+          {
+            "id": "L3",
+            "kind": "loop",
+            "header": "bb_0xf00",
+            "latch": "bb_0xf0c",
+            "depth": 1,
+            "blocks": 2,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L4",
+            "kind": "loop",
+            "header": "bb_0xf58",
+            "latch": "bb_0x1050",
+            "depth": 1,
+            "blocks": 20,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L5",
+            "kind": "loop",
+            "header": "bb_0xf60",
+            "latch": "bb_0xf68",
+            "depth": 2,
+            "blocks": 2,
+            "trips": "?",
+            "trips_known": false,
+            "in": "L4"
+          },
+          {
+            "id": "L6",
+            "kind": "loop",
+            "header": "bb_0xfa8",
+            "latch": "bb_0x1040",
+            "depth": 2,
+            "blocks": 9,
+            "trips": "?",
+            "trips_known": false,
+            "in": "L4"
+          },
+          {
+            "id": "L7",
+            "kind": "loop",
+            "header": "bb_0x1170",
+            "latch": "bb_0x1168",
+            "depth": 1,
+            "blocks": 8,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L8",
+            "kind": "loop",
+            "header": "bb_0x13c0",
+            "latch": "bb_0x13dc",
+            "depth": 1,
+            "blocks": 24,
+            "trips": "?",
+            "trips_known": false
+          }
+        ]
+      }
+    },
+    "requests": [],
+    "contract": "none",
+    "gates": {},
+    "verdict": null,
+    "rows": [],
+    "judgements": [],
+    "unjudged": [],
+    "agent_judged": [],
+    "notes": []
+  }
+}

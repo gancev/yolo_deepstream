@@ -1,0 +1,177 @@
+{
+  "ok": true,
+  "data": {
+    "run": "r-3495aef36ebb",
+    "verb": "analyse cfg",
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "turn": "demo-fix-20261103T151617Z",
+    "caller": "control-flow",
+    "artifact": {
+      "artifact": ".loci/build/objects/aarch64/src/nvdsparsebbox_Yolo.o",
+      "kind": "object",
+      "built": "2026-11-03T15:16:20.516614+00:00",
+      "freshness": "current",
+      "via": "ranked",
+      "recipe": {
+        "path": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+        "root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+        "hash": "sha256:2db3950bd9ce8baf84d37b76afca09fad157c4d46d0519cbab42432ed9808fd3",
+        "target": "aarch64",
+        "escrow": "ok",
+        "validated": "replay-compare",
+        "confirmed_by_user": false,
+        "artifact_only": false,
+        "warnings": [
+          "recipe: this recipe has not been confirmed by the user yet; run `/loci:init` to review it."
+        ],
+        "compiler_triplet": "aarch64-unknown-linux-gnu",
+        "recorded_artifact": "build/tests/bench_parser_aarch64",
+        "recorded_artifact_on_disk": true
+      },
+      "scope": "translation unit: calls that leave this object are unresolved",
+      "refused": [
+        "build/tests/bench_parser_aarch64 - stale artifact: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 predates its sources — /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp is 1006s newer. Rebuild before trusting these numbers."
+      ],
+      "before_saved": false,
+      "before_reason": "before_elf_stale"
+    },
+    "compiled": [
+      {
+        "source": "src/nvdsparsebbox_Yolo.cpp",
+        "object": ".loci/build/objects/aarch64/src/nvdsparsebbox_Yolo.o",
+        "compiled": false
+      }
+    ],
+    "requested": [
+      "NvDsInferParseCustomYoloV7",
+      "NvDsInferParseCustomYoloV4"
+    ],
+    "functions": [
+      "NvDsInferParseCustomYoloV4",
+      "NvDsInferParseCustomYoloV7"
+    ],
+    "files": {
+      "out_dir": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c3404019ebc85047/dumps/nvdsparsebbox_Yolo-59250b6e1d",
+      "timing_csv": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c3404019ebc85047/dumps/nvdsparsebbox_Yolo-59250b6e1d/timing.csv",
+      "assembly": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c3404019ebc85047/dumps/nvdsparsebbox_Yolo-59250b6e1d/assembly.txt",
+      "control_flow": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c3404019ebc85047/dumps/nvdsparsebbox_Yolo-59250b6e1d/control-flow.txt",
+      "arch": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c3404019ebc85047/dumps/nvdsparsebbox_Yolo-59250b6e1d/arch.json",
+      "manifest": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c3404019ebc85047/dumps/nvdsparsebbox_Yolo-59250b6e1d/manifest.json",
+      "architecture": "aarch64",
+      "timing_architecture": "aarch64",
+      "function_count": 2,
+      "loops": {
+        "total": 7,
+        "with_trip_count": 1,
+        "unknown_trip_count": 6,
+        "recursion": 0,
+        "uncounted_cycles": 1
+      }
+    },
+    "loops": {
+      "NvDsInferParseCustomYoloV7": {
+        "total": 2,
+        "with_trip_count": 1,
+        "unknown_trip_count": 1,
+        "recursion": 0,
+        "uncounted_cycles": 1,
+        "entry": "0x230",
+        "rows": [
+          {
+            "id": "L1",
+            "kind": "loop",
+            "header": "bb_0x2c0",
+            "latch": "bb_0x3c8",
+            "depth": 1,
+            "blocks": 25,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L2",
+            "kind": "loop",
+            "header": "bb_0x2d0",
+            "latch": "bb_0x2dc",
+            "depth": 2,
+            "blocks": 3,
+            "trips": "80",
+            "trips_known": true,
+            "in": "L1"
+          }
+        ]
+      },
+      "NvDsInferParseCustomYoloV4": {
+        "total": 5,
+        "with_trip_count": 0,
+        "unknown_trip_count": 5,
+        "recursion": 0,
+        "uncounted_cycles": 0,
+        "entry": "0x600",
+        "rows": [
+          {
+            "id": "L1",
+            "kind": "loop",
+            "header": "bb_0x698",
+            "latch": "bb_0x888",
+            "depth": 1,
+            "blocks": 29,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L2",
+            "kind": "loop",
+            "header": "bb_0x69c",
+            "latch": "bb_0x6e8",
+            "depth": 2,
+            "blocks": 8,
+            "trips": "?",
+            "trips_known": false,
+            "in": "L1"
+          },
+          {
+            "id": "L3",
+            "kind": "loop",
+            "header": "bb_0x6ac",
+            "latch": "bb_0x6bc",
+            "depth": 3,
+            "blocks": 3,
+            "trips": "?",
+            "trips_known": false,
+            "in": "L2"
+          },
+          {
+            "id": "L4",
+            "kind": "loop",
+            "header": "bb_0x6f0",
+            "latch": "bb_0x6fc",
+            "depth": 1,
+            "blocks": 2,
+            "trips": "?",
+            "trips_known": false
+          },
+          {
+            "id": "L5",
+            "kind": "loop",
+            "header": "bb_0xab4",
+            "latch": "bb_0xabc",
+            "depth": 1,
+            "blocks": 3,
+            "trips": "?",
+            "trips_known": false
+          }
+        ]
+      }
+    },
+    "requests": [],
+    "contract": "none",
+    "gates": {},
+    "verdict": null,
+    "rows": [],
+    "judgements": [],
+    "unjudged": [],
+    "agent_judged": [],
+    "notes": []
+  }
+}

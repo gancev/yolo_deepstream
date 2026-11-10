@@ -1,0 +1,81 @@
+--- a/src/nvdsparsebbox_Yolo.cpp
++++ b/src/nvdsparsebbox_Yolo.cpp
+@@ -118,7 +118,11 @@
+             }
+         }
+ 
+-        if (maxProb > detectionParams.perClassPreclusterThreshold[maxIndex])
++        // A row whose class scores are all zero leaves maxIndex at -1; it has
++        // no class to look the threshold up for, so skip it instead of indexing
++        // perClassPreclusterThreshold[-1].
++        if (maxIndex >= 0 &&
++            maxProb > detectionParams.perClassPreclusterThreshold[maxIndex])
+         {
+             addBBoxProposalYoloV4(bx1, by1, bx2, by2, netW, netH, maxIndex, maxProb, binfo);
+         }
+@@ -155,7 +159,7 @@
+ 
+     // The second dimension should be num_classes
+     assert(detectionParams.numClassesConfigured == scores.inferDims.d[1]);
+-    
++
+     uint num_bboxes = boxes.inferDims.d[0];
+ 
+     // std::cout << "Network Info: " << networkInfo.height << "  " << networkInfo.width << std::endl;
+@@ -218,8 +222,8 @@
+     NvDsInferParseDetectionParams const& detectionParams,
+     std::vector<NvDsInferParseObjectInfo>& objectList)
+ {
+- 
+ 
++
+     if (outputLayersInfo.empty()) {
+         std::cerr << "Could not find output layer in bbox parsing" << std::endl;;
+         return false;
+@@ -240,15 +244,15 @@
+     int rows = layer.inferDims.numElements / layer.inferDims.d[1];
+ 
+     for (int i = 0; i < rows; ++i) {
+-        //85 = x, y, w, h, maxProb, score0......score79
++        //85 = x, y, w, h, objectness, score0......score79
+         float bx = data[ 0];
+         float by = data[ 1];
+         float bw = data[ 2];
+         float bh = data[ 3];
+-        float maxProb = data[ 4];
+-        int  maxIndex = data[ 5];
++        float objectness = data[ 4];
+         float * classes_scores = data + 5;
+-        
++        data += dimensions;
++
+         float maxScore = 0;
+         int index = 0;
+         for (int j = 0 ;j < NUM_CLASSES_YOLO; j++){
+@@ -258,11 +262,21 @@
+            }
+            classes_scores++;
+         }
+-	
+-        maxIndex = index;
+-        data += dimensions;
+-        
+-        addBBoxProposalYoloV7(bx, by, bw, bh, 1, networkInfo.width, networkInfo.height, maxIndex, maxProb, objects);    
++
++        // Detection confidence is objectness x best class score, as in the
++        // reference YOLOv7 post-processing; the class is the argmax.
++        const int maxIndex = index;
++        const float maxProb = objectness * maxScore;
++
++        // Apply the per-class pre-cluster threshold here, per row, before any
++        // further work. Suppression of the survivors is the job of nvinfer's
++        // cluster stage (cluster-mode=2 with nms-iou-threshold in the config),
++        // which runs on the few hundred rows that pass, not on all 25,200.
++        if (maxProb < detectionParams.perClassPreclusterThreshold[maxIndex]) {
++            continue;
++        }
++
++        addBBoxProposalYoloV7(bx, by, bw, bh, 1, networkInfo.width, networkInfo.height, maxIndex, maxProb, objects);
+     }
+     objectList = objects;
+     return true;

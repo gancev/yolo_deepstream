@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "data": {
+    "recorded": true,
+    "run": "r-2a90cda6813f",
+    "patched": 0,
+    "state": "settled",
+    "pending": 0,
+    "agent_flags": 0,
+    "agent_note": "0 recursion cycles and 0 unresolved calls on the parse path across the 2 functions read; 3 indirect call sites (blr x2) sit in the std::endl warning branch, not the per-row path; the irreducible…",
+    "agent_verdict": "agent_cleared"
+  }
+}

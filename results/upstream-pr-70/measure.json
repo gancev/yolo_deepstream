@@ -1,0 +1,416 @@
+{
+  "ok": true,
+  "data": {
+    "id": "m-1144849903a1",
+    "manifest": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/c46ce61805ae40fd/manifests/m-1144849903a1.json",
+    "state": "measured",
+    "contract": "none",
+    "gates": {},
+    "verdict": null,
+    "rows": [],
+    "judgements": [],
+    "unjudged": [
+      {
+        "signal": "hot_path_time",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`hot_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 78.79628004771095,
+        "after": "78.8 ns",
+        "before": "78.7 ns",
+        "prior": {
+          "value": 78.70817713357467,
+          "measured_at": "2026-11-03T16:03:17.022651+00:00",
+          "run": "m-642d02ea2866",
+          "artifact": "object"
+        },
+        "delta_pct": 0.11,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.1% vs last run (2026-11-03T16:03:17.022651+00:00); callee-excluded",
+        "reason": "no bound covers `hot_path_time` of `NvDsInferParseCustomYoloV4`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "energy",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Energy",
+        "entry_key": null,
+        "text": "`energy` of `NvDsInferParseCustomYoloV4` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 110.31479206679533,
+        "after": "110 nWs",
+        "before": "110 nWs",
+        "prior": {
+          "value": 110.19144798700452,
+          "measured_at": "2026-11-03T16:03:17.022651+00:00",
+          "run": "m-642d02ea2866",
+          "artifact": "object"
+        },
+        "delta_pct": 0.11,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.1% vs last run (2026-11-03T16:03:17.022651+00:00); callee-excluded",
+        "reason": "no bound covers `energy` of `NvDsInferParseCustomYoloV4`, so this movement is measured and not judged"
+      },
+      {
+        "signal": "worst_path_time",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "gate": "Performance",
+        "entry_key": null,
+        "text": "`worst_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "kind": "regression",
+        "severity": "caution",
+        "fabricated": true,
+        "bound": null,
+        "observed": 215.8242893849801,
+        "after": "216 ns",
+        "before": "216 ns",
+        "prior": {
+          "value": 215.71702404325958,
+          "measured_at": "2026-11-03T16:03:17.022651+00:00",
+          "run": "m-642d02ea2866",
+          "artifact": "object"
+        },
+        "delta_pct": 0.05,
+        "verdict": "unjudged",
+        "reason_code": "no_bound",
+        "note": "+0.0% vs last run (2026-11-03T16:03:17.022651+00:00); callee-excluded",
+        "reason": "no bound covers `worst_path_time` of `NvDsInferParseCustomYoloV4`, so this movement is measured and not judged"
+      }
+    ],
+    "agent_judged": [
+      {
+        "entry_key": "hot_path_time:NvDsInferParseCustomYoloV4",
+        "text": "`hot_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "signal": "hot_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      },
+      {
+        "entry_key": "energy:NvDsInferParseCustomYoloV4",
+        "text": "`energy` of `NvDsInferParseCustomYoloV4` vs last run",
+        "signal": "energy",
+        "gate": "Energy",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      },
+      {
+        "entry_key": "worst_path_time:NvDsInferParseCustomYoloV4",
+        "text": "`worst_path_time` of `NvDsInferParseCustomYoloV4` vs last run",
+        "signal": "worst_path_time",
+        "gate": "Performance",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      }
+    ],
+    "escalations": [],
+    "linked_before": {
+      "before_saved": true,
+      "relink": "cmake --build build"
+    },
+    "notes": [],
+    "selection": [
+      "p1"
+    ],
+    "path_moved": {
+      "NvDsInferParseCustomYoloV4": false
+    },
+    "paths": {
+      "NvDsInferParseCustomYoloV4": {
+        "hot_path": {
+          "candidate": "p1",
+          "chosen_by": "ranking",
+          "scope": "call",
+          "path_moved": false,
+          "moved_at": [],
+          "baseline": "reselected",
+          "blocks": [
+            "bb_0x60c",
+            "bb_0x63c",
+            "bb_0x650",
+            "bb_0x65c",
+            "bb_0x66c",
+            "bb_0x674",
+            "bb_0x6a4",
+            "bb_0x6a8",
+            "bb_0x6c0",
+            "bb_0x6d0",
+            "bb_0x6dc",
+            "bb_0x6e0",
+            "bb_0x6f0",
+            "bb_0x6fc",
+            "bb_0x71c",
+            "bb_0x724",
+            "bb_0x734",
+            "bb_0x738",
+            "bb_0x73c",
+            "bb_0x74c",
+            "bb_0x750",
+            "bb_0x764",
+            "bb_0x768",
+            "bb_0x76c",
+            "bb_0x770",
+            "bb_0x774",
+            "bb_0x778"
+          ],
+          "ns": 78.79628004771095,
+          "ns_worst": 87.57676090772983,
+          "lower_bound": true,
+          "energy_nws": 110.31479206679533,
+          "reasons": [
+            "≥ — loop L1 trip count unknown (no register add/sub of w2 in the loop body — the counter is not in a register, or the loop is not counted)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)",
+            "≥ — loop L3 trip count unknown (limit register w0 is written inside the loop (add w0, w0, #1 @bb_0x6d0) — the bound varies per lap)",
+            "callee-excluded — _Znwm body not counted",
+            "callee-excluded — memcpy body not counted",
+            "callee-excluded — std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0] body not counted",
+            "callee-excluded — _ZdlPv body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_Znwm",
+              "site": "0x738"
+            },
+            {
+              "name": "memcpy",
+              "site": "0x74c"
+            },
+            {
+              "name": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+              "site": "0x750"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x76c"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0x774"
+            }
+          ],
+          "before_ns": 77.67169989264318
+        },
+        "worst_path": {
+          "baseline": "recomputed",
+          "blocks": [
+            "bb_0x60c",
+            "bb_0x8d8",
+            "bb_0x8ec",
+            "bb_0x8f0",
+            "bb_0x8fc",
+            "bb_0x900",
+            "bb_0x910",
+            "bb_0x914",
+            "bb_0x91c",
+            "bb_0x920",
+            "bb_0x938",
+            "bb_0x954",
+            "bb_0x958",
+            "bb_0x95c",
+            "bb_0x978",
+            "bb_0x980",
+            "bb_0x944",
+            "bb_0x948",
+            "bb_0x94c",
+            "bb_0x950",
+            "bb_0x63c",
+            "bb_0x650",
+            "bb_0x65c",
+            "bb_0x66c",
+            "bb_0x674",
+            "bb_0x6a4",
+            "bb_0x6a8",
+            "bb_0x6c0",
+            "bb_0x7a4",
+            "bb_0x6d0",
+            "bb_0x6dc",
+            "bb_0x6e0",
+            "bb_0x6f0",
+            "bb_0x6fc",
+            "bb_0x7b0",
+            "bb_0x7ec",
+            "bb_0x7f0",
+            "bb_0x804",
+            "bb_0x808",
+            "bb_0x81c",
+            "bb_0x820",
+            "bb_0x834",
+            "bb_0x838",
+            "bb_0x84c",
+            "bb_0x850",
+            "bb_0x864",
+            "bb_0x868",
+            "bb_0x874",
+            "bb_0x87c",
+            "bb_0x988",
+            "bb_0x9ac",
+            "bb_0x9b0",
+            "bb_0x89c",
+            "bb_0x8b0",
+            "bb_0x724",
+            "bb_0xa84",
+            "bb_0xa8c",
+            "bb_0xa90",
+            "bb_0xaa4",
+            "bb_0xaa8",
+            "bb_0xab4",
+            "bb_0xab8",
+            "bb_0xabc",
+            "bb_0xac0",
+            "bb_0xac4",
+            "bb_0xac8",
+            "bb_0xacc",
+            "bb_0xad0"
+          ],
+          "ns": 190.85622936186851,
+          "ns_worst": 215.8242893849801,
+          "lower_bound": true,
+          "energy_nws": 267.19872110661595,
+          "reasons": [
+            "callee-excluded — _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l body not counted",
+            "callee-excluded — _ZNSo9_M_insertImEERSoT_ body not counted",
+            "callee-excluded — _ZNSolsEi body not counted",
+            "callee-excluded — _ZNKSt5ctypeIcE13_M_widen_initEv body not counted",
+            "callee-excluded — _ZNSo3putEc body not counted",
+            "callee-excluded — _ZNSo5flushEv body not counted",
+            "≥ — loop L1 trip count unknown (no register add/sub of w2 in the loop body — the counter is not in a register, or the loop is not counted)",
+            "≥ — loop L2 trip count unknown (limit is neither an immediate nor a register compare)",
+            "≥ — loop L3 trip count unknown (limit register w0 is written inside the loop (add w0, w0, #1 @bb_0x6d0) — the bound varies per lap)",
+            "callee-excluded — _Z5clampfff body not counted",
+            "callee-excluded — _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_ body not counted",
+            "callee-excluded — _ZSt20__throw_length_errorPKc body not counted",
+            "callee-excluded — _ZSt16__throw_bad_castv body not counted",
+            "callee-excluded — _ZdlPv body not counted",
+            "≥ — loop L5 trip count unknown (no exit test inside the loop — exit is unconditional or indirect)",
+            "callee-excluded — _Unwind_Resume body not counted"
+          ],
+          "callees": [
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x8ec"
+            },
+            {
+              "name": "_ZNSo9_M_insertImEERSoT_",
+              "site": "0x8fc"
+            },
+            {
+              "name": "_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l",
+              "site": "0x910"
+            },
+            {
+              "name": "_ZNSolsEi",
+              "site": "0x91c"
+            },
+            {
+              "name": "_ZNKSt5ctypeIcE13_M_widen_initEv",
+              "site": "0x958"
+            },
+            {
+              "name": "_ZNSo3putEc",
+              "site": "0x948"
+            },
+            {
+              "name": "_ZNSo5flushEv",
+              "site": "0x94c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x7ec"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x804"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x81c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x834"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x84c"
+            },
+            {
+              "name": "_Z5clampfff",
+              "site": "0x864"
+            },
+            {
+              "name": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+              "site": "0x9ac"
+            },
+            {
+              "name": "_ZSt20__throw_length_errorPKc",
+              "site": "0xa8c"
+            },
+            {
+              "name": "_ZSt16__throw_bad_castv",
+              "site": "0xaa4"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0xab8"
+            },
+            {
+              "name": "_ZdlPv",
+              "site": "0xac4"
+            },
+            {
+              "name": "_Unwind_Resume",
+              "site": "0xacc"
+            }
+          ],
+          "paths_searched": 1144,
+          "ties": 0,
+          "before_ns_worst": 215.0364115546312
+        }
+      }
+    },
+    "frequency": {
+      "source": "repository",
+      "scaled": true,
+      "clock_hz": 2601000000,
+      "trained_hz": 2800000000
+    },
+    "measured": {
+      "r1": {
+        "value": 78.79628004771095,
+        "unit": "ns",
+        "baseline": "reselected",
+        "prev": 77.67169989264318,
+        "lower_bound": true
+      },
+      "r3": {
+        "value": 215.8242893849801,
+        "unit": "ns",
+        "baseline": "recomputed",
+        "prev": 215.0364115546312,
+        "lower_bound": true
+      },
+      "r2": {
+        "value": 110.31479206679533,
+        "unit": "nWs",
+        "baseline": "reselected",
+        "prev": 108.74037984970042,
+        "lower_bound": true
+      }
+    }
+  }
+}

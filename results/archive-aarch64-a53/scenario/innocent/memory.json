@@ -1,0 +1,269 @@
+{
+  "ok": true,
+  "data": {
+    "run": "r-4835129ef1a3",
+    "verb": "analyse memory",
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "turn": "demo-innocent-20261103T151103Z",
+    "caller": "memory-report",
+    "parent_run": "m-84cdd7e20095",
+    "contract": "none",
+    "artifact": {
+      "artifact": ".loci/build/objects/aarch64/src/nvdsparsebbox_Yolo.o",
+      "kind": "object",
+      "built": "2026-11-03T15:11:07.660520+00:00",
+      "freshness": "current",
+      "via": "ranked",
+      "recipe": {
+        "path": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+        "root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+        "hash": "sha256:2db3950bd9ce8baf84d37b76afca09fad157c4d46d0519cbab42432ed9808fd3",
+        "target": "aarch64",
+        "escrow": "ok",
+        "validated": "replay-compare",
+        "confirmed_by_user": false,
+        "artifact_only": false,
+        "warnings": [
+          "recipe: this recipe has not been confirmed by the user yet; run `/loci:init` to review it."
+        ],
+        "compiler_triplet": "aarch64-unknown-linux-gnu",
+        "recorded_artifact": "build/tests/bench_parser_aarch64",
+        "recorded_artifact_on_disk": true
+      },
+      "scope": "translation unit: this object's own sections; no linker placement, so no regions and no firmware total",
+      "code_before": ".loci/build/turns/160e3f817972deac/linked/bench_parser_aarch64.prev",
+      "refused": [
+        "build/tests/bench_parser_aarch64 - stale artifact: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 predates its sources — /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp is 693s newer. Rebuild before trusting these numbers."
+      ],
+      "before_saved": true,
+      "relink": "cmake --build build"
+    },
+    "functions": [],
+    "requests": [
+      {
+        "id": "r1",
+        "signal": "rom_size",
+        "entry_key": null,
+        "text": null,
+        "gate": "Memory",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "whole",
+        "measurability": "breach_only",
+        "fabricated": true
+      },
+      {
+        "id": "r2",
+        "signal": "ram_size",
+        "entry_key": null,
+        "text": null,
+        "gate": "Memory",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "whole",
+        "measurability": "breach_only",
+        "fabricated": true
+      }
+    ],
+    "measured": {
+      "r1": {
+        "value": 7399,
+        "unit": "B",
+        "baseline_reason": "no_before_artifact"
+      },
+      "r2": {
+        "value": 8,
+        "unit": "B",
+        "baseline_reason": "no_before_artifact"
+      }
+    },
+    "gates": {},
+    "verdict": null,
+    "rows": [],
+    "judgements": [],
+    "unjudged": [],
+    "agent_judged": [
+      {
+        "entry_key": "rom_size:whole",
+        "text": "`rom_size` of the translation unit, no bound",
+        "signal": "rom_size",
+        "gate": "Memory",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true
+      },
+      {
+        "entry_key": "ram_size:whole",
+        "text": "`ram_size` of the translation unit, no bound",
+        "signal": "ram_size",
+        "gate": "Memory",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true
+      }
+    ],
+    "notes": [],
+    "detail": {
+      "summary": {
+        "rom_total": 7399,
+        "ram_static_total": 8,
+        "code_size": 5332,
+        "rodata_size": 2059,
+        "data_size": 8,
+        "bss_size": 0
+      },
+      "top_consumers": {
+        "rom": [
+          {
+            "name": "NvDsInferParseCustomYoloV7",
+            "size": 1876,
+            "type": "STT_FUNC"
+          },
+          {
+            "name": "NvDsInferParseCustomYoloV4",
+            "size": 1304,
+            "type": "STT_FUNC"
+          },
+          {
+            "name": "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "size": 692,
+            "type": "STT_FUNC",
+            "mangled": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIP28NvDsInferObjectDetectionInfoSt6vectorIS2_SaIS2_EEEElNS0_5__ops15_Iter_comp_iterIZL9nmsYoloV7S6_fEUlRKS2_SB_E_EEEvT_SE_T0_T1_.isra.0"
+          },
+          {
+            "name": "std::__adjust_heap<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, NvDsInferObjectDetectionInfo, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "size": 404,
+            "type": "STT_FUNC",
+            "mangled": "_ZSt13__adjust_heapIN9__gnu_cxx17__normal_iteratorIP28NvDsInferObjectDetectionInfoSt6vectorIS2_SaIS2_EEEElS2_NS0_5__ops15_Iter_comp_iterIZL9nmsYoloV7S6_fEUlRKS2_SB_E_EEEvT_T0_SF_T1_T2_.isra.0"
+          },
+          {
+            "name": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "size": 340,
+            "type": "STT_FUNC",
+            "mangled": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EEaSERKS2_.isra.0"
+          },
+          {
+            "name": "std::__insertion_sort<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "size": 220,
+            "type": "STT_FUNC",
+            "mangled": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIP28NvDsInferObjectDetectionInfoSt6vectorIS2_SaIS2_EEEENS0_5__ops15_Iter_comp_iterIZL9nmsYoloV7S6_fEUlRKS2_SB_E_EEEvT_SE_T0_.isra.0"
+          },
+          {
+            "name": "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::_M_realloc_append<NvDsInferObjectDetectionInfo const&>",
+            "size": 208,
+            "type": "STT_FUNC",
+            "mangled": "_ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_"
+          },
+          {
+            "name": "std::__unguarded_linear_insert<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, __gnu_cxx::__ops::_Val_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "size": 136,
+            "type": "STT_FUNC",
+            "mangled": "_ZSt25__unguarded_linear_insertIN9__gnu_cxx17__normal_iteratorIP28NvDsInferObjectDetectionInfoSt6vectorIS2_SaIS2_EEEENS0_5__ops14_Val_comp_iterIZL9nmsYoloV7S6_fEUlRKS2_SB_E_EEEvT_T0_.isra.0"
+          },
+          {
+            "name": "clamp",
+            "size": 112,
+            "type": "STT_FUNC",
+            "mangled": "_Z5clampfff"
+          },
+          {
+            "name": "std::ctype<char>::do_widen",
+            "size": 8,
+            "type": "STT_FUNC",
+            "mangled": "_ZNKSt5ctypeIcE8do_widenEc"
+          }
+        ],
+        "ram": [
+          {
+            "name": "DW.ref.__gxx_personality_v0",
+            "size": 8,
+            "type": "STT_OBJECT"
+          }
+        ]
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "address": "0x00000000",
+          "size": 5116,
+          "type": "code",
+          "flags": "AX",
+          "memory_region": null
+        },
+        {
+          "name": ".data",
+          "address": "0x00000000",
+          "size": 0,
+          "type": "data",
+          "flags": "WA",
+          "memory_region": null
+        },
+        {
+          "name": ".bss",
+          "address": "0x00000000",
+          "size": 0,
+          "type": "bss",
+          "flags": "WA",
+          "memory_region": null
+        },
+        {
+          "name": ".text._ZNKSt5ctypeIcE8do_widenEc",
+          "address": "0x00000000",
+          "size": 8,
+          "type": "code",
+          "flags": "AX",
+          "memory_region": null
+        },
+        {
+          "name": ".rodata.str1.8",
+          "address": "0x00000000",
+          "size": 612,
+          "type": "rodata",
+          "flags": "A",
+          "memory_region": null
+        },
+        {
+          "name": ".rodata._ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_.str1.8",
+          "address": "0x00000000",
+          "size": 26,
+          "type": "rodata",
+          "flags": "A",
+          "memory_region": null
+        },
+        {
+          "name": ".text._ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_",
+          "address": "0x00000000",
+          "size": 208,
+          "type": "code",
+          "flags": "AX",
+          "memory_region": null
+        },
+        {
+          "name": ".gcc_except_table",
+          "address": "0x00000000",
+          "size": 109,
+          "type": "rodata",
+          "flags": "A",
+          "memory_region": null
+        },
+        {
+          "name": ".data.rel.local.DW.ref.__gxx_personality_v0",
+          "address": "0x00000000",
+          "size": 8,
+          "type": "data",
+          "flags": "WA",
+          "memory_region": null
+        },
+        {
+          "name": ".eh_frame",
+          "address": "0x00000000",
+          "size": 1312,
+          "type": "rodata",
+          "flags": "A",
+          "memory_region": null
+        }
+      ]
+    }
+  }
+}

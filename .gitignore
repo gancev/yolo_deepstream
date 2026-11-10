@@ -1,0 +1,20 @@
+# Fetched by bootstrap.sh (NVIDIA SDK/EULA material, not redistributed here)
+third_party/yolo_deepstream/
+third_party/deepstream-includes/
+third_party/cuda-includes/
+# Build outputs
+build/
+docker-pull.log
+# LOCI machine-local state is handled by .loci/.gitignore (written by loci init)
+third_party/tensorrt-includes/
+third_party/_debs/
+# Live demo (demo/setup.sh): venv, downloaded model and sample image
+demo/.venv/
+demo/assets/
+# demo/out: keep the comparison videos and measurements, ignore the rest
+demo/out/*
+!demo/out/*.mp4
+!demo/out/measurements.json
+# clangd index (built from NVIDIA SDK headers) and Python bytecode
+.cache/
+__pycache__/

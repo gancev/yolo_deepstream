@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "data": {
+    "recorded": true,
+    "run": "m-927cfc155da9",
+    "patched": 4,
+    "state": "settled",
+    "pending": 0,
+    "agent_flags": 5,
+    "agent_note": "Baseline: every figure is a floor. The per-row loop at src/nvdsparsebbox_Yolo.cpp:244-253 has no derivable trip count (rows = numElements/d[1] at run time), so hot >= 313 ns and worst >= 470 ns for…",
+    "agent_verdict": "agent_flagged"
+  }
+}

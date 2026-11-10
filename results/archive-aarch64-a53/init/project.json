@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "data": {
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "recipe": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+    "loci_target": "aarch64",
+    "compiler": "aarch64-linux-gnu-g++",
+    "build_system": "cmake",
+    "artifact": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64",
+    "artifact_only": false,
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json"
+  }
+}

@@ -1,0 +1,49 @@
+Third-party material used by this demo
+======================================
+
+1. yolo_deepstream (third_party/yolo_deepstream, fetched by bootstrap.sh)
+   Source:  https://github.com/NVIDIA-AI-IOT/yolo_deepstream
+   Commit:  see third_party/YOLO_DEEPSTREAM_COMMIT (pinned; last upstream push 2024-09-25)
+   License: Apache-2.0 for the repository (LICENSE.md). The file this demo
+            builds, deepstream_yolo/nvdsinfer_custom_impl_Yolo/nvdsparsebbox_Yolo.cpp,
+            carries an SPDX-License-Identifier: MIT header with NVIDIA's 2022
+            copyright. A copy of that file is kept at src/nvdsparsebbox_Yolo.cpp
+            (unmodified unless a scenario patch is applied) under those terms.
+            The scenario patches in scenario/ are derivative works of that
+            file and are offered under the same MIT terms.
+
+2. DeepStream SDK headers (third_party/deepstream-includes, fetched by bootstrap.sh)
+   Source:  /opt/nvidia/deepstream/deepstream/sources/includes inside the
+            nvcr.io/nvidia/deepstream:8.0-samples-multiarch container image
+            (linux/arm64); the image id and digest are recorded in
+            third_party/deepstream-includes/IMAGE_DIGEST after bootstrap.
+   License: NVIDIA DeepStream SDK license (the LICENSE.txt copied beside the
+            headers when the image ships one). The headers are compile-time
+            inputs only; they are NOT redistributed in this repository and are
+            git-ignored. Each user fetches them with bootstrap.sh under their
+            own acceptance of NVIDIA's terms (NGC / DeepStream EULA).
+
+3. TensorRT headers (third_party/tensorrt-includes, fetched by bootstrap.sh)
+   Source:  Debian packages libnvinfer-headers-dev and libnvonnxparsers-dev
+            (10.13.2.6-1+cuda13.0, arm64) from NVIDIA's public apt repository
+            https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa/,
+            downloaded and extracted (never installed) in an arm64 container;
+            the exact .deb names are in third_party/DEB_SOURCES. The
+            DeepStream samples image ships only the TensorRT runtime libraries.
+            nvdsinfer_custom_impl.h includes NvInfer.h and NvOnnxParser.h.
+   License: NVIDIA TensorRT license (the package's copyright file is copied to
+            third_party/tensorrt-includes/COPYRIGHT). Not redistributed here;
+            git-ignored; fetched per user under their own acceptance.
+
+4. CUDA runtime headers (third_party/cuda-includes, fetched by bootstrap.sh)
+   Source:  Debian packages cuda-cudart-dev-13-0 and cuda-crt-13-0 (arm64 sbsa)
+            from the same apt repository, extracted the same way
+            (/usr/local/cuda-13.0/targets/sbsa-linux/include). Only
+            cuda_runtime_api.h and what it includes are needed, through
+            NvInfer.h.
+   License: NVIDIA CUDA Toolkit EULA (copyright file copied to
+            third_party/cuda-includes/COPYRIGHT). Same handling as (2) and (3).
+
+Nothing under third_party/ is linked into a product by this demo; the only
+build outputs are an aarch64 relocatable object and a shared library of
+NVIDIA's own MIT-licensed parser, plus test executables, all under build/.

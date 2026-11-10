@@ -1,0 +1,225 @@
+{
+  "ok": true,
+  "data": {
+    "run": "r-ea914a0b369d",
+    "verb": "analyse stack",
+    "project_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+    "context_file": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "turn": "demo-v2-innocent-20261103T160131Z",
+    "caller": "stack-depth",
+    "parent_run": "m-d34ee5bd5dd4",
+    "contract": "none",
+    "artifact": {
+      "artifact": ".loci/build/objects/neoverse-v2/src/nvdsparsebbox_Yolo.o",
+      "kind": "object",
+      "built": "2026-11-03T16:01:33.372819+00:00",
+      "freshness": "current",
+      "via": "ranked",
+      "recipe": {
+        "path": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+        "root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser",
+        "hash": "sha256:68c2fc87d7ee6dd7ffdde7809200da4e0bd1c2d8e415fb5dfcae2f40a058401e",
+        "target": "neoverse-v2",
+        "escrow": "ok",
+        "validated": "replay-compare",
+        "confirmed_by_user": false,
+        "artifact_only": false,
+        "warnings": [
+          "recipe: this recipe has not been confirmed by the user yet; run `/loci:init` to review it."
+        ],
+        "compiler_triplet": "aarch64-unknown-linux-gnu",
+        "recorded_artifact": "build/tests/bench_parser_aarch64",
+        "recorded_artifact_on_disk": true
+      },
+      "scope": "single-function: callees are not resolved in a relocatable object",
+      "refused": [
+        "build/tests/bench_parser_aarch64 - stale artifact: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 predates its sources — /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp is 392s newer. Rebuild before trusting these numbers."
+      ],
+      "before_saved": true,
+      "relink": "cmake --build build"
+    },
+    "functions": [
+      "NvDsInferParseCustomYoloV7",
+      "NvDsInferParseCustomYoloV4"
+    ],
+    "requests": [
+      {
+        "id": "r1",
+        "signal": "stack_depth",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "unmeasurable",
+        "fabricated": true
+      },
+      {
+        "id": "r2",
+        "signal": "stack_frame_size",
+        "fn": "NvDsInferParseCustomYoloV7",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      },
+      {
+        "id": "r3",
+        "signal": "stack_depth",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "unmeasurable",
+        "fabricated": true
+      },
+      {
+        "id": "r4",
+        "signal": "stack_frame_size",
+        "fn": "NvDsInferParseCustomYoloV4",
+        "entry_key": null,
+        "text": null,
+        "gate": "Stack",
+        "unit": "B",
+        "artifact": "object",
+        "granularity": "fn",
+        "measurability": "verifiable",
+        "fabricated": true
+      }
+    ],
+    "measured": {
+      "r2": {
+        "value": 320,
+        "unit": "B",
+        "baseline_reason": "no_before_artifact"
+      },
+      "r4": {
+        "value": 256,
+        "unit": "B",
+        "baseline_reason": "no_before_artifact"
+      }
+    },
+    "gates": {},
+    "verdict": null,
+    "rows": [],
+    "judgements": [],
+    "unjudged": [],
+    "agent_judged": [
+      {
+        "entry_key": "stack_frame_size:NvDsInferParseCustomYoloV7",
+        "text": "`stack_frame_size` of `NvDsInferParseCustomYoloV7`, no bound",
+        "signal": "stack_frame_size",
+        "gate": "Stack",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV7"
+      },
+      {
+        "entry_key": "stack_frame_size:NvDsInferParseCustomYoloV4",
+        "text": "`stack_frame_size` of `NvDsInferParseCustomYoloV4`, no bound",
+        "signal": "stack_frame_size",
+        "gate": "Stack",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true,
+        "function": "NvDsInferParseCustomYoloV4"
+      },
+      {
+        "entry_key": "recursion_cycles:whole",
+        "text": "`recursion_cycles`: 1 counted, no bound",
+        "signal": "recursion_cycles",
+        "gate": "Safety",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true
+      },
+      {
+        "entry_key": "indirect_calls:whole",
+        "text": "`indirect_calls`: 3 counted, no bound",
+        "signal": "indirect_calls",
+        "gate": "Safety",
+        "severity": "caution",
+        "unjudged_reason": "no_bound",
+        "fabricated": true
+      }
+    ],
+    "notes": [],
+    "detail": {
+      "functions": [
+        "NvDsInferParseCustomYoloV4",
+        "NvDsInferParseCustomYoloV7"
+      ],
+      "cycles": [
+        "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]"
+      ],
+      "unknown_callees": [],
+      "indirect_call_sites": [
+        "in NvDsInferParseCustomYoloV4: indirect call via x2 at instruction 219",
+        "in NvDsInferParseCustomYoloV7: indirect call via x2 at instruction 376",
+        "in NvDsInferParseCustomYoloV7: indirect call via x2 at instruction 412"
+      ],
+      "stack_analysis": {
+        "NvDsInferParseCustomYoloV7": {
+          "frame_size": 320,
+          "worst_case_depth": 768,
+          "average_depth": 499.2,
+          "worst_case_path": [
+            "NvDsInferParseCustomYoloV7",
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "(recursion)"
+          ],
+          "per_function_frames": {
+            "NvDsInferParseCustomYoloV7": 320,
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]": 64,
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": 128
+          },
+          "warnings": [
+            "recursive call: std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] (depth bounded to 1)",
+            "indirect call via x2 at instruction 376",
+            "indirect call via x2 at instruction 412"
+          ]
+        },
+        "NvDsInferParseCustomYoloV4": {
+          "frame_size": 256,
+          "worst_case_depth": 704,
+          "average_depth": 544,
+          "worst_case_path": [
+            "NvDsInferParseCustomYoloV4",
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]",
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]",
+            "(recursion)"
+          ],
+          "per_function_frames": {
+            "NvDsInferParseCustomYoloV4": 256,
+            "std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >::operator= [clone .isra.0]": 64,
+            "std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0]": 128
+          },
+          "warnings": [
+            "recursive call: std::__introsort_loop<__gnu_cxx::__normal_iterator<NvDsInferObjectDetectionInfo*, std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<nmsYoloV7(std::vector<NvDsInferObjectDetectionInfo, std::allocator<NvDsInferObjectDetectionInfo> >, float)::{lambda(NvDsInferObjectDetectionInfo const&, NvDsInferObjectDetectionInfo const&)#1}> > [clone .isra.0] (depth bounded to 1)",
+            "indirect call via x2 at instruction 219"
+          ]
+        }
+      },
+      "summary": {
+        "total_functions_analyzed": 2,
+        "functions_with_warnings": 2
+      },
+      "roots": "named"
+    }
+  }
+}

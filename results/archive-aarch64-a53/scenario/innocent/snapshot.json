@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "data": {
+    "snapshotted": false,
+    "reason": "no .o found for source (not built yet)",
+    "source_captured": true,
+    "source_capture_state": "captured",
+    "baseline_root": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/160e3f817972deac",
+    "source_prev": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/160e3f817972deac/orig/src/nvdsparsebbox_Yolo.cpp.locisrc",
+    "linked": {
+      "state": "captured",
+      "artifact": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64",
+      "copy": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/turns/160e3f817972deac/linked/bench_parser_aarch64.prev",
+      "before_kind": "unverified"
+    }
+  }
+}

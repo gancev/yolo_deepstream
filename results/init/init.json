@@ -1,0 +1,111 @@
+{
+  "ok": true,
+  "data": {
+    "init_status": "ok",
+    "target": "neoverse-v2",
+    "recipe": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+    "recipe_hash": "sha256:68c2fc87d7ee6dd7ffdde7809200da4e0bd1c2d8e415fb5dfcae2f40a058401e",
+    "gitignore": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/.gitignore",
+    "escrow": "/Users/stojangancev/.loci/state/recipe-escrow-1a33cefb1086.json",
+    "escrow_status": "ok",
+    "context": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "validated": "replay-compare",
+    "confirmed_by_user": false,
+    "validation": {
+      "tier": "replay-compare",
+      "floor": "compile-check",
+      "source": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp",
+      "compiler": "/opt/homebrew/bin/aarch64-linux-gnu-g++",
+      "opt_level": "-O2",
+      "production_object": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o",
+      "comparison": "byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o",
+      "contradicted": null,
+      "notes": [
+        "compile-check: src/nvdsparsebbox_Yolo.cpp built to neoverse-v2 machine code by aarch64-linux-gnu-g++, opt -O2.",
+        "replay-compare: byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o"
+      ],
+      "failures": []
+    },
+    "candidates": [
+      {
+        "target": "neoverse-v2",
+        "evidence": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/compile_commands.json has entries compiled by `aarch64-linux-gnu-g++ -mcpu=neoverse-v2`",
+        "strongest": "compdb"
+      },
+      {
+        "target": "aarch64",
+        "evidence": "LOCI compiled /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp for aarch64 with `aarch64-linux-gnu-g++` (/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/objects/aarch64/src/nvdsparsebbox_Yolo.o.meta.json); /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 is aarch64; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/test_parser_aarch64 is aarch64; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o is aarch64; aarch64-linux-gnu-g++ is installed (/opt/homebrew/bin/aarch64-linux-gnu-g++) — a toolchain on this machine, not evidence from the tree; aarch64-linux-gnu-gcc is installed (/opt/homebrew/bin/aarch64-linux-gnu-gcc) — a toolchain on this machine, not evidence from the tree",
+        "strongest": "sidecar"
+      }
+    ],
+    "unsupported_candidates": [],
+    "recipe_summary": {
+      "version": 1,
+      "target": "neoverse-v2",
+      "languages": [
+        "c",
+        "cpp"
+      ],
+      "compiler": "aarch64-linux-gnu-g++",
+      "compiler_path": "/opt/homebrew/bin/aarch64-linux-gnu-g++",
+      "compiler_triplet": "aarch64-unknown-linux-gnu",
+      "env": {
+        "setup": ""
+      },
+      "build": {
+        "system": "cmake",
+        "configure": "",
+        "full_build": "cmake --build build",
+        "compdb": {
+          "path": "build/compile_commands.json",
+          "kind": "generated",
+          "regen": "cmake --build build"
+        }
+      },
+      "artifacts": {
+        "elf": "build/tests/bench_parser_aarch64"
+      },
+      "fidelity": {
+        "lto": false,
+        "unity_build": false
+      },
+      "staleness": {
+        "watch": [
+          "CMakeLists.txt",
+          "cmake/aarch64-cortex-a78ae.cmake",
+          "cmake/aarch64-neoverse-v2.cmake"
+        ],
+        "hashes": {
+          "CMakeLists.txt": "sha256:66c3e94deb8f70e9d6fad074ff28eea04a55664f17cfadfce3e01327de791401",
+          "cmake/aarch64-cortex-a78ae.cmake": "sha256:d63757060a0f9d2326b60cd4fd237aed022ede5d983ff6cd62e81b4f71e0f2fb",
+          "cmake/aarch64-neoverse-v2.cmake": "sha256:c307941833e6c2857e44d122f2566a3c35e7562e18c24e7684ab71c754f42a8d"
+        }
+      },
+      "provenance": {
+        "initialized_by": "claude",
+        "confirmed_by_user": false,
+        "validated": "replay-compare",
+        "initialized_at": "2026-11-03T15:54:26Z",
+        "host": "Mac.localdomain (Darwin)",
+        "notes": [
+          "the previous recipe's recorded knobs were not carried forward: it was initialized for 'aarch64' and this is 'neoverse-v2'",
+          "the recipe that was here was replaced because it could not be vouched for (recipe_stale: the build files this recipe was derived from have changed (CMakeLists.txt, cmake/aarch64-cortex-a78ae.cmake), so the flags it records may no longer be the flags this project builds with. LOCI refuses to measure against them rather than report a confident number for the wrong build. Run `cmake --build build`, then `/loci:init --refresh`.)."
+        ],
+        "validated_note": "compile-check: src/nvdsparsebbox_Yolo.cpp built to neoverse-v2 machine code by aarch64-linux-gnu-g++, opt -O2. replay-compare: byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o"
+      }
+    },
+    "notes": [
+      "--target=neoverse-v2: switching from aarch64.",
+      "artifact: recorded `build/tests/bench_parser_aarch64`, a choice rather than the only candidate; other linked programs for neoverse-v2: `build/tests/test_parser_aarch64`; shared library, never recorded without being named: `build/libnvdsinfer_custom_impl_Yolo.so`. If another is this project's image, `loci init set artifacts.elf=<path>` records it.",
+      "the previous recipe's recorded knobs were not carried forward: it was initialized for 'aarch64' and this is 'neoverse-v2'",
+      "the recipe that was here was replaced because it could not be vouched for (recipe_stale: the build files this recipe was derived from have changed (CMakeLists.txt, cmake/aarch64-cortex-a78ae.cmake), so the flags it records may no longer be the flags this project builds with. LOCI refuses to measure against them rather than report a confident number for the wrong build. Run `cmake --build build`, then `/loci:init --refresh`.)."
+    ],
+    "frequency": {
+      "source": "checkout",
+      "scaled": true,
+      "clock_hz": 2601000000,
+      "trained_hz": 2800000000
+    },
+    "report": "LOCI is initialized for this project:\n  target:     neoverse-v2\n  languages:  c, cpp\n  compiler:   aarch64-linux-gnu-g++  (/opt/homebrew/bin/aarch64-linux-gnu-g++)\n  build:      cmake, compdb build/compile_commands.json (generated)\n  artifact:   build/tests/bench_parser_aarch64\n  validated:  replay-compare (confirmed by user: False)\n  recipe:     /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml\n  - compile-check: src/nvdsparsebbox_Yolo.cpp built to neoverse-v2 machine code by aarch64-linux-gnu-g++, opt -O2.\n  - replay-compare: byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o\n  - --target=neoverse-v2: switching from aarch64.\n  - artifact: recorded `build/tests/bench_parser_aarch64`, a choice rather than the only candidate; other linked programs for neoverse-v2: `build/tests/test_parser_aarch64`; shared library, never recorded without being named: `build/libnvdsinfer_custom_impl_Yolo.so`. If another is this project's image, `loci init set artifacts.elf=<path>` records it.\n  - the previous recipe's recorded knobs were not carried forward: it was initialized for 'aarch64' and this is 'neoverse-v2'\n  - the recipe that was here was replaced because it could not be vouched for (recipe_stale: the build files this recipe was derived from have changed (CMakeLists.txt, cmake/aarch64-cortex-a78ae.cmake), so the flags it records may no longer be the flags this project builds with. LOCI refuses to measure against them rather than report a confident number for the wrong build. Run `cmake --build build`, then `/loci:init --refresh`.).\n  clock 2.601 GHz (checkout), model trained at 2.8 GHz"
+  }
+}

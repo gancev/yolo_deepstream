@@ -1,0 +1,102 @@
+{
+  "ok": true,
+  "data": {
+    "init_status": "ok",
+    "target": "aarch64",
+    "recipe": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml",
+    "recipe_hash": "sha256:2db3950bd9ce8baf84d37b76afca09fad157c4d46d0519cbab42432ed9808fd3",
+    "gitignore": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/.gitignore",
+    "escrow": "/Users/stojangancev/.loci/state/recipe-escrow-1a33cefb1086.json",
+    "escrow_status": "ok",
+    "context": "/Users/stojangancev/.loci/state/project-context-1a33cefb1086.json",
+    "validated": "replay-compare",
+    "confirmed_by_user": false,
+    "validation": {
+      "tier": "replay-compare",
+      "floor": "compile-check",
+      "source": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp",
+      "compiler": "/opt/homebrew/bin/aarch64-linux-gnu-g++",
+      "opt_level": "-O2",
+      "production_object": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o",
+      "comparison": "byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o",
+      "contradicted": null,
+      "notes": [
+        "compile-check: src/nvdsparsebbox_Yolo.cpp built to aarch64 machine code by aarch64-linux-gnu-g++, opt -O2.",
+        "replay-compare: byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o"
+      ],
+      "failures": []
+    },
+    "candidates": [
+      {
+        "target": "aarch64",
+        "evidence": "the Cortex-A53 (Armv8-A) timing model; nothing in this build names the core (`-mcpu=`, or an Armv9 `-march=`); /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/compile_commands.json has entries compiled by `aarch64-linux-gnu-g++ -mcpu=cortex-a78ae`; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 is aarch64; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/test_parser_aarch64 is aarch64; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o is aarch64; aarch64-linux-gnu-g++ is installed (/opt/homebrew/bin/aarch64-linux-gnu-g++) — a toolchain on this machine, not evidence from the tree",
+        "strongest": "compdb"
+      },
+      {
+        "target": "neoverse-v2",
+        "evidence": "the Neoverse V2 (Armv9-A) timing model; nothing in this build names the core (`-mcpu=`, or an Armv9 `-march=`); /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/compile_commands.json has entries compiled by `aarch64-linux-gnu-g++ -mcpu=cortex-a78ae`; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/bench_parser_aarch64 is aarch64; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/tests/test_parser_aarch64 is aarch64; /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o is aarch64; aarch64-linux-gnu-g++ is installed (/opt/homebrew/bin/aarch64-linux-gnu-g++) — a toolchain on this machine, not evidence from the tree",
+        "strongest": "compdb"
+      }
+    ],
+    "unsupported_candidates": [],
+    "recipe_summary": {
+      "version": 1,
+      "target": "aarch64",
+      "languages": [
+        "c",
+        "cpp"
+      ],
+      "compiler": "aarch64-linux-gnu-g++",
+      "compiler_path": "/opt/homebrew/bin/aarch64-linux-gnu-g++",
+      "compiler_triplet": "aarch64-unknown-linux-gnu",
+      "env": {
+        "setup": ""
+      },
+      "build": {
+        "system": "cmake",
+        "configure": "",
+        "full_build": "cmake --build build",
+        "compdb": {
+          "path": "build/compile_commands.json",
+          "kind": "generated",
+          "regen": "cmake --build build"
+        }
+      },
+      "artifacts": {
+        "elf": "build/tests/bench_parser_aarch64"
+      },
+      "fidelity": {
+        "lto": false,
+        "unity_build": false
+      },
+      "staleness": {
+        "watch": [
+          "CMakeLists.txt",
+          "cmake/aarch64-cortex-a78ae.cmake"
+        ],
+        "hashes": {
+          "CMakeLists.txt": "sha256:2c155b52cdb4918652350b62653a02d467d89d722abcfce5b66fb7e73fe36e75",
+          "cmake/aarch64-cortex-a78ae.cmake": "sha256:ad5ed5de2049179fb697aba288cc12e3890e77d33a494ec2dd689e34780afa3c"
+        }
+      },
+      "provenance": {
+        "initialized_by": "claude",
+        "confirmed_by_user": false,
+        "validated": "replay-compare",
+        "initialized_at": "2026-11-03T15:00:28Z",
+        "host": "Mac.localdomain (Darwin)",
+        "validated_note": "compile-check: src/nvdsparsebbox_Yolo.cpp built to aarch64 machine code by aarch64-linux-gnu-g++, opt -O2. replay-compare: byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o"
+      }
+    },
+    "notes": [
+      "artifact: recorded `build/tests/bench_parser_aarch64`, a choice rather than the only candidate; other linked programs for aarch64: `build/tests/test_parser_aarch64`; shared library, never recorded without being named: `build/libnvdsinfer_custom_impl_Yolo.so`. If another is this project's image, `loci init set artifacts.elf=<path>` records it."
+    ],
+    "frequency": {
+      "source": "checkout",
+      "scaled": true,
+      "clock_hz": 1728000000,
+      "trained_hz": 1000000000
+    },
+    "report": "LOCI is initialized for this project:\n  target:     aarch64\n  languages:  c, cpp\n  compiler:   aarch64-linux-gnu-g++  (/opt/homebrew/bin/aarch64-linux-gnu-g++)\n  build:      cmake, compdb build/compile_commands.json (generated)\n  artifact:   build/tests/bench_parser_aarch64\n  validated:  replay-compare (confirmed by user: False)\n  recipe:     /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build.yaml\n  - compile-check: src/nvdsparsebbox_Yolo.cpp built to aarch64 machine code by aarch64-linux-gnu-g++, opt -O2.\n  - replay-compare: byte-identical to the production object build/CMakeFiles/nvdsinfer_custom_impl_Yolo.dir/src/nvdsparsebbox_Yolo.cpp.o\n  - artifact: recorded `build/tests/bench_parser_aarch64`, a choice rather than the only candidate; other linked programs for aarch64: `build/tests/test_parser_aarch64`; shared library, never recorded without being named: `build/libnvdsinfer_custom_impl_Yolo.so`. If another is this project's image, `loci init set artifacts.elf=<path>` records it.\n  clock 1.728 GHz (checkout), model trained at 1 GHz"
+  }
+}

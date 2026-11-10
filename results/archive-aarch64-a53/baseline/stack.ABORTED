@@ -1,0 +1,1 @@
+baseline whole-binary stack walk on build/tests/bench_parser_aarch64 (statically linked glibc, 2.6 MB) was stopped after >30 min without completing; see STATUS.md

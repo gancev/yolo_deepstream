@@ -1,0 +1,151 @@
+--- a/src/nvdsparsebbox_Yolo.cpp
++++ b/src/nvdsparsebbox_Yolo.cpp
+@@ -33,6 +33,11 @@
+ 
+ static const int NUM_CLASSES_YOLO = 80;
+ 
++/* IoU threshold for the parser-side NMS. Matches nms-iou-threshold in
++ * config_infer_primary_yoloV7.txt; NvDsInferParseDetectionParams does not
++ * carry it, so it is fixed here. */
++static const float NMS_IOU_THRESHOLD_YOLO = 0.65f;
++
+ float clamp(const float val, const float minVal, const float maxVal)
+ {
+     assert(minVal <= maxVal);
+@@ -118,7 +123,11 @@
+             }
+         }
+ 
+-        if (maxProb > detectionParams.perClassPreclusterThreshold[maxIndex])
++        // A row whose class scores are all zero leaves maxIndex at -1; it has
++        // no class to look the threshold up for, so skip it instead of indexing
++        // perClassPreclusterThreshold[-1].
++        if (maxIndex >= 0 &&
++            maxProb > detectionParams.perClassPreclusterThreshold[maxIndex])
+         {
+             addBBoxProposalYoloV4(bx1, by1, bx2, by2, netW, netH, maxIndex, maxProb, binfo);
+         }
+@@ -155,7 +164,7 @@
+ 
+     // The second dimension should be num_classes
+     assert(detectionParams.numClassesConfigured == scores.inferDims.d[1]);
+-    
++
+     uint num_bboxes = boxes.inferDims.d[0];
+ 
+     // std::cout << "Network Info: " << networkInfo.height << "  " << networkInfo.width << std::endl;
+@@ -212,14 +221,58 @@
+     binfo.push_back(bbi);
+ }
+ 
++/* Intersection over union of two parsed boxes (left/top/width/height). */
++static float iouYoloV7(const NvDsInferParseObjectInfo& a, const NvDsInferParseObjectInfo& b)
++{
++    const float ax1 = a.left + a.width;
++    const float ay1 = a.top + a.height;
++    const float bx1 = b.left + b.width;
++    const float by1 = b.top + b.height;
++
++    const float iw = std::min(ax1, bx1) - std::max(a.left, b.left);
++    const float ih = std::min(ay1, by1) - std::max(a.top, b.top);
++    if (iw <= 0.0f || ih <= 0.0f) return 0.0f;
++
++    const float inter = iw * ih;
++    const float uni = a.width * a.height + b.width * b.height - inter;
++    return uni > 0.0f ? inter / uni : 0.0f;
++}
++
++/* Greedy per-class non-maximum suppression. Candidates are visited in
++ * descending confidence; a candidate is dropped when a kept box of the same
++ * class overlaps it by more than iouThreshold. */
++static std::vector<NvDsInferParseObjectInfo>
++nmsYoloV7(std::vector<NvDsInferParseObjectInfo> candidates, const float iouThreshold)
++{
++    std::sort(candidates.begin(), candidates.end(),
++              [](const NvDsInferParseObjectInfo& a, const NvDsInferParseObjectInfo& b) {
++                  return a.detectionConfidence > b.detectionConfidence;
++              });
++
++    std::vector<char> suppressed(candidates.size(), 0);
++    std::vector<NvDsInferParseObjectInfo> kept;
++
++    for (size_t i = 0; i < candidates.size(); ++i) {
++        if (suppressed[i]) continue;
++        kept.push_back(candidates[i]);
++        for (size_t j = i + 1; j < candidates.size(); ++j) {
++            if (suppressed[j] || candidates[j].classId != candidates[i].classId) continue;
++            if (iouYoloV7(candidates[i], candidates[j]) > iouThreshold) {
++                suppressed[j] = 1;
++            }
++        }
++    }
++    return kept;
++}
++
+ static bool NvDsInferParseYoloV7(
+     std::vector<NvDsInferLayerInfo> const& outputLayersInfo,
+     NvDsInferNetworkInfo const& networkInfo,
+     NvDsInferParseDetectionParams const& detectionParams,
+     std::vector<NvDsInferParseObjectInfo>& objectList)
+ {
+- 
+ 
++
+     if (outputLayersInfo.empty()) {
+         std::cerr << "Could not find output layer in bbox parsing" << std::endl;;
+         return false;
+@@ -240,15 +293,14 @@
+     int rows = layer.inferDims.numElements / layer.inferDims.d[1];
+ 
+     for (int i = 0; i < rows; ++i) {
+-        //85 = x, y, w, h, maxProb, score0......score79
++        //85 = x, y, w, h, objectness, score0......score79
+         float bx = data[ 0];
+         float by = data[ 1];
+         float bw = data[ 2];
+         float bh = data[ 3];
+-        float maxProb = data[ 4];
+-        int  maxIndex = data[ 5];
++        float objectness = data[ 4];
+         float * classes_scores = data + 5;
+-        
++
+         float maxScore = 0;
+         int index = 0;
+         for (int j = 0 ;j < NUM_CLASSES_YOLO; j++){
+@@ -258,13 +310,30 @@
+            }
+            classes_scores++;
+         }
+-	
+-        maxIndex = index;
++
++        // Detection confidence is objectness x best class score, as in the
++        // reference YOLOv7 post-processing; the class is the argmax.
++        const int maxIndex = index;
++        const float maxProb = objectness * maxScore;
+         data += dimensions;
+-        
+-        addBBoxProposalYoloV7(bx, by, bw, bh, 1, networkInfo.width, networkInfo.height, maxIndex, maxProb, objects);    
++
++        addBBoxProposalYoloV7(bx, by, bw, bh, 1, networkInfo.width, networkInfo.height, maxIndex, maxProb, objects);
+     }
+-    objectList = objects;
++
++    // Suppress duplicates over the full decoded set first, so that every weak
++    // overlap of a strong detection is removed before thresholding; then apply
++    // the configured per-class pre-cluster threshold to the survivors.
++    std::vector<NvDsInferParseObjectInfo> kept = nmsYoloV7(objects, NMS_IOU_THRESHOLD_YOLO);
++
++    std::vector<NvDsInferParseObjectInfo> detections;
++    for (size_t k = 0; k < kept.size(); ++k) {
++        const NvDsInferParseObjectInfo& d = kept[k];
++        if (d.detectionConfidence >= detectionParams.perClassPreclusterThreshold[d.classId]) {
++            detections.push_back(d);
++        }
++    }
++
++    objectList = detections;
+     return true;
+ }
+ 

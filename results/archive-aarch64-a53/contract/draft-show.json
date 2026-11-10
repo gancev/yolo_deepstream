@@ -1,0 +1,85 @@
+{
+  "ok": true,
+  "data": {
+    "draft": "/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/.loci/build/contract.draft.yaml",
+    "pending": 6,
+    "ops": [
+      {
+        "op": "add",
+        "entry": {
+          "text": "NvDsInferParseCustomYoloV7 worst-path time must not exceed 700 ns",
+          "kind": "budget",
+          "function": "NvDsInferParseCustomYoloV7",
+          "signal": "worst_path_time",
+          "bound": {
+            "max": 700,
+            "unit": "ns"
+          },
+          "severity": "fail"
+        }
+      },
+      {
+        "op": "add",
+        "entry": {
+          "text": "NvDsInferParseCustomYoloV7 hot-path time must not regress more than 10 %",
+          "kind": "regression",
+          "function": "NvDsInferParseCustomYoloV7",
+          "signal": "hot_path_time",
+          "bound": {
+            "max_delta": "+10 %"
+          },
+          "severity": "fail"
+        }
+      },
+      {
+        "op": "add",
+        "entry": {
+          "text": "NvDsInferParseCustomYoloV7 must use no more than 288 bytes of stack for its own frame",
+          "kind": "budget",
+          "function": "NvDsInferParseCustomYoloV7",
+          "signal": "stack_frame_size",
+          "bound": {
+            "max": 288,
+            "unit": "B"
+          },
+          "severity": "fail"
+        }
+      },
+      {
+        "op": "add",
+        "entry": {
+          "text": "The parser library must not contain recursion: recursion cycles must stay at 0",
+          "kind": "invariant",
+          "signal": "recursion_cycles",
+          "bound": {
+            "max": 0
+          },
+          "severity": "fail"
+        }
+      },
+      {
+        "op": "add",
+        "entry": {
+          "text": "NvDsInferParseCustomYoloV7 must not run a loop over the candidate rows inside another loop over the candidate rows; the only nested loop allowed is the 80-class argmax inside the row loop",
+          "function": "NvDsInferParseCustomYoloV7"
+        }
+      },
+      {
+        "op": "add",
+        "entry": {
+          "text": "NvDsInferParseCustomYoloV4 worst-path time must not exceed 900 ns",
+          "kind": "budget",
+          "function": "NvDsInferParseCustomYoloV4",
+          "signal": "worst_path_time",
+          "bound": {
+            "max": 900,
+            "unit": "ns"
+          },
+          "severity": "fail"
+        }
+      }
+    ],
+    "base_hash": "absent",
+    "stale": false
+  }
+}

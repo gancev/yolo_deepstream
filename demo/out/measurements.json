@@ -1,0 +1,57 @@
+{
+  "measured_at": "2026-11-09T12:11:48+0100",
+  "cpu": "Apple M5 Pro",
+  "clip": "vtest.avi",
+  "seconds_per_version": 30.0,
+  "inference": "onnxruntime cpu, 4 threads, YOLOv5s FP16 640x640",
+  "versions": [
+    {
+      "variant": "upstream",
+      "frames_captured": 300,
+      "frames_processed": 300,
+      "dropped_pct": 0.0,
+      "fps": 10.0,
+      "parser_ms_median": 0.826,
+      "parser_ms_p95": 0.852,
+      "parser_ms_min": 0.722,
+      "inference_ms_median": 33.5,
+      "frame_ms_median": 34.53,
+      "parser_share_pct": 2.4,
+      "latency_ms_median": 35.2,
+      "samples": 298,
+      "name": "NVIDIA original (before)"
+    },
+    {
+      "variant": "innocent",
+      "frames_captured": 300,
+      "frames_processed": 68,
+      "dropped_pct": 77.3,
+      "fps": 2.27,
+      "parser_ms_median": 401.939,
+      "parser_ms_p95": 417.941,
+      "parser_ms_min": 385.487,
+      "inference_ms_median": 30.62,
+      "frame_ms_median": 432.03,
+      "parser_share_pct": 93.0,
+      "latency_ms_median": 478.9,
+      "samples": 66,
+      "name": "Agent's change"
+    },
+    {
+      "variant": "fix",
+      "frames_captured": 300,
+      "frames_processed": 300,
+      "dropped_pct": 0.0,
+      "fps": 10.0,
+      "parser_ms_median": 0.652,
+      "parser_ms_p95": 0.681,
+      "parser_ms_min": 0.623,
+      "inference_ms_median": 32.55,
+      "frame_ms_median": 33.36,
+      "parser_share_pct": 2.0,
+      "latency_ms_median": 33.9,
+      "samples": 298,
+      "name": "Fix"
+    }
+  ]
+}

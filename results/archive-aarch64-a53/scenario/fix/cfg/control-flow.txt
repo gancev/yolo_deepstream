@@ -1,0 +1,1335 @@
+function: NvDsInferParseCustomYoloV7 (entry: bb_0x230)
+
+loops: 2 (1 with a derived trip count; max nesting depth 2)
+  iters = executions of a block per single call of NvDsInferParseCustomYoloV7 (product of enclosing trip counts);
+  ? = not derivable from the code — treat that block's cost as per-iteration, not per-call.
+  A block with no iters annotation is in no loop and runs once per call.
+  L1  loop  header bb_0x2c0  latch bb_0x3c8  depth 1  blocks 25  source=/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194:195  trips ?  reason=limit-varies-per-lap (limit register w20 is written inside the loop (add w20, w20, #1 @bb_0x3c8) — the bound varies per lap)
+  L2  loop  header bb_0x2d0  latch bb_0x2dc  depth 2  in L1  blocks 3  source=/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195:195  trips 80 exact  (init x0=0 @bb_0x2c0; step +1 (add x0, x0, #1 @bb_0x2dc); limit 80 (cmp x0, #0x50 @bb_0x2dc); continue on ne)
+cycles: 1 backward edge(s) that are not natural loops — bb_0x5cc -> bb_0x5d8. Multi-entry/irreducible: no trip count is derivable, and blocks on them can run more often than iters says.
+
+[NvDsInferParseCustomYoloV7_0x230] 0x230-0x24c  (entry)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106:106;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189:212;
+  stp x29, x30, [sp, #-0xf0]!
+  mov x29, sp
+  stp x19, x20, [sp, #0x10]
+  str x3, [sp, #0xa8]
+  ldp x20, x0, [x0]
+  cmp x20, x0
+  b.eq #0x52c
+  -> bb_0x24c (ne=fallthrough), bb_0x52c (eq=taken)
+
+[NvDsInferParseCustomYoloV7_0x24c] 0x24c-0x26c
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:212:253;
+  stp x21, x22, [sp, #0x20]
+  stp x23, x24, [sp, #0x30]
+  mov x24, x2
+  stp x27, x28, [sp, #0x50]
+  mov x27, x1
+  ldr w0, [x2]
+  cmp w0, #0x50
+  b.ne #0x434
+  -> bb_0x26c (eq=fallthrough), bb_0x434 (ne=taken)
+
+[NvDsInferParseCustomYoloV7_0x26c] 0x26c-0x280
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:257:263;
+  ldr w23, [x20, #0xc]
+  ldr w22, [x20, #0x28]
+  udiv w22, w22, w23
+  cmp w22, #0
+  b.le #0x514
+  -> bb_0x280 (gt=fallthrough), bb_0x514 (le=taken)
+
+[NvDsInferParseCustomYoloV7_0x280] 0x280-0x2c0
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:189:279;
+  stp x25, x26, [sp, #0x40]
+  sbfiz x23, x23, #2, #0x20
+  mov x26, #0
+  mov x21, #0
+  mov x25, #0
+  stp d8, d9, [sp, #0x60]
+  stp d10, d11, [sp, #0x70]
+  fmov s11, #0.50000000
+  fmov s10, #1.00000000
+  stp d12, d13, [sp, #0x80]
+  stp d14, d15, [sp, #0x90]
+  ldr x28, [x20, #0x38]
+  mov w20, #0
+  add x28, x28, #0x14
+  nop
+  nop
+  -> bb_0x2c0
+
+[NvDsInferParseCustomYoloV7_0x2c0] 0x2c0-0x2d0  (loop-header L1, trips=?, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:194:195;
+  ldur s15, [x28, #-4]
+  movi v30.2s, #0
+  mov x0, #0
+  mov w19, #0
+  -> bb_0x2d0
+
+[NvDsInferParseCustomYoloV7_0x2d0] 0x2d0-0x2dc  (loop-header L2, trips=80, in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195:195;
+  ldr s31, [x28, x0, lsl #2]
+  fcmpe s30, s31
+  b.mi #0x428
+  -> bb_0x2dc (pl=fallthrough), bb_0x428 (mi=taken)
+
+[NvDsInferParseCustomYoloV7_0x2dc] 0x2dc-0x2e8  (in L2, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:195:196;
+  add x0, x0, #1
+  cmp x0, #0x50
+  b.ne #0x2d0
+  -> bb_0x2d0 (ne=taken, back-edge, loop L2), bb_0x2e8 (eq=fallthrough)
+
+[NvDsInferParseCustomYoloV7_0x2e8] 0x2e8-0x2fc  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:196:197;
+  ldr x0, [x24, #8]
+  fmul s15, s15, s30
+  ldr s31, [x0, w19, uxtw #2]
+  fcmpe s15, s31
+  b.mi #0x3c8
+  -> bb_0x2fc (pl=fallthrough), bb_0x3c8 (mi=taken)
+
+[NvDsInferParseCustomYoloV7_0x2fc] 0x2fc-0x320  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:197:200;
+  ldp s13, s14, [x28, #-0xc]
+  movi v1.2s, #0
+  ldp s0, s12, [x28, #-0x14]
+  ldr s2, [x27]
+  fmsub s0, s13, s11, s0
+  fmsub s12, s14, s11, s12
+  ucvtf s2, s2
+  fadd s13, s13, s0
+  fadd s14, s14, s12
+  -> bb_0x320
+
+[NvDsInferParseCustomYoloV7_0x320] 0x320-0x324  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200:200;
+  bl #0x320
+  -> bb_0x324
+
+[NvDsInferParseCustomYoloV7_0x324] 0x324-0x338  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:200:202;
+  ldr s2, [x27, #4]
+  fmov s9, s0
+  movi v1.2s, #0
+  fmov s0, s12
+  ucvtf s2, s2
+  -> bb_0x338
+
+[NvDsInferParseCustomYoloV7_0x338] 0x338-0x33c  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:202:202;
+  bl #0x338
+  -> bb_0x33c
+
+[NvDsInferParseCustomYoloV7_0x33c] 0x33c-0x350  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:204:214;
+  ldr s2, [x27]
+  fmov s12, s0
+  movi v1.2s, #0
+  fmov s0, s13
+  ucvtf s2, s2
+  -> bb_0x350
+
+[NvDsInferParseCustomYoloV7_0x350] 0x350-0x354  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:214:214;
+  bl #0x350
+  -> bb_0x354
+
+[NvDsInferParseCustomYoloV7_0x354] 0x354-0x368  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:665:665;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:191:191;
+  ldr s2, [x27, #4]
+  fmov s8, s0
+  movi v1.2s, #0
+  fmov s0, s14
+  ucvtf s2, s2
+  -> bb_0x368
+
+[NvDsInferParseCustomYoloV7_0x368] 0x368-0x36c  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246:246;
+  bl #0x368
+  -> bb_0x36c
+
+[NvDsInferParseCustomYoloV7_0x36c] 0x36c-0x380  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:246:281;
+  ldr s2, [x27]
+  fmov s13, s0
+  movi v1.2s, #0
+  fsub s0, s8, s9
+  ucvtf s2, s2
+  -> bb_0x380
+
+[NvDsInferParseCustomYoloV7_0x380] 0x380-0x384  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281:281;
+  bl #0x380
+  -> bb_0x384
+
+[NvDsInferParseCustomYoloV7_0x384] 0x384-0x398  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:281:282;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648;
+  ldr s2, [x27, #4]
+  fmov s14, s0
+  movi v1.2s, #0
+  fsub s0, s13, s12
+  ucvtf s2, s2
+  -> bb_0x398
+
+[NvDsInferParseCustomYoloV7_0x398] 0x398-0x39c  (in L1, iters=?, external-call _Z5clampfff)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172:172;
+  bl #0x398
+  -> bb_0x39c
+
+[NvDsInferParseCustomYoloV7_0x39c] 0x39c-0x3a4  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172:172;
+  fcmpe s14, s10
+  b.mi #0x3c8
+  -> bb_0x3a4 (pl=fallthrough), bb_0x3c8 (mi=taken)
+
+[NvDsInferParseCustomYoloV7_0x3a4] 0x3a4-0x3ac  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:172:172;
+  fcmpe s0, s10
+  b.mi #0x3c8
+  -> bb_0x3ac (pl=fallthrough), bb_0x3c8 (mi=taken)
+
+[NvDsInferParseCustomYoloV7_0x3ac] 0x3ac-0x3b4  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:139;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282:282;
+  cmp x21, x26
+  b.eq #0x4b0
+  -> bb_0x3b4 (ne=fallthrough), bb_0x4b0 (eq=taken)
+
+[NvDsInferParseCustomYoloV7_0x3b4] 0x3b4-0x3c8  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:282:293;
+  add x21, x21, #0x18
+  stur w19, [x21, #-0x18]
+  stp s9, s12, [x21, #-0x14]
+  stp s14, s0, [x21, #-0xc]
+  stur s15, [x21, #-4]
+  -> bb_0x3c8
+
+[NvDsInferParseCustomYoloV7_0x3c8] 0x3c8-0x3d8  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:235:261;
+  add w20, w20, #1
+  add x28, x28, x23
+  cmp w22, w20
+  b.ne #0x2c0
+  -> bb_0x2c0 (ne=taken, back-edge, loop L1), bb_0x3d8 (eq=fallthrough)
+
+[NvDsInferParseCustomYoloV7_0x3d8] 0x3d8-0x3ec
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:739:739;
+  ldr x0, [sp, #0xa8]
+  add x1, sp, #0xb0
+  stp x25, x21, [sp, #0xb0]
+  str x26, [sp, #0xc0]
+  bl #0x60
+  -> bb_0x3ec
+
+[NvDsInferParseCustomYoloV7_0x3ec] 0x3ec-0x3f0
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:200:200;
+  cbz x25, #0x3f8
+  -> bb_0x3f0 (nz=fallthrough), bb_0x3f8 (z=taken)
+
+[NvDsInferParseCustomYoloV7_0x3f0] 0x3f0-0x3f4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:200:200;
+  mov x0, x25
+  -> bb_0x3f4
+
+[NvDsInferParseCustomYoloV7_0x3f4] 0x3f4-0x3f8  (external-call _ZdlPv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:200:200;
+  bl #0x3f4
+  -> bb_0x3f8
+
+[NvDsInferParseCustomYoloV7_0x3f8] 0x3f8-0x40c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:200:204;
+  ldp d8, d9, [sp, #0x60]
+  ldp x25, x26, [sp, #0x40]
+  ldp d10, d11, [sp, #0x70]
+  ldp d12, d13, [sp, #0x80]
+  ldp d14, d15, [sp, #0x90]
+  -> bb_0x40c
+
+[NvDsInferParseCustomYoloV7_0x40c] 0x40c-0x41c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:734:739;
+  ldp x21, x22, [sp, #0x20]
+  mov w0, #1
+  ldp x23, x24, [sp, #0x30]
+  ldp x27, x28, [sp, #0x50]
+  -> bb_0x41c
+
+[NvDsInferParseCustomYoloV7_0x41c] 0x41c-0x428  (exit)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:116:739;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:67;
+  ldp x19, x20, [sp, #0x10]
+  ldp x29, x30, [sp], #0xf0
+  ret
+
+[NvDsInferParseCustomYoloV7_0x428] 0x428-0x434  (in L2, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:67;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/basic_ios.h:464:464;
+  fmov s30, s31
+  mov w19, w0
+  b #0x2dc
+  -> bb_0x2dc
+
+[NvDsInferParseCustomYoloV7_0x434] 0x434-0x448
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882:885;
+  adrp x1, #0
+  mov x2, #0x2a
+  adrp x0, #0
+  ldr x0, [x0]
+  add x1, x1, #0
+  -> bb_0x448
+
+[NvDsInferParseCustomYoloV7_0x448] 0x448-0x44c  (external-call _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:88:88;
+  bl #0x448
+  -> bb_0x44c
+
+[NvDsInferParseCustomYoloV7_0x44c] 0x44c-0x458
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:89;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  ldr w1, [x24]
+  adrp x0, #0
+  ldr x0, [x0]
+  -> bb_0x458
+
+[NvDsInferParseCustomYoloV7_0x458] 0x458-0x45c  (external-call _ZNSo9_M_insertImEERSoT_)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  bl #0x458
+  -> bb_0x45c
+
+[NvDsInferParseCustomYoloV7_0x45c] 0x45c-0x46c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  adrp x1, #0
+  mov x2, #0x17
+  add x1, x1, #0
+  mov x19, x0
+  -> bb_0x46c
+
+[NvDsInferParseCustomYoloV7_0x46c] 0x46c-0x470  (external-call _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  bl #0x46c
+  -> bb_0x470
+
+[NvDsInferParseCustomYoloV7_0x470] 0x470-0x478
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  mov x0, x19
+  mov w1, #0x50
+  -> bb_0x478
+
+[NvDsInferParseCustomYoloV7_0x478] 0x478-0x47c  (external-call _ZNSolsEi)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  bl #0x478
+  -> bb_0x47c
+
+[NvDsInferParseCustomYoloV7_0x47c] 0x47c-0x494
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882:887;
+  mov x21, x0
+  ldr x0, [x0]
+  ldur x0, [x0, #-0x18]
+  add x0, x21, x0
+  ldr x19, [x0, #0xf0]
+  cbz x19, #0x5d8
+  -> bb_0x494 (nz=fallthrough), bb_0x5d8 (z=taken)
+
+[NvDsInferParseCustomYoloV7_0x494] 0x494-0x49c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  ldrb w0, [x19, #0x38]
+  cbz w0, #0x4e0
+  -> bb_0x49c (nz=fallthrough), bb_0x4e0 (z=taken)
+
+[NvDsInferParseCustomYoloV7_0x49c] 0x49c-0x4a0
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  ldrb w1, [x19, #0x43]
+  -> bb_0x4a0
+
+[NvDsInferParseCustomYoloV7_0x4a0] 0x4a0-0x4a4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  mov x0, x21
+  -> bb_0x4a4
+
+[NvDsInferParseCustomYoloV7_0x4a4] 0x4a4-0x4a8  (external-call _ZNSo3putEc)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  bl #0x4a4
+  -> bb_0x4a8
+
+[NvDsInferParseCustomYoloV7_0x4a8] 0x4a8-0x4ac  (external-call _ZNSo5flushEv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  bl #0x4a8
+  -> bb_0x4ac
+
+[NvDsInferParseCustomYoloV7_0x4ac] 0x4ac-0x4b0
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  b #0x26c
+  -> bb_0x26c
+
+[NvDsInferParseCustomYoloV7_0x4b0] 0x4b0-0x4d0  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:228:281;
+  add x1, sp, #0xd0
+  add x0, sp, #0xb0
+  stp x25, x21, [sp, #0xb0]
+  str x21, [sp, #0xc0]
+  str w19, [sp, #0xd0]
+  stp s9, s12, [sp, #0xd4]
+  stp s14, s0, [sp, #0xdc]
+  str s15, [sp, #0xe4]
+  -> bb_0x4d0
+
+[NvDsInferParseCustomYoloV7_0x4d0] 0x4d0-0x4d4  (in L1, iters=?, external-call _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:228:228;
+  bl #0x4d0
+  -> bb_0x4d4
+
+[NvDsInferParseCustomYoloV7_0x4d4] 0x4d4-0x4e0  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:228:228;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:739:739;
+  ldr x26, [sp, #0xc0]
+  ldp x25, x21, [sp, #0xb0]
+  b #0x3c8
+  -> bb_0x3c8
+
+[NvDsInferParseCustomYoloV7_0x4e0] 0x4e0-0x4e4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:739:739;
+  mov x0, x19
+  -> bb_0x4e4
+
+[NvDsInferParseCustomYoloV7_0x4e4] 0x4e4-0x4e8  (external-call _ZNKSt5ctypeIcE13_M_widen_initEv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:739:739;
+  bl #0x4e4
+  -> bb_0x4e8
+
+[NvDsInferParseCustomYoloV7_0x4e8] 0x4e8-0x504
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:116:116;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/basic_ios.h:464:464;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882:884;
+  ldr x0, [x19]
+  mov w1, #0xa
+  ldr x2, [x0, #0x30]
+  adrp x0, #0
+  ldr x0, [x0]
+  cmp x2, x0
+  b.eq #0x4a0
+  -> bb_0x4a0 (eq=taken), bb_0x504 (ne=fallthrough)
+
+[NvDsInferParseCustomYoloV7_0x504] 0x504-0x50c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:885:885;
+  mov x0, x19
+  blr x2
+  -> bb_0x50c
+
+[NvDsInferParseCustomYoloV7_0x50c] 0x50c-0x514
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:885:885;
+  mov w1, w0
+  b #0x4a0
+  -> bb_0x4a0
+
+[NvDsInferParseCustomYoloV7_0x514] 0x514-0x528
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:88;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:228:228;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882:882;
+  ldr x0, [sp, #0xa8]
+  add x1, sp, #0xb0
+  stp xzr, xzr, [sp, #0xb0]
+  str xzr, [sp, #0xc0]
+  bl #0x60
+  -> bb_0x528
+
+[NvDsInferParseCustomYoloV7_0x528] 0x528-0x52c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  b #0x40c
+  -> bb_0x40c
+
+[NvDsInferParseCustomYoloV7_0x52c] 0x52c-0x544
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  adrp x19, #0
+  ldr x19, [x19]
+  adrp x1, #0
+  mov x2, #0x2b
+  add x1, x1, #0
+  mov x0, x19
+  -> bb_0x544
+
+[NvDsInferParseCustomYoloV7_0x544] 0x544-0x548  (external-call _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  bl #0x544
+  -> bb_0x548
+
+[NvDsInferParseCustomYoloV7_0x548] 0x548-0x55c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:800;
+  ldr x0, [x19]
+  ldur x0, [x0, #-0x18]
+  add x0, x0, x19
+  ldr x19, [x0, #0xf0]
+  cbz x19, #0x5cc
+  -> bb_0x55c (nz=fallthrough), bb_0x5cc (z=taken)
+
+[NvDsInferParseCustomYoloV7_0x55c] 0x55c-0x564
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648;
+  ldrb w0, [x19, #0x38]
+  cbz w0, #0x580
+  -> bb_0x564 (nz=fallthrough), bb_0x580 (z=taken)
+
+[NvDsInferParseCustomYoloV7_0x564] 0x564-0x568
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:139;
+  ldrb w1, [x19, #0x43]
+  -> bb_0x568
+
+[NvDsInferParseCustomYoloV7_0x568] 0x568-0x570
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:139;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  adrp x0, #0
+  ldr x0, [x0]
+  -> bb_0x570
+
+[NvDsInferParseCustomYoloV7_0x570] 0x570-0x574  (external-call _ZNSo3putEc)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  bl #0x570
+  -> bb_0x574
+
+[NvDsInferParseCustomYoloV7_0x574] 0x574-0x578  (external-call _ZNSo5flushEv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  bl #0x574
+  -> bb_0x578
+
+[NvDsInferParseCustomYoloV7_0x578] 0x578-0x580
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  mov w0, #0
+  b #0x41c
+  -> bb_0x41c
+
+[NvDsInferParseCustomYoloV7_0x580] 0x580-0x584
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  mov x0, x19
+  -> bb_0x584
+
+[NvDsInferParseCustomYoloV7_0x584] 0x584-0x588  (external-call _ZNKSt5ctypeIcE13_M_widen_initEv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  bl #0x584
+  -> bb_0x588
+
+[NvDsInferParseCustomYoloV7_0x588] 0x588-0x5a4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/basic_ios.h:52:52;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:800:1427;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142:142;
+  ldr x0, [x19]
+  mov w1, #0xa
+  ldr x2, [x0, #0x30]
+  adrp x0, #0
+  ldr x0, [x0]
+  cmp x2, x0
+  b.eq #0x568
+  -> bb_0x568 (eq=taken), bb_0x5a4 (ne=fallthrough)
+
+[NvDsInferParseCustomYoloV7_0x5a4] 0x5a4-0x5ac
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142:142;
+  mov x0, x19
+  blr x2
+  -> bb_0x5ac
+
+[NvDsInferParseCustomYoloV7_0x5ac] 0x5ac-0x5b4
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142:142;
+  mov w1, w0
+  b #0x568
+  -> bb_0x568
+
+[NvDsInferParseCustomYoloV7_0x5b4] 0x5b4-0x5bc
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142:142;
+  mov x19, x0
+  cbz x25, #0x5c4
+  -> bb_0x5bc (nz=fallthrough), bb_0x5c4 (z=taken)
+
+[NvDsInferParseCustomYoloV7_0x5bc] 0x5bc-0x5c0
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142:142;
+  mov x0, x25
+  -> bb_0x5c0
+
+[NvDsInferParseCustomYoloV7_0x5c0] 0x5c0-0x5c4  (external-call _ZdlPv)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:143:143;
+  bl #0x5c0
+  -> bb_0x5c4
+
+[NvDsInferParseCustomYoloV7_0x5c4] 0x5c4-0x5c8
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:142:142;
+  mov x0, x19
+  -> bb_0x5c8
+
+[NvDsInferParseCustomYoloV7_0x5c8] 0x5c8-0x5cc  (external-call _Unwind_Resume)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:143:143;
+  bl #0x5c8
+  -> bb_0x5cc
+
+[NvDsInferParseCustomYoloV7_0x5cc] 0x5cc-0x5d8
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:143:156;
+  stp x21, x22, [sp, #0x20]
+  stp x23, x24, [sp, #0x30]
+  stp x27, x28, [sp, #0x50]
+  -> bb_0x5d8 (backward-edge, irreducible)
+
+[NvDsInferParseCustomYoloV7_0x5d8] 0x5d8-0x5ec
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106:106;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:152:158;
+  stp x25, x26, [sp, #0x40]
+  stp d8, d9, [sp, #0x60]
+  stp d10, d11, [sp, #0x70]
+  stp d12, d13, [sp, #0x80]
+  stp d14, d15, [sp, #0x90]
+  -> bb_0x5ec
+
+[NvDsInferParseCustomYoloV7_0x5ec] 0x5ec-0x5f0  (external-call _ZSt16__throw_bad_castv)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158:158;
+  bl #0x5ec
+  -> bb_0x5f0
+
+[NvDsInferParseCustomYoloV7_0x5f0] 0x5f0-0x5fc
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161:161;
+  ldr x25, [sp, #0xb0]
+  mov x19, x0
+  cbnz x25, #0x5bc
+  -> bb_0x5bc (nz=taken), bb_0x5fc (z=fallthrough)
+
+[NvDsInferParseCustomYoloV7_0x5fc] 0x5fc-0x600
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161:161;
+  b #0x5c4
+  -> bb_0x5c4
+
+------------------------------------------------------------
+
+function: NvDsInferParseCustomYoloV4 (entry: bb_0x600)
+
+loops: 5 (0 with a derived trip count; max nesting depth 3)
+  iters = executions of a block per single call of NvDsInferParseCustomYoloV4 (product of enclosing trip counts);
+  ? = not derivable from the code — treat that block's cost as per-iteration, not per-call.
+  A block with no iters annotation is in no loop and runs once per call.
+  L1  loop  header bb_0x698  latch bb_0x888  depth 1  blocks 29  source=/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:101  trips ?  reason=step-not-in-register (no register add/sub of w2 in the loop body — the counter is not in a register, or the loop is not counted)
+  L2  loop  header bb_0x69c  latch bb_0x6e8  depth 2  in L1  blocks 8  source=/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:134  trips ?  reason=limit-not-immediate (limit is neither an immediate nor a register compare)
+  L3  loop  header bb_0x6ac  latch bb_0x6bc  depth 3  in L2  blocks 3  source=/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134:134;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:150:150;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197:2197  trips ?  reason=limit-varies-per-lap (limit register w0 is written inside the loop (add w0, w0, #1 @bb_0x6bc) — the bound varies per lap)
+  L4  loop  header bb_0x6f0  latch bb_0x6fc  depth 1  blocks 2  source=/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176:176;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648  trips ?  reason=limit-varies-per-lap (limit register w0 is written inside the loop (add w0, w26, #1 @bb_0x6f0) — the bound varies per lap)
+  L5  loop  header bb_0xab4  latch bb_0xabc  depth 1  blocks 3  trips ?  reason=no-exit-test (no exit test inside the loop — exit is unconditional or indirect)
+
+[NvDsInferParseCustomYoloV4_0x600] 0x600-0x630  (entry)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:100:169;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106:106;
+  stp x29, x30, [sp, #-0x100]!
+  mov x29, sp
+  stp x19, x20, [sp, #0x10]
+  mov x20, x0
+  stp x21, x22, [sp, #0x20]
+  mov x21, x2
+  stp x25, x26, [sp, #0x40]
+  mov x25, x1
+  ldr w0, [x2]
+  str x3, [sp, #0x98]
+  cmp w0, #0x50
+  b.ne #0x8c4
+  -> bb_0x630 (eq=fallthrough), bb_0x8c4 (ne=taken)
+
+[NvDsInferParseCustomYoloV4_0x630] 0x630-0x644
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:106:106;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103:169;
+  ldr x0, [x20]
+  ldr w1, [x0, #4]
+  stp xzr, xzr, [sp, #0xa8]
+  cmp w1, #3
+  b.ne #0xa3c
+  -> bb_0x644 (eq=fallthrough), bb_0xa3c (ne=taken)
+
+[NvDsInferParseCustomYoloV4_0x644] 0x644-0x650
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:103:113;
+  ldr w1, [x0, #0x4c]
+  cmp w1, #2
+  b.ne #0xa08
+  -> bb_0x650 (eq=fallthrough), bb_0xa08 (ne=taken)
+
+[NvDsInferParseCustomYoloV4_0x650] 0x650-0x660
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111:114;
+  ldr w1, [x0, #0x54]
+  ldr w2, [x21]
+  cmp w2, w1
+  b.ne #0x9d4
+  -> bb_0x660 (eq=fallthrough), bb_0x9d4 (ne=taken)
+
+[NvDsInferParseCustomYoloV4_0x660] 0x660-0x668
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:111:111;
+  ldr w20, [x0, #8]
+  cbz w20, #0x9ac
+  -> bb_0x668 (nz=fallthrough), bb_0x9ac (z=taken)
+
+[NvDsInferParseCustomYoloV4_0x668] 0x668-0x698
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:131;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1280:1280;
+  stp x23, x24, [sp, #0x30]
+  mov x22, #0
+  mov x24, #0
+  mov w26, #0
+  mov w19, #0
+  stp x27, x28, [sp, #0x50]
+  stp d10, d11, [sp, #0x60]
+  stp d12, d13, [sp, #0x70]
+  stp d14, d15, [sp, #0x80]
+  ldr x23, [x0, #0x38]
+  str xzr, [sp, #0x90]
+  ldr x27, [x0, #0x80]
+  -> bb_0x698
+
+[NvDsInferParseCustomYoloV4_0x698] 0x698-0x69c  (loop-header L1, trips=?, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:101;
+  cbz w2, #0x6f0
+  -> bb_0x69c (nz=fallthrough), bb_0x6f0 (z=taken)
+
+[NvDsInferParseCustomYoloV4_0x69c] 0x69c-0x6ac  (loop-header L2, trips=?, in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:134;
+  movi v15.2s, #0
+  lsl w4, w26, #2
+  mov w28, #-1
+  mov w0, #0
+  -> bb_0x6ac
+
+[NvDsInferParseCustomYoloV4_0x6ac] 0x6ac-0x6bc  (loop-header L3, trips=?, in L2, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134:134;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_iterator_base_funcs.h:150:150;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2197:2197;
+  add w1, w0, w19
+  ldr s31, [x27, x1, lsl #2]
+  fcmpe s31, s15
+  b.gt #0x790
+  -> bb_0x6bc (le=fallthrough), bb_0x790 (gt=taken)
+
+[NvDsInferParseCustomYoloV4_0x6bc] 0x6bc-0x6c8  (in L3, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384:2197;
+  add w0, w0, #1
+  cmp w2, w0
+  b.ne #0x6ac
+  -> bb_0x6ac (ne=taken, back-edge, loop L3), bb_0x6c8 (eq=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0x6c8] 0x6c8-0x6cc  (in L2, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:384:384;
+  tbnz w28, #0x1f, #0x6dc
+  -> bb_0x6cc (z=fallthrough), bb_0x6dc (nz-bit=taken)
+
+[NvDsInferParseCustomYoloV4_0x6cc] 0x6cc-0x6dc  (in L2, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:151:151;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:273:276;
+  ldr x0, [x21, #8]
+  ldr s31, [x0, w28, uxtw #2]
+  fcmpe s31, s15
+  b.mi #0x79c
+  -> bb_0x6dc (pl=fallthrough), bb_0x79c (mi=taken)
+
+[NvDsInferParseCustomYoloV4_0x6dc] 0x6dc-0x6e8  (in L2, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_uninitialized.h:144:144;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:174:174;
+  add w26, w26, #1
+  cmp w20, w26
+  b.eq #0x708
+  -> bb_0x6e8 (ne=fallthrough), bb_0x708 (eq=taken)
+
+[NvDsInferParseCustomYoloV4_0x6e8] 0x6e8-0x6f0  (in L2, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/vector.tcc:975:975;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998:998;
+  add w19, w19, w2
+  b #0x69c
+  -> bb_0x69c (back-edge, loop L2)
+
+[NvDsInferParseCustomYoloV4_0x6f0] 0x6f0-0x6fc  (loop-header L4, trips=?, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176:176;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648;
+  add w0, w26, #1
+  cmp w20, w0
+  b.eq #0x708
+  -> bb_0x6fc (ne=fallthrough), bb_0x708 (eq=taken)
+
+[NvDsInferParseCustomYoloV4_0x6fc] 0x6fc-0x708  (in L4, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:139;
+  add w26, w26, #2
+  cmp w20, w26
+  b.ne #0x6f0
+  -> bb_0x6f0 (ne=taken, back-edge, loop L4), bb_0x708 (eq=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0x708] 0x708-0x710
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177:177;
+  cmp x24, x22
+  b.eq #0x8a4
+  -> bb_0x710 (ne=fallthrough), bb_0x8a4 (eq=taken)
+
+[NvDsInferParseCustomYoloV4_0x710] 0x710-0x720
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177:177;
+  sub x22, x22, x24
+  mov x0, #0x7ffffffffffffff8
+  cmp x22, x0
+  b.hi #0xa70
+  -> bb_0x720 (ls=fallthrough), bb_0xa70 (hi=taken)
+
+[NvDsInferParseCustomYoloV4_0x720] 0x720-0x724
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177:177;
+  mov x0, x22
+  -> bb_0x724
+
+[NvDsInferParseCustomYoloV4_0x724] 0x724-0x728  (external-call _Znwm)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177:177;
+  bl #0x724
+  -> bb_0x728
+
+[NvDsInferParseCustomYoloV4_0x728] 0x728-0x738
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:116:177;
+  mov x19, x0
+  mov x2, x22
+  mov x1, x24
+  add x22, x19, x22
+  -> bb_0x738
+
+[NvDsInferParseCustomYoloV4_0x738] 0x738-0x73c  (external-call memcpy)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:117:117;
+  bl #0x738
+  -> bb_0x73c
+
+[NvDsInferParseCustomYoloV4_0x73c] 0x73c-0x750
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:62:127;
+  ldr x0, [sp, #0x98]
+  add x1, sp, #0xa0
+  stp x19, x22, [sp, #0xa0]
+  str x22, [sp, #0xb0]
+  bl #0x60
+  -> bb_0x750
+
+[NvDsInferParseCustomYoloV4_0x750] 0x750-0x754
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:63:63;
+  cbz x24, #0x75c
+  -> bb_0x754 (nz=fallthrough), bb_0x75c (z=taken)
+
+[NvDsInferParseCustomYoloV4_0x754] 0x754-0x758
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:106:106;
+  mov x0, x24
+  -> bb_0x758
+
+[NvDsInferParseCustomYoloV4_0x758] 0x758-0x75c  (external-call _ZdlPv)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:64:64;
+  bl #0x758
+  -> bb_0x75c
+
+[NvDsInferParseCustomYoloV4_0x75c] 0x75c-0x760
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:61:61;
+  mov x0, x19
+  -> bb_0x760
+
+[NvDsInferParseCustomYoloV4_0x760] 0x760-0x764  (external-call _ZdlPv)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:62:62;
+  bl #0x760
+  -> bb_0x764
+
+[NvDsInferParseCustomYoloV4_0x764] 0x764-0x790  (exit)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:61:67;
+  ldp d10, d11, [sp, #0x60]
+  mov w0, #1
+  ldp x23, x24, [sp, #0x30]
+  ldp x27, x28, [sp, #0x50]
+  ldp x19, x20, [sp, #0x10]
+  ldp x21, x22, [sp, #0x20]
+  ldp x25, x26, [sp, #0x40]
+  ldp d12, d13, [sp, #0x70]
+  ldp d14, d15, [sp, #0x80]
+  ldp x29, x30, [sp], #0x100
+  ret
+
+[NvDsInferParseCustomYoloV4_0x790] 0x790-0x79c  (in L3, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:67:68;
+  fmov s15, s31
+  mov w28, w0
+  b #0x6bc
+  -> bb_0x6bc
+
+[NvDsInferParseCustomYoloV4_0x79c] 0x79c-0x7d8  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:68:72;
+  ldp s2, s31, [x25]
+  add w0, w4, #1
+  movi v1.2s, #0
+  ldr s13, [x23, x0, lsl #2]
+  add w0, w4, #2
+  ldr s11, [x23, x0, lsl #2]
+  add w0, w4, #3
+  ldr s30, [x23, x0, lsl #2]
+  ucvtf s2, s2
+  ucvtf s31, s31
+  ldr s0, [x23, w4, uxtw #2]
+  fmul s13, s31, s13
+  fmul s11, s2, s11
+  fmul s14, s31, s30
+  fmul s0, s2, s0
+  -> bb_0x7d8
+
+[NvDsInferParseCustomYoloV4_0x7d8] 0x7d8-0x7dc  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:72:72;
+  bl #0x7d8
+  -> bb_0x7dc
+
+[NvDsInferParseCustomYoloV4_0x7dc] 0x7dc-0x7f0  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:72:74;
+  ldr s2, [x25, #4]
+  fmov s12, s0
+  movi v1.2s, #0
+  fmov s0, s13
+  ucvtf s2, s2
+  -> bb_0x7f0
+
+[NvDsInferParseCustomYoloV4_0x7f0] 0x7f0-0x7f4  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:74:74;
+  bl #0x7f0
+  -> bb_0x7f4
+
+[NvDsInferParseCustomYoloV4_0x7f4] 0x7f4-0x808  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:76:84;
+  ldr s2, [x25]
+  fmov s13, s0
+  movi v1.2s, #0
+  fmov s0, s11
+  ucvtf s2, s2
+  -> bb_0x808
+
+[NvDsInferParseCustomYoloV4_0x808] 0x808-0x80c  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:86:86;
+  bl #0x808
+  -> bb_0x80c
+
+[NvDsInferParseCustomYoloV4_0x80c] 0x80c-0x820  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:86:86;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:665:665;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:191:191;
+  ldr s2, [x25, #4]
+  fmov s10, s0
+  movi v1.2s, #0
+  fmov s0, s14
+  ucvtf s2, s2
+  -> bb_0x820
+
+[NvDsInferParseCustomYoloV4_0x820] 0x820-0x824  (in L1, iters=?, external-call _Z5clampfff)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:191:191;
+  bl #0x820
+  -> bb_0x824
+
+[NvDsInferParseCustomYoloV4_0x824] 0x824-0x838  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:191:191;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:131;
+  ldr s2, [x25]
+  fmov s11, s0
+  movi v1.2s, #0
+  fsub s0, s10, s12
+  ucvtf s2, s2
+  -> bb_0x838
+
+[NvDsInferParseCustomYoloV4_0x838] 0x838-0x83c  (in L1, iters=?, external-call _Z5clampfff)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:101:101;
+  bl #0x838
+  -> bb_0x83c
+
+[NvDsInferParseCustomYoloV4_0x83c] 0x83c-0x850  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134:134;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998:998;
+  ldr s2, [x25, #4]
+  fmov s14, s0
+  movi v1.2s, #0
+  fsub s0, s11, s13
+  ucvtf s2, s2
+  -> bb_0x850
+
+[NvDsInferParseCustomYoloV4_0x850] 0x850-0x854  (in L1, iters=?, external-call _Z5clampfff)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:998:998;
+  bl #0x850
+  -> bb_0x854
+
+[NvDsInferParseCustomYoloV4_0x854] 0x854-0x860  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:176:176;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648;
+  fmov s31, #1.00000000
+  fcmpe s14, s31
+  b.mi #0x888
+  -> bb_0x860 (pl=fallthrough), bb_0x888 (mi=taken)
+
+[NvDsInferParseCustomYoloV4_0x860] 0x860-0x868  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:139;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:145:145;
+  fcmpe s0, s31
+  b.mi #0x888
+  -> bb_0x868 (pl=fallthrough), bb_0x888 (mi=taken)
+
+[NvDsInferParseCustomYoloV4_0x868] 0x868-0x874  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:739:739;
+  ldr x0, [sp, #0x90]
+  cmp x0, x22
+  b.eq #0x974
+  -> bb_0x874 (ne=fallthrough), bb_0x974 (eq=taken)
+
+[NvDsInferParseCustomYoloV4_0x874] 0x874-0x888  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:200:739;
+  add x22, x22, #0x18
+  stur w28, [x22, #-0x18]
+  stp s12, s13, [x22, #-0x14]
+  stp s14, s0, [x22, #-0xc]
+  stur s15, [x22, #-4]
+  -> bb_0x888
+
+[NvDsInferParseCustomYoloV4_0x888] 0x888-0x89c  (in L1, iters=?)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:200:204;
+  ldr w2, [x21]
+  add w26, w26, #1
+  add w19, w19, w2
+  cmp w20, w26
+  b.ne #0x698
+  -> bb_0x698 (ne=taken, back-edge, loop L1), bb_0x89c (eq=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0x89c] 0x89c-0x8a4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:734:739;
+  cmp x24, x22
+  b.ne #0x710
+  -> bb_0x710 (ne=taken), bb_0x8a4 (eq=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0x8a4] 0x8a4-0x8b4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/ostream.h:116:739;
+  ldr x0, [sp, #0x98]
+  add x1, sp, #0xa0
+  str xzr, [sp, #0xa0]
+  bl #0x60
+  -> bb_0x8b4
+
+[NvDsInferParseCustomYoloV4_0x8b4] 0x8b4-0x8b8
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:67;
+  cbz x24, #0x764
+  -> bb_0x764 (z=taken), bb_0x8b8 (nz=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0x8b8] 0x8b8-0x8bc
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:67;
+  mov x0, x24
+  -> bb_0x8bc
+
+[NvDsInferParseCustomYoloV4_0x8bc] 0x8bc-0x8c0  (external-call _ZdlPv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:67:67;
+  bl #0x8bc
+  -> bb_0x8c0
+
+[NvDsInferParseCustomYoloV4_0x8c0] 0x8c0-0x8c4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/basic_ios.h:464:464;
+  b #0x764
+  -> bb_0x764
+
+[NvDsInferParseCustomYoloV4_0x8c4] 0x8c4-0x8d8
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882:885;
+  adrp x1, #0
+  mov x2, #0x2a
+  adrp x0, #0
+  ldr x0, [x0]
+  add x1, x1, #0
+  -> bb_0x8d8
+
+[NvDsInferParseCustomYoloV4_0x8d8] 0x8d8-0x8dc  (external-call _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:88:88;
+  bl #0x8d8
+  -> bb_0x8dc
+
+[NvDsInferParseCustomYoloV4_0x8dc] 0x8dc-0x8e8
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/ostream:89:89;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:882:882;
+  ldr w1, [x21]
+  adrp x0, #0
+  ldr x0, [x0]
+  -> bb_0x8e8
+
+[NvDsInferParseCustomYoloV4_0x8e8] 0x8e8-0x8ec  (external-call _ZNSo9_M_insertImEERSoT_)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  bl #0x8e8
+  -> bb_0x8ec
+
+[NvDsInferParseCustomYoloV4_0x8ec] 0x8ec-0x8fc
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  adrp x1, #0
+  mov x2, #0x17
+  add x1, x1, #0
+  mov x19, x0
+  -> bb_0x8fc
+
+[NvDsInferParseCustomYoloV4_0x8fc] 0x8fc-0x900  (external-call _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  bl #0x8fc
+  -> bb_0x900
+
+[NvDsInferParseCustomYoloV4_0x900] 0x900-0x908
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  mov x0, x19
+  mov w1, #0x50
+  -> bb_0x908
+
+[NvDsInferParseCustomYoloV4_0x908] 0x908-0x90c  (external-call _ZNSolsEi)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;
+  bl #0x908
+  -> bb_0x90c
+
+[NvDsInferParseCustomYoloV4_0x90c] 0x90c-0x924
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/locale_facets.h:887:887;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  mov x22, x0
+  ldr x0, [x0]
+  ldur x0, [x0, #-0x18]
+  add x0, x22, x0
+  ldr x19, [x0, #0xf0]
+  cbz x19, #0xa7c
+  -> bb_0x924 (nz=fallthrough), bb_0xa7c (z=taken)
+
+[NvDsInferParseCustomYoloV4_0x924] 0x924-0x92c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  ldrb w0, [x19, #0x38]
+  cbz w0, #0x940
+  -> bb_0x92c (nz=fallthrough), bb_0x940 (z=taken)
+
+[NvDsInferParseCustomYoloV4_0x92c] 0x92c-0x930
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  ldrb w1, [x19, #0x43]
+  -> bb_0x930
+
+[NvDsInferParseCustomYoloV4_0x930] 0x930-0x934
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  mov x0, x22
+  -> bb_0x934
+
+[NvDsInferParseCustomYoloV4_0x934] 0x934-0x938  (external-call _ZNSo3putEc)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  bl #0x934
+  -> bb_0x938
+
+[NvDsInferParseCustomYoloV4_0x938] 0x938-0x93c  (external-call _ZNSo5flushEv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  bl #0x938
+  -> bb_0x93c
+
+[NvDsInferParseCustomYoloV4_0x93c] 0x93c-0x940
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  b #0x630
+  -> bb_0x630
+
+[NvDsInferParseCustomYoloV4_0x940] 0x940-0x944
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  mov x0, x19
+  -> bb_0x944
+
+[NvDsInferParseCustomYoloV4_0x944] 0x944-0x948  (external-call _ZNKSt5ctypeIcE13_M_widen_initEv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;
+  bl #0x944
+  -> bb_0x948
+
+[NvDsInferParseCustomYoloV4_0x948] 0x948-0x964
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:1427:1427;/Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:134:177;
+  ldr x0, [x19]
+  mov w1, #0xa
+  ldr x2, [x0, #0x30]
+  adrp x0, #0
+  ldr x0, [x0]
+  cmp x2, x0
+  b.eq #0x930
+  -> bb_0x930 (eq=taken), bb_0x964 (ne=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0x964] 0x964-0x96c
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177:177;
+  mov x0, x19
+  blr x2
+  -> bb_0x96c
+
+[NvDsInferParseCustomYoloV4_0x96c] 0x96c-0x974
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:177:177;
+  mov w1, w0
+  b #0x930
+  -> bb_0x930
+
+[NvDsInferParseCustomYoloV4_0x974] 0x974-0x998  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161:161;
+  ldr x0, [sp, #0x90]
+  add x1, sp, #0xe0
+  str w28, [sp, #0xe0]
+  stp s12, s13, [sp, #0xe4]
+  stp s14, s0, [sp, #0xec]
+  str s15, [sp, #0xf4]
+  stp x24, x0, [sp, #0xc0]
+  str x0, [sp, #0xd0]
+  add x0, sp, #0xc0
+  -> bb_0x998
+
+[NvDsInferParseCustomYoloV4_0x998] 0x998-0x99c  (in L1, iters=?, external-call _ZNSt6vectorI28NvDsInferObjectDetectionInfoSaIS0_EE17_M_realloc_appendIJRKS0_EEEvDpOT_)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:161:161;
+  bl #0x998
+  -> bb_0x99c
+
+[NvDsInferParseCustomYoloV4_0x99c] 0x99c-0x9ac  (in L1, iters=?)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158:161;
+  ldr x0, [sp, #0xd0]
+  ldp x24, x22, [sp, #0xc0]
+  str x0, [sp, #0x90]
+  b #0x888
+  -> bb_0x888
+
+[NvDsInferParseCustomYoloV4_0x9ac] 0x9ac-0x9bc
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158:158;
+  ldr x0, [sp, #0x98]
+  add x1, sp, #0xa0
+  str xzr, [sp, #0xa0]
+  bl #0x60
+  -> bb_0x9bc
+
+[NvDsInferParseCustomYoloV4_0x9bc] 0x9bc-0x9d4  (exit)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:158:158;
+  ldp x19, x20, [sp, #0x10]
+  mov w0, #1
+  ldp x21, x22, [sp, #0x20]
+  ldp x25, x26, [sp, #0x40]
+  ldp x29, x30, [sp], #0x100
+  ret
+
+[NvDsInferParseCustomYoloV4_0x9d4] 0x9d4-0xa04
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:156:158;
+  adrp x3, #0
+  adrp x1, #0
+  stp x23, x24, [sp, #0x30]
+  adrp x0, #0
+  add x3, x3, #0
+  mov w2, #0xa1
+  add x1, x1, #0
+  add x0, x0, #0
+  stp x27, x28, [sp, #0x50]
+  stp d10, d11, [sp, #0x60]
+  stp d12, d13, [sp, #0x70]
+  stp d14, d15, [sp, #0x80]
+  -> bb_0xa04
+
+[NvDsInferParseCustomYoloV4_0xa04] 0xa04-0xa08  (external-call __assert_fail)
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:156:156;
+  bl #0xa04
+  -> bb_0xa08
+
+[NvDsInferParseCustomYoloV4_0xa08] 0xa08-0xa38
+source: /Users/stojangancev/projects/aurorora/NVIDIA/deepstream-yolo-parser/src/nvdsparsebbox_Yolo.cpp:156:156;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:2200:2200;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/basic_ios.h:52:52;
+  adrp x3, #0
+  adrp x1, #0
+  stp x23, x24, [sp, #0x30]
+  adrp x0, #0
+  add x3, x3, #0
+  mov w2, #0x9e
+  add x1, x1, #0
+  add x0, x0, #0
+  stp x27, x28, [sp, #0x50]
+  stp d10, d11, [sp, #0x60]
+  stp d12, d13, [sp, #0x70]
+  stp d14, d15, [sp, #0x80]
+  -> bb_0xa38
+
+[NvDsInferParseCustomYoloV4_0xa38] 0xa38-0xa3c  (external-call __assert_fail)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:395;
+  bl #0xa38
+  -> bb_0xa3c
+
+[NvDsInferParseCustomYoloV4_0xa3c] 0xa3c-0xa6c
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:800;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;
+  adrp x3, #0
+  adrp x1, #0
+  stp x23, x24, [sp, #0x30]
+  adrp x0, #0
+  add x3, x3, #0
+  mov w2, #0x9c
+  add x1, x1, #0
+  add x0, x0, #0
+  stp x27, x28, [sp, #0x50]
+  stp d10, d11, [sp, #0x60]
+  stp d12, d13, [sp, #0x70]
+  stp d14, d15, [sp, #0x80]
+  -> bb_0xa6c
+
+[NvDsInferParseCustomYoloV4_0xa6c] 0xa6c-0xa70  (external-call __assert_fail)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:395;
+  bl #0xa6c
+  -> bb_0xa70
+
+[NvDsInferParseCustomYoloV4_0xa70] 0xa70-0xa78
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:395;
+  adrp x0, #0
+  add x0, x0, #0
+  -> bb_0xa78
+
+[NvDsInferParseCustomYoloV4_0xa78] 0xa78-0xa7c  (external-call _ZSt20__throw_length_errorPKc)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:395;
+  bl #0xa78
+  -> bb_0xa7c
+
+[NvDsInferParseCustomYoloV4_0xa7c] 0xa7c-0xa90
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:800;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/alloc_traits.h:648:648;
+  stp x23, x24, [sp, #0x30]
+  stp x27, x28, [sp, #0x50]
+  stp d10, d11, [sp, #0x60]
+  stp d12, d13, [sp, #0x70]
+  stp d14, d15, [sp, #0x80]
+  -> bb_0xa90
+
+[NvDsInferParseCustomYoloV4_0xa90] 0xa90-0xa94  (external-call _ZSt16__throw_bad_castv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:139:139;
+  bl #0xa90
+  -> bb_0xa94
+
+[NvDsInferParseCustomYoloV4_0xa94] 0xa94-0xaa0
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/new_allocator.h:104:104;/opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:800:800;
+  mov x20, x0
+  mov x19, #0
+  cbz x24, #0xaa8
+  -> bb_0xaa0 (nz=fallthrough), bb_0xaa8 (z=taken)
+
+[NvDsInferParseCustomYoloV4_0xaa0] 0xaa0-0xaa4
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:800:800;
+  mov x0, x24
+  -> bb_0xaa4
+
+[NvDsInferParseCustomYoloV4_0xaa4] 0xaa4-0xaa8  (external-call _ZdlPv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:395;
+  bl #0xaa4
+  -> bb_0xaa8
+
+[NvDsInferParseCustomYoloV4_0xaa8] 0xaa8-0xaac
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:395:395;
+  cbz x19, #0xab4
+  -> bb_0xaac (nz=fallthrough), bb_0xab4 (z=taken)
+
+[NvDsInferParseCustomYoloV4_0xaac] 0xaac-0xab0
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:800:800;
+  mov x0, x19
+  -> bb_0xab0
+
+[NvDsInferParseCustomYoloV4_0xab0] 0xab0-0xab4  (external-call _ZdlPv)
+source: /opt/homebrew/Cellar/aarch64-unknown-linux-gnu/15.2.0/toolchain/aarch64-unknown-linux-gnu/include/c++/15.2.0/bits/stl_vector.h:800:800;
+  bl #0xab0
+  -> bb_0xab4
+
+[NvDsInferParseCustomYoloV4_0xab4] 0xab4-0xab8  (loop-header L5, trips=?, iters=?)
+  mov x0, x20
+  -> bb_0xab8
+
+[NvDsInferParseCustomYoloV4_0xab8] 0xab8-0xabc  (in L5, iters=?, external-call _Unwind_Resume)
+  bl #0xab8
+  -> bb_0xabc
+
+[NvDsInferParseCustomYoloV4_0xabc] 0xabc-0xad8  (in L5, iters=?)
+  mov x20, x0
+  stp x23, x24, [sp, #0x30]
+  stp x27, x28, [sp, #0x50]
+  stp d10, d11, [sp, #0x60]
+  stp d12, d13, [sp, #0x70]
+  stp d14, d15, [sp, #0x80]
+  b #0xab4
+  -> bb_0xab4 (back-edge, loop L5)
+
+[NvDsInferParseCustomYoloV4_0xad8] 0xad8-0xae4
+  ldr x24, [sp, #0xc0]
+  mov x19, x0
+  cbz x24, #0xaec
+  -> bb_0xae4 (nz=fallthrough), bb_0xaec (z=taken)
+
+[NvDsInferParseCustomYoloV4_0xae4] 0xae4-0xae8
+  mov x0, x24
+  -> bb_0xae8
+
+[NvDsInferParseCustomYoloV4_0xae8] 0xae8-0xaec  (external-call _ZdlPv)
+  bl #0xae8
+  -> bb_0xaec
+
+[NvDsInferParseCustomYoloV4_0xaec] 0xaec-0xaf0
+  mov x0, x19
+  -> bb_0xaf0
+
+[NvDsInferParseCustomYoloV4_0xaf0] 0xaf0-0xaf4  (external-call _Unwind_Resume)
+  bl #0xaf0
+  -> bb_0xaf4
+
+[NvDsInferParseCustomYoloV4_0xaf4] 0xaf4-0xaf8
+  b #0xa94
+  -> bb_0xa94
+
+[NvDsInferParseCustomYoloV4_0xaf8] 0xaf8-0xb00
+  mov x20, x0
+  cbnz x24, #0xaa0
+  -> bb_0xaa0 (nz=taken), bb_0xb00 (z=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0xb00] 0xb00-0xb04
+  b #0xaa8
+  -> bb_0xaa8
+
+[NvDsInferParseCustomYoloV4_0xb04] 0xb04-0xb08
+  b #0xa94
+  -> bb_0xa94
+
+[NvDsInferParseCustomYoloV4_0xb08] 0xb08-0xb10
+  mov x19, x0
+  cbnz x24, #0xae4
+  -> bb_0xae4 (nz=taken), bb_0xb10 (z=fallthrough)
+
+[NvDsInferParseCustomYoloV4_0xb10] 0xb10-0xb14
+  b #0xaec
+  -> bb_0xaec
